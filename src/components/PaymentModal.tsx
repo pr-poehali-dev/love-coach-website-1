@@ -97,12 +97,12 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="w-[95vw] sm:w-[90vw] max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto p-3 sm:p-6">
+      <DialogContent className="w-[95vw] sm:w-[90vw] max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto p-3 sm:p-6 mx-2 xs:mx-4">
         <DialogHeader>
-          <DialogTitle className="text-lg sm:text-2xl font-bold text-gray-900">
+          <DialogTitle className="text-base xs:text-lg sm:text-2xl font-bold text-gray-900">
             Оплата услуг
           </DialogTitle>
-          <DialogDescription className="text-xs sm:text-base text-gray-600">
+          <DialogDescription className="text-xs xs:text-sm sm:text-base text-gray-600">
             Выберите тариф и заполните данные для оплаты
           </DialogDescription>
         </DialogHeader>
@@ -110,7 +110,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
         <div className="space-y-4 sm:space-y-6 mt-3 sm:mt-4">
           {/* Выбор тарифа */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Выберите тариф</h3>
+            <h3 className="text-sm xs:text-base sm:text-lg font-semibold text-gray-900 mb-2 xs:mb-3 sm:mb-4">Выберите тариф</h3>
             <div className="grid gap-2 sm:gap-3">
               {tariffs.map((tariff) => (
                 <div 
@@ -187,7 +187,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
           {/* Форма данных */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Контактные данные</h3>
+            <h3 className="text-sm xs:text-base sm:text-lg font-semibold text-gray-900 mb-2 xs:mb-3 sm:mb-4">Контактные данные</h3>
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
@@ -248,7 +248,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
               className="w-full bg-primary hover:bg-primary/90" 
               size="lg"
             >
-              <Icon name="CreditCard" className="mr-2 h-5 w-5" />
+              <Icon name="CreditCard" className="mr-1 xs:mr-2 h-4 w-4 xs:h-5 xs:w-5" />
               Перейти к оплате
             </Button>
             

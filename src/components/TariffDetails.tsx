@@ -89,30 +89,30 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto w-[95vw] sm:w-full">
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto w-[95vw] sm:w-full mx-2 xs:mx-4">
         <DialogHeader>
-          <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
-            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
-              <Icon name={currentTariff.icon as any} className="h-6 w-6 text-primary" />
+          <DialogTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
+            <div className="w-8 h-8 xs:w-10 xs:h-10 bg-primary/10 rounded-full flex items-center justify-center mr-2 xs:mr-3 flex-shrink-0">
+              <Icon name={currentTariff.icon as any} className="h-4 w-4 xs:h-6 xs:w-6 text-primary" />
             </div>
             {currentTariff.title}
           </DialogTitle>
-          <DialogDescription className="text-sm sm:text-base text-gray-600">
+          <DialogDescription className="text-xs xs:text-sm sm:text-base text-gray-600">
             {currentTariff.description}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 mt-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-primary/5 rounded-lg gap-3">
+        <div className="space-y-4 xs:space-y-6 mt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 xs:p-4 bg-primary/5 rounded-lg gap-2 xs:gap-3">
             <div>
-              <div className="text-2xl font-bold text-primary">{currentTariff.price}</div>
-              <div className="text-sm text-gray-600">{currentTariff.duration}</div>
+              <div className="text-xl xs:text-2xl font-bold text-primary">{currentTariff.price}</div>
+              <div className="text-xs xs:text-sm text-gray-600">{currentTariff.duration}</div>
             </div>
             {!showForm && (
               <Button 
                 onClick={() => setShowForm(true)}
                 size="lg"
-                className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
+                className="bg-primary hover:bg-primary/90 w-full sm:w-auto text-sm xs:text-base px-3 xs:px-4 py-2 xs:py-3"
               >
                 <Icon name="Calendar" className="mr-2 h-5 w-5" />
                 Записаться
@@ -121,13 +121,13 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
           </div>
 
           {!showForm ? (
-            <div className="space-y-6">
+            <div className="space-y-4 xs:space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Что входит:</h3>
+                <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2 xs:mb-3">Что входит:</h3>
                 <ul className="space-y-2">
                   {currentTariff.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center text-gray-700">
-                      <Icon name="Check" className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                    <li key={index} className="flex items-start text-gray-700 text-sm xs:text-base">
+                      <Icon name="Check" className="h-4 w-4 xs:h-5 xs:w-5 text-green-500 mr-2 xs:mr-3 flex-shrink-0 mt-0.5" />
                       {benefit}
                     </li>
                   ))}
@@ -135,39 +135,39 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Как проходит:</h3>
-                <p className="text-gray-700 leading-relaxed">{currentTariff.process}</p>
+                <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2 xs:mb-3">Как проходит:</h3>
+                <p className="text-gray-700 leading-relaxed text-sm xs:text-base">{currentTariff.process}</p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 xs:gap-3">
                 <Button 
                   onClick={() => setShowForm(true)}
-                  className="w-full bg-primary hover:bg-primary/90 min-h-[56px] sm:min-h-[48px] py-4"
+                  className="w-full bg-primary hover:bg-primary/90 min-h-[48px] xs:min-h-[56px] sm:min-h-[48px] py-3 xs:py-4 text-sm xs:text-base"
                   size="lg"
                 >
-                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                  <Icon name="Calendar" className="mr-1 xs:mr-2 h-4 w-4 xs:h-5 xs:w-5" />
                   Записаться на сессию
                 </Button>
                 <Button 
                   onClick={onClose}
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto min-h-[56px] sm:min-h-[48px] py-4"
+                  className="w-full sm:w-auto min-h-[48px] xs:min-h-[56px] sm:min-h-[48px] py-3 xs:py-4 text-sm xs:text-base"
                 >
                   Закрыть
                 </Button>
               </div>
             </div>
           ) : (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Записаться на сессию</h3>
+            <div className="space-y-3 xs:space-y-4">
+              <div className="flex items-center justify-between mb-3 xs:mb-4">
+                <h3 className="text-base xs:text-lg font-semibold text-gray-900">Записаться на сессию</h3>
                 <Button 
                   onClick={() => setShowForm(false)}
                   variant="ghost"
                   size="sm"
                 >
-                  <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
+                  <Icon name="ArrowLeft" className="mr-1 xs:mr-2 h-3 w-3 xs:h-4 xs:w-4" />
                   Назад
                 </Button>
               </div>

@@ -73,10 +73,10 @@ const Index = () => {
       />
 
       <Dialog open={showContactForm} onOpenChange={setShowContactForm}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg w-[95vw] mx-2 xs:mx-4 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Записаться на консультацию</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-base xs:text-lg sm:text-xl">Записаться на консультацию</DialogTitle>
+            <DialogDescription className="text-xs xs:text-sm sm:text-base">
               Заполните форму и мы свяжемся с вами в течение 24 часов
             </DialogDescription>
           </DialogHeader>

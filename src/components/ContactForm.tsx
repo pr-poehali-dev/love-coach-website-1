@@ -45,9 +45,9 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4 xs:space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Имя</label>
+        <label className="block text-xs xs:text-sm font-medium text-gray-700 mb-1 xs:mb-2">Имя</label>
         <Input 
           placeholder="Ваше имя" 
           value={formData.name}
@@ -56,7 +56,7 @@ const ContactForm = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+        <label className="block text-xs xs:text-sm font-medium text-gray-700 mb-1 xs:mb-2">Email</label>
         <Input 
           type="email" 
           placeholder="your@email.com" 
@@ -66,25 +66,25 @@ const ContactForm = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Сообщение</label>
+        <label className="block text-xs xs:text-sm font-medium text-gray-700 mb-1 xs:mb-2">Сообщение</label>
         <Textarea 
           placeholder="Расскажите о вашей ситуации..." 
-          rows={4}
+          rows={3}
           value={formData.message}
           onChange={(e) => handleInputChange('message', e.target.value)}
           required
         />
       </div>
-      <div className="flex items-start space-x-2">
+      <div className="flex items-start space-x-2 xs:space-x-3">
         <input 
           type="checkbox" 
           id="agreeToTerms"
           checked={formData.agreeToTerms}
           onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
-          className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+          className="mt-0.5 xs:mt-1 h-3 w-3 xs:h-4 xs:w-4 text-primary focus:ring-primary border-gray-300 rounded flex-shrink-0"
           required
         />
-        <label htmlFor="agreeToTerms" className="text-sm text-gray-600">
+        <label htmlFor="agreeToTerms" className="text-xs xs:text-sm text-gray-600 leading-tight">
           Я согласен с{' '}
           <a href="/offer" target="_blank" className="text-primary hover:underline">
             публичной офертой
@@ -98,17 +98,17 @@ const ContactForm = () => {
       <Button 
         type="submit" 
         size="lg" 
-        className="w-full" 
+        className="w-full min-h-[48px] xs:min-h-[52px] py-3 xs:py-4 text-sm xs:text-base" 
         disabled={isSubmitting}
       >
         {isSubmitting ? (
           <>
-            <Icon name="Loader2" className="mr-2 h-5 w-5 animate-spin" />
+            <Icon name="Loader2" className="mr-1 xs:mr-2 h-4 w-4 xs:h-5 xs:w-5 animate-spin" />
             Отправляем...
           </>
         ) : (
           <>
-            <Icon name="Send" className="mr-2 h-5 w-5" />
+            <Icon name="Send" className="mr-1 xs:mr-2 h-4 w-4 xs:h-5 xs:w-5" />
             Отправить сообщение
           </>
         )}
