@@ -234,6 +234,9 @@ const Offer = () => {
                 <p className="text-gray-600">
                   Дата публикации: 03 августа 2025 года
                 </p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Последнее обновление: 03 августа 2025 года
+                </p>
               </div>
             </CardContent>
           </Card>
