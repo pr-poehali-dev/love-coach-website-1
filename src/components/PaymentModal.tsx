@@ -148,6 +148,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             onClick={(e) => e.stopPropagation()}
                             min="100"
                             autoFocus={false}
+                            tabIndex={-1}
                           />
                           <span className="text-sm text-gray-600">₽</span>
                         </div>
