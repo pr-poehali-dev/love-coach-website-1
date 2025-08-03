@@ -128,7 +128,10 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
             </CardHeader>
             <CardContent className="text-center">
               <div className="mb-2">
-                <div className="text-4xl font-bold text-gray-400 line-through decoration-red-500 decoration-2">0 ₽</div>
+                <div className="relative inline-block">
+                  <div className="text-4xl font-bold text-gray-400">0 ₽</div>
+                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2 -rotate-12 origin-center"></div>
+                </div>
                 <p className="text-xs text-gray-500 mt-2 font-medium">Стоимость определяется индивидуально</p>
               </div>
               <p className="text-gray-600 mb-6">Гибкий формат работы</p>
