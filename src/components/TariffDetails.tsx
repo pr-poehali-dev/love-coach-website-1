@@ -142,7 +142,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button 
                   onClick={() => setShowForm(true)}
-                  className="flex-1 bg-primary hover:bg-primary/90"
+                  className="flex-1 bg-primary hover:bg-primary/90 h-12"
                   size="lg"
                 >
                   <Icon name="Calendar" className="mr-2 h-5 w-5" />
