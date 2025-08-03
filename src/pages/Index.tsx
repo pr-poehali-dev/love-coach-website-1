@@ -539,15 +539,25 @@ const Index = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <Button 
-                onClick={() => scrollToSection('contact')}
-                className="hidden sm:flex bg-primary hover:bg-primary/90 group relative overflow-hidden"
-              >
-                <span className="relative z-10">
-                  Записаться
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></div>
-              </Button>
+              <div className="hidden sm:flex items-center space-x-3">
+                <Button 
+                  onClick={() => setShowPaymentModal(true)}
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary/5"
+                >
+                  <Icon name="CreditCard" className="mr-2 h-4 w-4" />
+                  Оплата
+                </Button>
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  className="bg-primary hover:bg-primary/90 group relative overflow-hidden"
+                >
+                  <span className="relative z-10">
+                    Записаться
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></div>
+                </Button>
+              </div>
               
               {/* Mobile menu */}
               <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -573,13 +583,23 @@ const Index = () => {
                       </button>
                     ))}
                     
-                    <Button 
-                      onClick={() => scrollToSection('contact')}
-                      className="mt-6 bg-primary hover:bg-primary/90"
-                    >
-                      <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                      Записаться на консультацию
-                    </Button>
+                    <div className="space-y-3 mt-6">
+                      <Button 
+                        onClick={() => setShowPaymentModal(true)}
+                        variant="outline"
+                        className="w-full border-primary text-primary hover:bg-primary/5"
+                      >
+                        <Icon name="CreditCard" className="mr-2 h-5 w-5" />
+                        Оплата
+                      </Button>
+                      <Button 
+                        onClick={() => scrollToSection('contact')}
+                        className="w-full bg-primary hover:bg-primary/90"
+                      >
+                        <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                        Записаться на консультацию
+                      </Button>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
@@ -949,25 +969,14 @@ const Index = () => {
                 <div className="text-4xl font-bold text-gray-900 mb-2">3 000 ₽</div>
                 <p className="text-gray-600 mb-6">60 минут</p>
                 <div className="space-y-3">
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                      onClick={() => setShowContactForm(true)}
-                      className="bg-primary hover:bg-primary/90" 
-                      size="lg"
-                    >
-                      <Icon name="Calendar" className="mr-1 h-4 w-4" />
-                      Записаться
-                    </Button>
-                    <Button 
-                      onClick={() => setShowPaymentModal(true)}
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary/5"
-                      size="lg"
-                    >
-                      <Icon name="CreditCard" className="mr-1 h-4 w-4" />
-                      Оплата
-                    </Button>
-                  </div>
+                  <Button 
+                    onClick={() => setShowContactForm(true)}
+                    className="w-full bg-primary hover:bg-primary/90" 
+                    size="lg"
+                  >
+                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                    Записаться
+                  </Button>
                   <Button 
                     variant="outline" 
                     className="w-full" 
@@ -1006,30 +1015,18 @@ const Index = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-secondary/80 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
                 <div className="space-y-3 mt-4">
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                      onClick={() => setShowContactForm(true)}
-                      className="bg-primary hover:bg-primary/90" 
-                      size="sm"
-                    >
-                      <Icon name="Calendar" className="mr-1 h-4 w-4" />
-                      Записаться
-                    </Button>
-                    <Button 
-                      onClick={() => setShowPaymentModal(true)}
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary/5"
-                      size="sm"
-                    >
-                      <Icon name="CreditCard" className="mr-1 h-4 w-4" />
-                      Оплата
-                    </Button>
-                  </div>
+                  <Button 
+                    onClick={() => setShowContactForm(true)}
+                    className="w-full bg-primary hover:bg-primary/90" 
+                    size="lg"
+                  >
+                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                    Записаться
+                  </Button>
                   <Button 
                     variant="outline" 
                     className="w-full" 
                     onClick={() => setSelectedTariff('couple')}
-                    size="sm"
                   >
                     <Icon name="Info" className="mr-2 h-4 w-4" />
                     Узнать больше
@@ -1050,25 +1047,14 @@ const Index = () => {
                 <div className="text-4xl font-bold text-gray-900 mb-2">4 000 ₽</div>
                 <p className="text-gray-600 mb-6">Неделя поддержки</p>
                 <div className="space-y-3">
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                      onClick={() => setShowContactForm(true)}
-                      className="bg-primary hover:bg-primary/90" 
-                      size="lg"
-                    >
-                      <Icon name="Calendar" className="mr-1 h-4 w-4" />
-                      Записаться
-                    </Button>
-                    <Button 
-                      onClick={() => setShowPaymentModal(true)}
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary/5"
-                      size="lg"
-                    >
-                      <Icon name="CreditCard" className="mr-1 h-4 w-4" />
-                      Оплата
-                    </Button>
-                  </div>
+                  <Button 
+                    onClick={() => setShowContactForm(true)}
+                    className="w-full bg-primary hover:bg-primary/90" 
+                    size="lg"
+                  >
+                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                    Записаться
+                  </Button>
                   <Button 
                     variant="outline" 
                     className="w-full" 
