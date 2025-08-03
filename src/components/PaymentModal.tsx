@@ -135,7 +135,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                       </div>
                     </div>
                     <div className="text-right flex items-center space-x-3">
-                      {tariff.id === 'custom' && selectedTariff === 'custom' ? (
+                      {tariff.id === 'custom' && selectedTariff === 'custom' && isAmountFocused ? (
                         <div className="flex items-center space-x-2">
                           <Input
                             type="number"
@@ -147,9 +147,19 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             className="w-24 h-8 text-sm"
                             onClick={(e) => e.stopPropagation()}
                             min="100"
-                            tabIndex={selectedTariff === 'custom' ? 0 : -1}
+                            autoFocus={true}
                           />
                           <span className="text-sm text-gray-600">₽</span>
+                        </div>
+                      ) : tariff.id === 'custom' && selectedTariff === 'custom' ? (
+                        <div 
+                          className="text-xl font-bold text-gray-900 cursor-pointer hover:text-primary transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsAmountFocused(true);
+                          }}
+                        >
+                          {tariff.price}
                         </div>
                       ) : (
                         <div className="text-xl font-bold text-gray-900">{tariff.price}</div>
