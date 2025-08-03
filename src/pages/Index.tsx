@@ -6,7 +6,100 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useToast } from "@/components/ui/use-toast";
 import Icon from "@/components/ui/icon";
+
+// Contact Form Component
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Сообщение отправлено!",
+        description: "Мы свяжемся с вами в течение 24 часов.",
+      });
+      
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description: "Не удалось отправить сообщение. Попробуйте позже.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Имя</label>
+        <Input 
+          placeholder="Ваше имя" 
+          value={formData.name}
+          onChange={(e) => handleInputChange('name', e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+        <Input 
+          type="email" 
+          placeholder="your@email.com" 
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Сообщение</label>
+        <Textarea 
+          placeholder="Расскажите о вашей ситуации..." 
+          rows={4}
+          value={formData.message}
+          onChange={(e) => handleInputChange('message', e.target.value)}
+          required
+        />
+      </div>
+      <Button 
+        type="submit" 
+        size="lg" 
+        className="w-full" 
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <Icon name="Loader2" className="mr-2 h-5 w-5 animate-spin" />
+            Отправляем...
+          </>
+        ) : (
+          <>
+            <Icon name="Send" className="mr-2 h-5 w-5" />
+            Отправить сообщение
+          </>
+        )}
+      </Button>
+    </form>
+  );
+};
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,7 +120,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Icon name="Heart" className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900">LoveCoach.Pro</span>
+              <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -61,7 +154,7 @@ const Index = () => {
                   <div className="flex flex-col space-y-6 mt-6">
                     <div className="flex items-center space-x-2 mb-6">
                       <Icon name="Heart" className="h-8 w-8 text-primary" />
-                      <span className="text-2xl font-bold text-gray-900">LoveCoach.Pro</span>
+                      <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
                     </div>
                     
                     {navItems.map((item) => (
@@ -171,44 +264,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Video Presentation Section */}
-      <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-primary/10 text-primary">Видео-презентация</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Посмотрите, как мы работаем</h2>
-            <p className="text-xl text-gray-600 mb-12">Узнайте больше о нашем подходе к коучингу отношений</p>
-            
-            <div className="relative bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl p-8 mb-8 group hover:from-primary/20 hover:to-secondary/20 transition-all duration-500">
-              <div className="aspect-video bg-gray-900 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20"></div>
-                <Button size="lg" className="relative z-10 bg-white text-gray-900 hover:bg-gray-100 rounded-full w-20 h-20 group-hover:scale-110 transition-transform">
-                  <Icon name="Play" className="h-8 w-8 ml-1" />
-                </Button>
-              </div>
-              <div className="mt-6">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-2">"Как восстановить близость в отношениях"</h3>
-                <p className="text-gray-600">5-минутное видео о наших методах работы с парами</p>
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 group relative overflow-hidden">
-                <span className="relative z-10 flex items-center">
-                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                  Записаться на бесплатную консультацию
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-              </Button>
-              
-              <Button variant="outline" size="lg" className="group hover:bg-primary/5">
-                <Icon name="Download" className="mr-2 h-5 w-5 group-hover:text-primary transition-colors" />
-                Скачать гайд по отношениям
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Testimonials Section */}
       <section className="py-20 bg-white">
@@ -385,24 +441,7 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Индивидуальный коучинг", desc: "Персональная работа 1 на 1", duration: "60 мин" },
-              { title: "Коучинг для пар", desc: "Совместные сессии", duration: "90 мин" },
-              { title: "Экспресс-сессии", desc: "Быстрая помощь", duration: "30 мин" },
-              { title: "Месячное сопровождение", desc: "Постоянная поддержка", duration: "30 дней" }
-            ].map((service, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
-                <CardHeader>
-                  <CardTitle className="text-lg">{service.title}</CardTitle>
-                  <CardDescription>{service.desc}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Badge variant="outline">{service.duration}</Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+
         </div>
       </section>
 
@@ -548,24 +587,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-8">Форма обратной связи</h3>
-              <form className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Имя</label>
-                  <Input placeholder="Ваше имя" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <Input type="email" placeholder="your@email.com" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Сообщение</label>
-                  <Textarea placeholder="Расскажите о вашей ситуации..." rows={4} />
-                </div>
-                <Button size="lg" className="w-full">
-                  <Icon name="Send" className="mr-2 h-5 w-5" />
-                  Отправить сообщение
-                </Button>
-              </form>
+              <ContactForm />
             </div>
 
             <div>
@@ -577,7 +599,7 @@ const Index = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">Email</p>
-                    <p className="text-gray-600">hello@lovecoach.pro</p>
+                    <p className="text-gray-600">hello@workstab.com</p>
                   </div>
                 </div>
 
@@ -587,7 +609,7 @@ const Index = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">Telegram</p>
-                    <p className="text-gray-600">@lovecoach_pro</p>
+                    <p className="text-gray-600">@workstab_support</p>
                   </div>
                 </div>
 
@@ -620,7 +642,7 @@ const Index = () => {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Icon name="Heart" className="h-8 w-8 text-primary" />
-                <span className="text-2xl font-bold">LoveCoach.Pro</span>
+                <span className="text-2xl font-bold">Workstab.com</span>
               </div>
               <p className="text-gray-400">
                 Помогаем строить здоровые и счастливые отношения через развитие эмоциональных навыков.
@@ -639,8 +661,8 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Информация</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="/offer" className="hover:text-white transition-colors">Оферта</a></li>
-                <li><a href="/privacy" className="hover:text-white transition-colors">Политика конфиденциальности</a></li>
+                <li><a href="#" onClick={() => window.open('/offer', '_blank')} className="hover:text-white transition-colors">Оферта</a></li>
+                <li><a href="#" onClick={() => window.open('/privacy', '_blank')} className="hover:text-white transition-colors">Политика конфиденциальности</a></li>
                 <li><a href="#faq" className="hover:text-white transition-colors">Вопросы и ответы</a></li>
               </ul>
             </div>
@@ -648,7 +670,7 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Контакты</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>hello@lovecoach.pro</li>
+                <li>hello@workstab.com</li>
                 <li>ИНН: 123456789012</li>
                 <li>Самозанятый</li>
               </ul>
@@ -656,7 +678,7 @@ const Index = () => {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2024 LoveCoach.Pro. Все права защищены.</p>
+            <p>© 2024 Workstab.com. Все права защищены.</p>
           </div>
         </div>
       </footer>
