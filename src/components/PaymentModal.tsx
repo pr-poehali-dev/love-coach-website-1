@@ -97,7 +97,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-lg max-h-[95vh] overflow-y-auto p-4 sm:p-6">
+      <DialogContent className="w-[95vw] max-w-lg max-h-[95vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg sm:text-xl font-bold text-gray-900">
             Оплата услуг
@@ -122,8 +122,8 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                   }`}
                   onClick={() => setSelectedTariff(tariff.id)}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0 overflow-hidden">
                       <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                         selectedTariff === tariff.id ? 'bg-primary/20' : 'bg-gray-100'
                       }`}>
@@ -140,12 +140,12 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
-                    <div className="text-right flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                    <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                       {tariff.id === 'custom' ? (
-                        <div className="flex items-center space-x-1 sm:space-x-2">
+                        <div className="flex items-center gap-1">
                           <Input
                             type="number"
-                            placeholder="Сумма"
+                            placeholder="0"
                             value={customAmount}
                             onChange={(e) => {
                               const value = e.target.value.replace(/\s/g, '');
@@ -153,7 +153,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             }}
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
-                            className="w-20 sm:w-24 h-7 sm:h-8 text-xs sm:text-sm"
+                            className="w-16 sm:w-20 h-6 sm:h-7 text-xs px-2"
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedTariff('custom');
@@ -162,10 +162,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             autoFocus={false}
                             tabIndex={-1}
                           />
-                          <span className="text-xs sm:text-sm text-gray-600">₽</span>
+                          <span className="text-xs text-gray-600">₽</span>
                         </div>
                       ) : (
-                        <div className="text-base sm:text-xl font-bold text-gray-900">{tariff.price}</div>
+                        <div className="text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap">{tariff.price}</div>
                       )}
                       <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 ${
                         selectedTariff === tariff.id 
