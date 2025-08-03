@@ -25,7 +25,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'individual',
       title: 'Индивидуальная сессия',
-      price: '3 000 ₽',
+      price: '3 000₽',
       duration: '60 минут',
       description: 'Персональная работа 1 на 1',
       icon: 'User',
@@ -34,7 +34,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'couple',
       title: 'Сессия для пары',
-      price: '5 000 ₽',
+      price: '5 000₽',
       duration: '90 минут',
       description: 'Совместная работа над отношениями',
       icon: 'Users',
@@ -43,7 +43,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'support',
       title: 'Поддержка в чате',
-      price: '4 000 ₽',
+      price: '4 000₽',
       duration: '7 дней',
       description: 'Круглосуточная поддержка',
       icon: 'MessageCircle',
@@ -97,55 +97,55 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="w-[98vw] sm:w-[90vw] max-w-none sm:max-w-lg max-h-[95vh] overflow-y-auto overflow-x-hidden p-3 sm:p-6 mx-1 sm:mx-auto">
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-lg sm:text-xl font-bold text-gray-900">
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900">
             Оплата услуг
           </DialogTitle>
-          <DialogDescription className="text-sm text-gray-600">
+          <DialogDescription className="text-sm sm:text-base text-gray-600">
             Выберите тариф и заполните данные для оплаты
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 sm:space-y-6 mt-3 sm:mt-4">
+        <div className="space-y-6 mt-4">
           {/* Выбор тарифа */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Выберите тариф</h3>
-            <div className="grid gap-2 sm:gap-3">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Выберите тариф</h3>
+            <div className="grid gap-3">
               {tariffs.map((tariff) => (
                 <div 
                   key={tariff.id}
-                  className={`relative border-2 rounded-lg p-3 sm:p-4 pr-4 sm:pr-5 cursor-pointer transition-all ${
+                  className={`relative border-2 rounded-lg p-4 cursor-pointer transition-all ${
                     selectedTariff === tariff.id 
                       ? 'border-primary bg-primary/5' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                   onClick={() => setSelectedTariff(tariff.id)}
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center space-x-1 sm:space-x-3 flex-1 min-w-0 overflow-hidden">
-                      <div className={`w-6 h-6 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         selectedTariff === tariff.id ? 'bg-primary/20' : 'bg-gray-100'
                       }`}>
                         <Icon 
                           name={tariff.icon as any} 
-                          className={`h-3 w-3 sm:h-5 sm:w-5 ${
+                          className={`h-5 w-5 ${
                             selectedTariff === tariff.id ? 'text-primary' : 'text-gray-600'
                           }`} 
                         />
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <h4 className="font-semibold text-gray-900 text-xs sm:text-base truncate">{tariff.title}</h4>
-                        <p className="text-xs text-gray-600 truncate">{tariff.description}</p>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{tariff.title}</h4>
+                        <p className="text-sm text-gray-600">{tariff.description}</p>
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+                    <div className="text-right flex items-center space-x-3">
                       {tariff.id === 'custom' ? (
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center space-x-2">
                           <Input
                             type="number"
-                            placeholder="0"
+                            placeholder="Сумма"
                             value={customAmount}
                             onChange={(e) => {
                               const value = e.target.value.replace(/\s/g, '');
@@ -153,7 +153,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             }}
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
-                            className="w-16 sm:w-20 h-6 sm:h-7 text-xs px-2"
+                            className="w-24 h-8 text-sm"
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedTariff('custom');
@@ -162,19 +162,19 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             autoFocus={false}
                             tabIndex={-1}
                           />
-                          <span className="text-xs text-gray-600">₽</span>
+                          <span className="text-sm text-gray-600">₽</span>
                         </div>
                       ) : (
-                        <div className="text-base sm:text-lg font-bold text-gray-900 whitespace-nowrap">{tariff.price}</div>
+                        <div className="text-xl font-bold text-gray-900">{tariff.price}</div>
                       )}
-                      <div className={`w-4 h-4 sm:w-4 sm:h-4 rounded-full border-2 ${
+                      <div className={`w-4 h-4 rounded-full border-2 ${
                         selectedTariff === tariff.id 
                           ? 'border-primary bg-primary' 
                           : 'border-gray-300'
                       }`}>
                         {selectedTariff === tariff.id && (
                           <div className="w-full h-full rounded-full bg-primary flex items-center justify-center">
-                            <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 bg-white rounded-full"></div>
+                            <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                           </div>
                         )}
                       </div>
@@ -187,10 +187,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
           {/* Форма данных */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Контактные данные</h3>
-            <div className="space-y-3 sm:space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Контактные данные</h3>
+            <div className="space-y-4">
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   ФИО *
                 </label>
                 <Input
@@ -203,7 +203,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                 />
               </div>
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Email *
                 </label>
                 <Input
@@ -215,7 +215,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                 />
               </div>
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Телефон *
                 </label>
                 <Input
@@ -230,13 +230,13 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
           </div>
 
           {/* Итого */}
-          <div className="border-t pt-3 sm:pt-4">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <div className="min-w-0 flex-1">
-                <h4 className="font-semibold text-gray-900 text-sm sm:text-base truncate">{selectedTariffData?.title}</h4>
-                <p className="text-xs sm:text-sm text-gray-600">{selectedTariffData?.duration}</p>
+          <div className="border-t pt-4">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h4 className="font-semibold text-gray-900">{selectedTariffData?.title}</h4>
+                <p className="text-sm text-gray-600">{selectedTariffData?.duration}</p>
               </div>
-              <div className="text-lg sm:text-2xl font-bold text-primary flex-shrink-0">
+              <div className="text-2xl font-bold text-primary">
                 {selectedTariff === 'custom' && customAmount 
                   ? `${formatAmount(customAmount)} ₽` 
                   : selectedTariffData?.price}
@@ -245,14 +245,14 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
             
             <Button 
               onClick={handlePayment}
-              className="w-full bg-primary hover:bg-primary/90 text-sm sm:text-base" 
+              className="w-full bg-primary hover:bg-primary/90" 
               size="lg"
             >
-              <Icon name="CreditCard" className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              <Icon name="CreditCard" className="mr-2 h-5 w-5" />
               Перейти к оплате
             </Button>
             
-            <p className="text-xs text-gray-500 mt-2 text-center leading-tight">
+            <p className="text-xs text-gray-500 mt-2 text-center">
               Нажимая кнопку, вы соглашаетесь с{' '}
               <button onClick={() => window.open('/offer', '_blank')} className="text-primary hover:underline">
                 офертой
