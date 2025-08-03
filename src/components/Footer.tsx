@@ -15,22 +15,38 @@ const Footer = ({ scrollToSection }: FooterProps) => {
   const infoLinks = [
     { label: "О нас", section: "about" },
     { label: "Вопросы и ответы", section: "faq" },
+    { label: "О компании", href: "/about" },
     { label: "Публичная оферта", href: "/offer" },
-    { label: "Политика конфиденциальности", href: "/privacy" }
+    { label: "Политика конфиденциальности", href: "/privacy" },
+    { label: "Политика возврата", href: "/refund" }
   ];
 
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
           <div className="sm:col-span-2 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Icon name="Heart" className="h-8 w-8 text-primary" />
               <span className="text-xl sm:text-2xl font-bold">Workstab.com</span>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 mb-6">
               Помогаем строить крепкие и счастливые отношения через понимание, принятие и любовь.
             </p>
+            <div className="space-y-2 text-gray-400">
+              <div className="flex items-center">
+                <Icon name="Phone" className="h-4 w-4 mr-2" />
+                <span>+7 (999) 123-45-67</span>
+              </div>
+              <div className="flex items-center">
+                <Icon name="Mail" className="h-4 w-4 mr-2" />
+                <span>info@workstab.com</span>
+              </div>
+              <div className="flex items-center">
+                <Icon name="Clock" className="h-4 w-4 mr-2" />
+                <span>Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-18:00</span>
+              </div>
+            </div>
           </div>
           
           <div>
@@ -78,8 +94,9 @@ const Footer = ({ scrollToSection }: FooterProps) => {
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
           <p>&copy; 2024 Workstab.com. Все права защищены.</p>
           <p className="mt-2 text-sm">
-            ИП [ФИО], ОГРНИП: [ОГРНИП], ИНН: [ИНН]<br />
-            Юридический адрес: [Адрес регистрации ИП]
+            ИП Иванов Иван Иванович, ОГРНИП: 123456789012345, ИНН: 123456789012<br />
+            Юридический адрес: г. Москва, ул. Примерная, д. 1, кв. 1<br />
+            Телефон: +7 (999) 123-45-67, Email: info@workstab.com
           </p>
         </div>
       </div>
