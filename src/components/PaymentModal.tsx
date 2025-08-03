@@ -25,7 +25,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'individual',
       title: 'Индивидуальная сессия',
-      price: '3 000₽',
+      price: '3 000 ₽',
       duration: '60 минут',
       description: 'Персональная работа 1 на 1',
       icon: 'User',
@@ -34,7 +34,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'couple',
       title: 'Сессия для пары',
-      price: '5 000₽',
+      price: '5 000 ₽',
       duration: '90 минут',
       description: 'Совместная работа над отношениями',
       icon: 'Users',
@@ -43,7 +43,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'support',
       title: 'Поддержка в чате',
-      price: '4 000₽',
+      price: '4 000 ₽',
       duration: '7 дней',
       description: 'Круглосуточная поддержка',
       icon: 'MessageCircle',
