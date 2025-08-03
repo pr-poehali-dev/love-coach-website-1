@@ -79,7 +79,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                       key={item.href}
                       onClick={() => {
                         scrollToSection(item.href);
-                        setIsMenuOpen(false);
+                        setTimeout(() => setIsMenuOpen(false), 100);
                       }}
                       className="text-lg text-gray-700 hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/5 text-left w-full"
                     >
@@ -91,7 +91,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <Button 
                       onClick={() => {
                         setShowPaymentModal(true);
-                        setIsMenuOpen(false);
+                        setTimeout(() => setIsMenuOpen(false), 100);
                       }}
                       variant="outline"
                       className="w-full border-primary text-primary hover:bg-primary/5"
@@ -102,7 +102,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <Button 
                       onClick={() => {
                         scrollToSection('contact');
-                        setIsMenuOpen(false);
+                        setTimeout(() => setIsMenuOpen(false), 100);
                       }}
                       className="w-full bg-primary hover:bg-primary/90"
                     >

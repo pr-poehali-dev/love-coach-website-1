@@ -30,7 +30,6 @@ const Index = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
   };
 
   return (
