@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import Icon from "@/components/ui/icon";
 
@@ -101,8 +102,142 @@ const ContactForm = () => {
   );
 };
 
+// Tariff Details Component
+const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: { 
+  tariff: string; 
+  isOpen: boolean; 
+  onClose: () => void;
+  scrollToSection: (id: string) => void; 
+}) => {
+  const tariffData = {
+    'individual': {
+      title: 'Индивидуальный коучинг',
+      description: 'Персональная работа с эмоциональными блоками и развитием навыков общения',
+      price: '8,000₽',
+      duration: '60 минут',
+      features: [
+        'Глубокая диагностика эмоциональных паттернов',
+        'Персональные упражнения и техники',
+        'Работа с детскими травмами и блоками',
+        'Развитие эмоционального интеллекта',
+        'Поддержка между сессиями',
+        'Запись сессии для повторного прослушивания'
+      ],
+      benefits: [
+        'Понимание своих эмоциональных реакций',
+        'Улучшение самооценки и уверенности',
+        'Навыки здорового выражения чувств',
+        'Преодоление страхов в отношениях'
+      ]
+    },
+    'couple': {
+      title: 'Парный коучинг',
+      description: 'Совместная работа пары над улучшением взаимопонимания и решением конфликтов',
+      price: '12,000₽',
+      duration: '90 минут',
+      features: [
+        'Диагностика паттернов взаимодействия',
+        'Техники активного слушания',
+        'Работа с конфликтными ситуациями',
+        'Восстановление эмоциональной близости',
+        'Домашние задания для пары',
+        'Методы поддержания близости'
+      ],
+      benefits: [
+        'Улучшение качества общения',
+        'Разрешение застарелых конфликтов',
+        'Восстановление доверия и близости',
+        'Создание общих целей и ценностей'
+      ]
+    },
+    'support': {
+      title: 'Поддержка в чате',
+      description: 'Круглосуточная поддержка и консультации в сложных ситуациях',
+      price: '15,000₽',
+      duration: '7 дней',
+      features: [
+        'Ответы на сообщения в течение 2 часов',
+        'Кризисная поддержка 24/7',
+        'Практические советы и техники',
+        'Аудиосообщения с упражнениями',
+        'Мотивационная поддержка',
+        'Еженедельные видеозвонки (30 мин)'
+      ],
+      benefits: [
+        'Быстрая помощь в кризисных ситуациях',
+        'Постоянное сопровождение процесса',
+        'Удобный формат общения',
+        'Накопление опыта решения проблем'
+      ]
+    }
+  };
+
+  const data = tariffData[tariff as keyof typeof tariffData];
+  if (!data) return null;
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold text-gray-900">
+            {data.title}
+          </DialogTitle>
+          <DialogDescription className="text-lg text-gray-600 mt-2">
+            {data.description}
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="space-y-6 mt-6">
+          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg">
+            <div>
+              <div className="text-3xl font-bold text-primary">{data.price}</div>
+              <div className="text-sm text-gray-600">{data.duration}</div>
+            </div>
+            <Button onClick={() => scrollToSection('contact')} size="lg" className="bg-primary hover:bg-primary/90">
+              <Icon name="Calendar" className="mr-2 h-5 w-5" />
+              Записаться
+            </Button>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Что включено:</h3>
+            <div className="grid gap-2">
+              {data.features.map((feature, index) => (
+                <div key={index} className="flex items-start">
+                  <Icon name="Check" className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Результаты:</h3>
+            <div className="grid gap-2">
+              {data.benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start">
+                  <Icon name="Star" className="h-5 w-5 text-yellow-500 mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">{benefit}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-4 bg-gray-50 rounded-lg">
+            <p className="text-sm text-gray-600">
+              <Icon name="Info" className="h-4 w-4 text-primary inline mr-2" />
+              Первая консультация всегда бесплатная. Мы обсудим ваши цели и подберём оптимальный формат работы.
+            </p>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -559,6 +694,14 @@ const Index = () => {
                 <Button className="w-full" size="lg">
                   Оплатить
                 </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full mt-3" 
+                  onClick={() => setSelectedTariff('individual')}
+                >
+                  <Icon name="Info" className="mr-2 h-4 w-4" />
+                  Узнать больше
+                </Button>
               </CardContent>
             </Card>
 
@@ -583,6 +726,14 @@ const Index = () => {
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-secondary/80 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full mt-3" 
+                  onClick={() => setSelectedTariff('couple')}
+                >
+                  <Icon name="Info" className="mr-2 h-4 w-4" />
+                  Узнать больше
+                </Button>
               </CardContent>
             </Card>
 
@@ -599,6 +750,14 @@ const Index = () => {
                 <p className="text-gray-600 mb-6">Неделя поддержки</p>
                 <Button className="w-full" size="lg">
                   Оплатить
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full mt-3" 
+                  onClick={() => setSelectedTariff('support')}
+                >
+                  <Icon name="Info" className="mr-2 h-4 w-4" />
+                  Узнать больше
                 </Button>
               </CardContent>
             </Card>
@@ -742,9 +901,30 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Услуги</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Индивидуальный коучинг</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Коучинг для пар</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Поддержка в чате</a></li>
+                <li>
+                  <button 
+                    onClick={() => setSelectedTariff('individual')} 
+                    className="hover:text-white transition-colors text-left"
+                  >
+                    Индивидуальный коучинг
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => setSelectedTariff('couple')} 
+                    className="hover:text-white transition-colors text-left"
+                  >
+                    Коучинг для пар
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => setSelectedTariff('support')} 
+                    className="hover:text-white transition-colors text-left"
+                  >
+                    Поддержка в чате
+                  </button>
+                </li>
               </ul>
             </div>
 
@@ -772,6 +952,14 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Tariff Details Modal */}
+      <TariffDetails 
+        tariff={selectedTariff || ''} 
+        isOpen={!!selectedTariff} 
+        onClose={() => setSelectedTariff(null)}
+        scrollToSection={scrollToSection}
+      />
     </div>
   );
 };
