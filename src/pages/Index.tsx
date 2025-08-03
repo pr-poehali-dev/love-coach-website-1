@@ -104,12 +104,23 @@ const ContactForm = () => {
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    setIsMenuOpen(false);
+  };
+
   const navItems = [
-    { href: "#services", label: "Услуги" },
-    { href: "#about", label: "О нас" },
-    { href: "#prices", label: "Цены" },
-    { href: "#faq", label: "Вопросы" },
-    { href: "#contact", label: "Контакты" }
+    { href: "services", label: "Услуги" },
+    { href: "about", label: "О нас" },
+    { href: "prices", label: "Цены" },
+    { href: "faq", label: "Вопросы" },
+    { href: "contact", label: "Контакты" }
   ];
 
   return (
@@ -124,19 +135,22 @@ const Index = () => {
             </div>
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <a 
+                <button 
                   key={item.href}
-                  href={item.href} 
+                  onClick={() => scrollToSection(item.href)}
                   className="text-gray-600 hover:text-primary transition-colors relative group"
                 >
                   {item.label}
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></div>
-                </a>
+                </button>
               ))}
             </div>
             
             <div className="flex items-center space-x-4">
-              <Button className="hidden sm:flex bg-primary hover:bg-primary/90 group relative overflow-hidden">
+              <Button 
+                onClick={() => scrollToSection('contact')}
+                className="hidden sm:flex bg-primary hover:bg-primary/90 group relative overflow-hidden"
+              >
                 <span className="relative z-10">
                   Записаться
                 </span>
@@ -158,17 +172,19 @@ const Index = () => {
                     </div>
                     
                     {navItems.map((item) => (
-                      <a 
+                      <button 
                         key={item.href}
-                        href={item.href} 
-                        className="text-lg text-gray-700 hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/5"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => scrollToSection(item.href)}
+                        className="text-lg text-gray-700 hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/5 text-left w-full"
                       >
                         {item.label}
-                      </a>
+                      </button>
                     ))}
                     
-                    <Button className="mt-6 bg-primary hover:bg-primary/90">
+                    <Button 
+                      onClick={() => scrollToSection('contact')}
+                      className="mt-6 bg-primary hover:bg-primary/90"
+                    >
                       <Icon name="Calendar" className="mr-2 h-5 w-5" />
                       Записаться на консультацию
                     </Button>
@@ -194,14 +210,23 @@ const Index = () => {
                 Пойми друг друга. Услышь. Почувствуй.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-4 group relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                <Button 
+                  onClick={() => scrollToSection('contact')}
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-lg px-8 py-4 group relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                >
                   <span className="relative z-10 flex items-center">
                     <Icon name="Calendar" className="mr-2 h-5 w-5" />
                     Записаться на консультацию
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-4 group hover:bg-primary/5 transition-all duration-300">
+                <Button 
+                  onClick={() => scrollToSection('stats')}
+                  variant="outline" 
+                  size="lg" 
+                  className="text-lg px-8 py-4 group hover:bg-primary/5 transition-all duration-300"
+                >
                   <Icon name="Play" className="mr-2 h-5 w-5 group-hover:text-primary transition-colors" />
                   Узнать больше
                 </Button>
@@ -220,7 +245,7 @@ const Index = () => {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+      <section id="stats" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-white/10 text-white border-white/20">Наши результаты</Badge>
@@ -279,11 +304,9 @@ const Index = () => {
             <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2 animate-slide-in-left">
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
-                  <img 
-                    src="/img/fc53113c-98d3-457c-b43b-ed3bc861dd3c.jpg" 
-                    alt="Анна"
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
+                  <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mr-4">
+                    <Icon name="Heart" className="h-8 w-8 text-white" />
+                  </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Анна, 32 года</h4>
                     <p className="text-sm text-gray-600">Индивидуальный коучинг</p>
@@ -304,11 +327,9 @@ const Index = () => {
             <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2 animate-scale-in">
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
-                  <img 
-                    src="/img/3f3146b0-c9d8-49c7-9d2e-64536bc2e132.jpg" 
-                    alt="Михаил"
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mr-4">
+                    <Icon name="Users" className="h-8 w-8 text-white" />
+                  </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Михаил и Елена</h4>
                     <p className="text-sm text-gray-600">Парный коучинг</p>
@@ -330,7 +351,7 @@ const Index = () => {
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4">
-                    <Icon name="User" className="h-8 w-8 text-white" />
+                    <Icon name="MessageCircle" className="h-8 w-8 text-white" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Дарья, 28 лет</h4>
@@ -340,6 +361,75 @@ const Index = () => {
                 <p className="text-gray-700 leading-relaxed mb-4">
                   "Постоянная поддержка в течение недели помогла пережить сложный период. 
                   Чувствую себя увереннее в отношениях."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4">
+                    <Icon name="Lightbulb" className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Олег, 35 лет</h4>
+                    <p className="text-sm text-gray-600">Индивидуальная работа</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  "Открыл для себя совершенно новые способы выражения чувств. 
+                  Жена говорит, что я стал более открытым и понимающим."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center mr-4">
+                    <Icon name="Smile" className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Виктория, 29 лет</h4>
+                    <p className="text-sm text-gray-600">Кризисная поддержка</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  "В самый сложный момент получила именно ту помощь, которая была нужна. 
+                  Смогла сохранить семью и восстановить доверие."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mr-4">
+                    <Icon name="Target" className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Алексей и Мария</h4>
+                    <p className="text-sm text-gray-600">Семейная терапия</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  "За полгода работы кардинально изменили подход к воспитанию детей 
+                  и научились быть командой. Дети стали спокойнее и счастливее."
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
