@@ -67,7 +67,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                   <Icon name="Menu" className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto max-h-screen">
                 <div className="flex flex-col space-y-6 mt-6">
                   <div className="flex items-center space-x-2 mb-6">
                     <Icon name="Heart" className="h-8 w-8 text-primary" />
@@ -77,7 +77,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                   {navItems.map((item) => (
                     <button 
                       key={item.href}
-                      onClick={() => scrollToSection(item.href)}
+                      onClick={() => {
+                        scrollToSection(item.href);
+                        setIsMenuOpen(false);
+                      }}
                       className="text-lg text-gray-700 hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/5 text-left w-full"
                     >
                       {item.label}
@@ -86,7 +89,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                   
                   <div className="space-y-3 mt-6">
                     <Button 
-                      onClick={() => setShowPaymentModal(true)}
+                      onClick={() => {
+                        setShowPaymentModal(true);
+                        setIsMenuOpen(false);
+                      }}
                       variant="outline"
                       className="w-full border-primary text-primary hover:bg-primary/5"
                     >
@@ -94,7 +100,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                       Оплата
                     </Button>
                     <Button 
-                      onClick={() => scrollToSection('contact')}
+                      onClick={() => {
+                        scrollToSection('contact');
+                        setIsMenuOpen(false);
+                      }}
                       className="w-full bg-primary hover:bg-primary/90"
                     >
                       <Icon name="Calendar" className="mr-2 h-5 w-5" />

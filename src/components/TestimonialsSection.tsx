@@ -71,8 +71,8 @@ const TestimonialsSection = () => {
             >
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${testimonial.gradient} rounded-full flex items-center justify-center mr-4`}>
-                    <Icon name={testimonial.icon as any} className="h-8 w-8 text-white" />
+                  <div className={`w-16 h-16 bg-gradient-to-r ${testimonial.gradient} rounded-full flex items-center justify-center mr-4 flex-shrink-0`}>
+                    <Icon name={testimonial.icon as any} className="h-8 w-8 text-white flex-shrink-0" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
