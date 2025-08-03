@@ -54,7 +54,8 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
       title: 'Расширенный план',
       price: 'По согласованию',
       duration: 'Индивидуально',
-      description: 'Введите сумму\nсогласованную заранее',
+      description: 'Введите сумму согласованную заранее',
+      mobileDescription: 'Введите сумму\nсогласованную заранее',
       icon: 'Settings',
       popular: false
     }
@@ -136,7 +137,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                       </div>
                       <div className="min-w-0 flex-1">
                         <h4 className="font-semibold text-gray-900 text-xs sm:text-base truncate">{tariff.title}</h4>
-                        <p className="text-xs sm:text-sm text-gray-600 whitespace-pre-line">{tariff.description}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 sm:truncate">
+                          <span className="hidden sm:inline">{tariff.description}</span>
+                          <span className="sm:hidden whitespace-pre-line">{tariff.mobileDescription || tariff.description}</span>
+                        </p>
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
