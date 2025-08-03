@@ -153,7 +153,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             }}
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
-                            className="w-16 sm:w-24 h-7 sm:h-8 text-xs sm:text-sm"
+                            className="w-20 sm:w-28 h-7 sm:h-8 text-xs sm:text-sm [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedTariff('custom');

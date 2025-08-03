@@ -89,7 +89,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto w-[95vw] sm:w-full">
         <DialogHeader>
           <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
@@ -103,7 +103,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
         </DialogHeader>
 
         <div className="space-y-6 mt-4">
-          <div className="flex items-center justify-between p-4 bg-primary/5 rounded-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-primary/5 rounded-lg gap-3">
             <div>
               <div className="text-2xl font-bold text-primary">{currentTariff.price}</div>
               <div className="text-sm text-gray-600">{currentTariff.duration}</div>
@@ -112,7 +112,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
               <Button 
                 onClick={() => setShowForm(true)}
                 size="lg"
-                className="bg-primary hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
               >
                 <Icon name="Calendar" className="mr-2 h-5 w-5" />
                 Записаться
@@ -139,7 +139,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
                 <p className="text-gray-700 leading-relaxed">{currentTariff.process}</p>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button 
                   onClick={() => setShowForm(true)}
                   className="flex-1 bg-primary hover:bg-primary/90"
@@ -152,6 +152,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
                   onClick={onClose}
                   variant="outline"
                   size="lg"
+                  className="w-full sm:w-auto"
                 >
                   Закрыть
                 </Button>
