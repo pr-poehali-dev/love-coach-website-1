@@ -16,8 +16,7 @@ const Footer = ({ scrollToSection }: FooterProps) => {
     { label: "О нас", section: "about" },
     { label: "Вопросы и ответы", section: "faq" },
     { label: "Публичная оферта", href: "/offer" },
-    { label: "Политика конфиденциальности", href: "/privacy" },
-    { label: "Политика возврата", href: "/refund" }
+    { label: "Политика конфиденциальности", href: "/privacy" }
   ];
 
   return (
