@@ -15,7 +15,8 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    agreeToTerms: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -33,7 +34,7 @@ const ContactForm = () => {
         description: "Мы свяжемся с вами в течение 24 часов.",
       });
       
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', agreeToTerms: false });
     } catch (error) {
       toast({
         title: "Ошибка",
@@ -45,7 +46,7 @@ const ContactForm = () => {
     }
   };
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -79,6 +80,26 @@ const ContactForm = () => {
           onChange={(e) => handleInputChange('message', e.target.value)}
           required
         />
+      </div>
+      <div className="flex items-start space-x-2">
+        <input 
+          type="checkbox" 
+          id="agreeToTerms"
+          checked={formData.agreeToTerms}
+          onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
+          className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+          required
+        />
+        <label htmlFor="agreeToTerms" className="text-sm text-gray-600">
+          Я согласен с{' '}
+          <a href="/offer" target="_blank" className="text-primary hover:underline">
+            публичной офертой
+          </a>
+          {' '}и{' '}
+          <a href="/privacy" target="_blank" className="text-primary hover:underline">
+            политикой конфиденциальности
+          </a>
+        </label>
       </div>
       <Button 
         type="submit" 
@@ -365,13 +386,7 @@ const PaymentModal = ({ isOpen, onClose }: {
                   }`}
                   onClick={() => setSelectedTariff(tariff.id)}
                 >
-                  {tariff.popular && (
-                    <div className="absolute -top-2 left-4">
-                      <span className="bg-secondary text-white text-xs px-2 py-1 rounded">
-                        Популярное
-                      </span>
-                    </div>
-                  )}
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -725,8 +740,8 @@ const Index = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "После трёх сессий я научилась лучше понимать свои эмоции и выражать их партнёру. 
-                  Наши отношения стали гораздо глубже и теплее."
+                  "Честно, скептически относилась к коучингу. Но уже после первой сессии поняла — это работает! 
+                  Теперь мы с мужем говорим о чувствах без криков и обид. Это просто космос! 🚀"
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -748,8 +763,8 @@ const Index = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "Мы были на грани расставания. За месяц работы научились слышать друг друга 
-                  и решать конфликты конструктивно. Спасибо!"
+                  "15 лет брака, а ругались как подростки! Сеансы изменили всё — теперь обсуждаем проблемы 
+                  спокойно, без взаимных упрёков. Дети даже заметили, что мы стали добрее друг к другу."
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -767,12 +782,12 @@ const Index = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Дарья, 28 лет</h4>
-                    <p className="text-sm text-gray-600">Поддержка в чате</p>
+                    <p className="text-sm text-gray-600">Поддержка в кризисе</p>
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "Постоянная поддержка в течение недели помогла пережить сложный период. 
-                  Чувствую себя увереннее в отношениях."
+                  "Парень подал на развод. На улице плакала, не знала куда деваться. Посчастливилось 
+                  найти этот сервис. Через неделю поняла, как действовать. Мы помирились!"
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -794,8 +809,8 @@ const Index = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "Открыл для себя совершенно новые способы выражения чувств. 
-                  Жена говорит, что я стал более открытым и понимающим."
+                  "Мужики не плачут, так учил отец. Ошибался! После сеансов научился 
+                  делиться эмоциями. Жена сказала: 'Олег, ты стал настоящим мужчиной.' Лучший комплимент!"
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -817,8 +832,8 @@ const Index = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "В самый сложный момент получила именно ту помощь, которая была нужна. 
-                  Смогла сохранить семью и восстановить доверие."
+                  "Обман с ипотекой вскрылся, муж обиделся до слёз... Казалось, всё кончено. 
+                  Но почему-то сумела найти слова, которые вернули нам отношения. Магия!"
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -840,8 +855,8 @@ const Index = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "За полгода работы кардинально изменили подход к воспитанию детей 
-                  и научились быть командой. Дети стали спокойнее и счастливее."
+                  "Кричали друг на друга при детях, понимали — так нельзя. Но как по-другому? 
+                  Коуч показал конкретные приёмы. И знаете что? Работает!"
                 </p>
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -1003,18 +1018,7 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">5 000 ₽</div>
                 <p className="text-gray-600 mb-6">90 минут</p>
-                <Button 
-                  onClick={() => setShowContactForm(true)}
-                  className="w-full bg-secondary hover:bg-secondary/90 group relative overflow-hidden" 
-                  size="lg"
-                >
-                  <span className="relative z-10 flex items-center justify-center">
-                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                    Записаться
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-secondary/80 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                </Button>
-                <div className="space-y-3 mt-4">
+                <div className="space-y-3">
                   <Button 
                     onClick={() => setShowContactForm(true)}
                     className="w-full bg-primary hover:bg-primary/90" 

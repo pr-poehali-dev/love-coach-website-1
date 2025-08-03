@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { useNavigate } from "react-router-dom";
 
 const Offer = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -13,7 +16,7 @@ const Offer = () => {
               <Icon name="Heart" className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
             </div>
-            <Button variant="outline" onClick={() => window.history.back()}>
+            <Button variant="outline" onClick={() => navigate('/')}>
               <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
               Назад
             </Button>
