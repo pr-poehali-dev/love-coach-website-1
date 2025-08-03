@@ -103,14 +103,16 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
               <div className="text-2xl font-bold text-primary">{currentTariff.price}</div>
               <div className="text-sm text-gray-600">{currentTariff.duration}</div>
             </div>
-            <Button 
-              onClick={() => setShowForm(true)}
-              size="lg"
-              className="bg-primary hover:bg-primary/90"
-            >
-              <Icon name="Calendar" className="mr-2 h-5 w-5" />
-              Записаться
-            </Button>
+            {!showForm && (
+              <Button 
+                onClick={() => setShowForm(true)}
+                size="lg"
+                className="bg-primary hover:bg-primary/90"
+              >
+                <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                Записаться
+              </Button>
+            )}
           </div>
 
           {!showForm ? (
@@ -393,6 +395,24 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon name="MessageCircle" className="h-5 w-5 text-green-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">WhatsApp</h4>
+                      <p className="text-gray-600">+7 (999) 123-45-67</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon name="Send" className="h-5 w-5 text-blue-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Telegram</h4>
+                      <p className="text-gray-600">@workstab_support</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
                     <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Icon name="Clock" className="h-5 w-5 text-primary" />
                     </div>
@@ -420,17 +440,7 @@ const Index = () => {
               <p className="text-gray-400 mb-4">
                 Помогаем строить крепкие и счастливые отношения через понимание, принятие и любовь.
               </p>
-              <div className="flex space-x-4">
-                <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-                  <Icon name="Instagram" className="h-5 w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-                  <Icon name="Facebook" className="h-5 w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-                  <Icon name="Twitter" className="h-5 w-5" />
-                </Button>
-              </div>
+
             </div>
             
             <div>
@@ -456,6 +466,10 @@ const Index = () => {
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
             <p>&copy; 2024 Workstab.com. Все права защищены.</p>
+            <p className="mt-2 text-sm">
+              ИП [ФИО], ОГРНИП: [ОГРНИП], ИНН: [ИНН]<br />
+              Юридический адрес: [Адрес регистрации ИП]
+            </p>
           </div>
         </div>
       </footer>
