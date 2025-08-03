@@ -1,12 +1,24 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { href: "#services", label: "Услуги" },
+    { href: "#about", label: "О нас" },
+    { href: "#prices", label: "Цены" },
+    { href: "#faq", label: "Вопросы" },
+    { href: "#contact", label: "Контакты" }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Navigation */}
@@ -18,18 +30,59 @@ const Index = () => {
               <span className="text-2xl font-bold text-gray-900">LoveCoach.Pro</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#services" className="text-gray-600 hover:text-primary transition-colors">Услуги</a>
-              <a href="#about" className="text-gray-600 hover:text-primary transition-colors">О нас</a>
-              <a href="#prices" className="text-gray-600 hover:text-primary transition-colors">Цены</a>
-              <a href="#faq" className="text-gray-600 hover:text-primary transition-colors">Вопросы</a>
-              <a href="#contact" className="text-gray-600 hover:text-primary transition-colors">Контакты</a>
+              {navItems.map((item) => (
+                <a 
+                  key={item.href}
+                  href={item.href} 
+                  className="text-gray-600 hover:text-primary transition-colors relative group"
+                >
+                  {item.label}
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></div>
+                </a>
+              ))}
             </div>
-            <Button className="bg-primary hover:bg-primary/90 group relative overflow-hidden">
-              <span className="relative z-10">
-                Записаться
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></div>
-            </Button>
+            
+            <div className="flex items-center space-x-4">
+              <Button className="hidden sm:flex bg-primary hover:bg-primary/90 group relative overflow-hidden">
+                <span className="relative z-10">
+                  Записаться
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></div>
+              </Button>
+              
+              {/* Mobile menu */}
+              <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="md:hidden">
+                    <Icon name="Menu" className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                  <div className="flex flex-col space-y-6 mt-6">
+                    <div className="flex items-center space-x-2 mb-6">
+                      <Icon name="Heart" className="h-8 w-8 text-primary" />
+                      <span className="text-2xl font-bold text-gray-900">LoveCoach.Pro</span>
+                    </div>
+                    
+                    {navItems.map((item) => (
+                      <a 
+                        key={item.href}
+                        href={item.href} 
+                        className="text-lg text-gray-700 hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/5"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                    
+                    <Button className="mt-6 bg-primary hover:bg-primary/90">
+                      <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                      Записаться на консультацию
+                    </Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </nav>
@@ -73,8 +126,92 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Statistics Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-white/10 text-white border-white/20">Наши результаты</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Цифры, которые говорят сами за себя</h2>
+            <p className="text-xl text-gray-300">Реальная статистика работы с клиентами</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="Users" className="h-10 w-10 text-white" />
+              </div>
+              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">500+</div>
+              <p className="text-gray-300">Счастливых пар</p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="Heart" className="h-10 w-10 text-white" />
+              </div>
+              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">89%</div>
+              <p className="text-gray-300">Улучшили отношения</p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="Clock" className="h-10 w-10 text-white" />
+              </div>
+              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">3</div>
+              <p className="text-gray-300">Года опыта</p>
+            </div>
+
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="Award" className="h-10 w-10 text-white" />
+              </div>
+              <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">98%</div>
+              <p className="text-gray-300">Довольных клиентов</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Presentation Section */}
       <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-4 bg-primary/10 text-primary">Видео-презентация</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Посмотрите, как мы работаем</h2>
+            <p className="text-xl text-gray-600 mb-12">Узнайте больше о нашем подходе к коучингу отношений</p>
+            
+            <div className="relative bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl p-8 mb-8 group hover:from-primary/20 hover:to-secondary/20 transition-all duration-500">
+              <div className="aspect-video bg-gray-900 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20"></div>
+                <Button size="lg" className="relative z-10 bg-white text-gray-900 hover:bg-gray-100 rounded-full w-20 h-20 group-hover:scale-110 transition-transform">
+                  <Icon name="Play" className="h-8 w-8 ml-1" />
+                </Button>
+              </div>
+              <div className="mt-6">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">"Как восстановить близость в отношениях"</h3>
+                <p className="text-gray-600">5-минутное видео о наших методах работы с парами</p>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 group relative overflow-hidden">
+                <span className="relative z-10 flex items-center">
+                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                  Записаться на бесплатную консультацию
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+              </Button>
+              
+              <Button variant="outline" size="lg" className="group hover:bg-primary/5">
+                <Icon name="Download" className="mr-2 h-5 w-5 group-hover:text-primary transition-colors" />
+                Скачать гайд по отношениям
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-primary/10 text-primary">Отзывы</Badge>
@@ -160,7 +297,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-secondary/10 text-secondary">О проекте</Badge>
@@ -218,7 +355,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50">
+      <section id="services" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-primary/10 text-primary">Наши услуги</Badge>
@@ -270,7 +407,7 @@ const Index = () => {
       </section>
 
       {/* Prices Section */}
-      <section id="prices" className="py-20 bg-white">
+      <section id="prices" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-secondary/10 text-secondary">Тарифы</Badge>
@@ -341,7 +478,7 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-gray-50">
+      <section id="faq" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-primary/10 text-primary">FAQ</Badge>
@@ -400,7 +537,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      <section id="contact" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-secondary/10 text-secondary">Контакты</Badge>
