@@ -132,7 +132,7 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
                   <div className="text-4xl font-bold text-gray-400">0 ₽</div>
                   <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2 -rotate-[20deg] origin-center scale-110"></div>
                 </div>
-                <p className="text-xs text-gray-500 mt-2 font-medium">Стоимость определяется индивидуально</p>
+                <p className="text-xs text-gray-500 mt-2 font-medium">Стоимость определяется индивидуально, до начала консультации</p>
               </div>
               <p className="text-gray-600 mb-6">Гибкий формат работы</p>
               <div className="space-y-3">
