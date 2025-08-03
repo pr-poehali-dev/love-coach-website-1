@@ -99,10 +99,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900">
+          <DialogTitle className="text-lg sm:text-2xl font-bold text-gray-900">
             Оплата услуг
           </DialogTitle>
-          <DialogDescription className="text-sm sm:text-base text-gray-600">
+          <DialogDescription className="text-xs sm:text-base text-gray-600">
             Выберите тариф и заполните данные для оплаты
           </DialogDescription>
         </DialogHeader>
@@ -110,7 +110,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
         <div className="space-y-6 mt-4">
           {/* Выбор тарифа */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Выберите тариф</h3>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Выберите тариф</h3>
             <div className="grid gap-3">
               {tariffs.map((tariff) => (
                 <div 
@@ -124,19 +124,19 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center ${
                         selectedTariff === tariff.id ? 'bg-primary/20' : 'bg-gray-100'
                       }`}>
                         <Icon 
                           name={tariff.icon as any} 
-                          className={`h-5 w-5 ${
+                          className={`h-4 w-4 sm:h-5 sm:w-5 ${
                             selectedTariff === tariff.id ? 'text-primary' : 'text-gray-600'
                           }`} 
                         />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900">{tariff.title}</h4>
-                        <p className="text-sm text-gray-600">{tariff.description}</p>
+                        <h4 className="font-semibold text-gray-900 text-xs sm:text-base">{tariff.title}</h4>
+                        <p className="text-xs sm:text-sm text-gray-600">{tariff.description}</p>
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
@@ -153,7 +153,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             }}
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
-                            className="w-24 h-8 text-sm"
+                            className="w-16 sm:w-24 h-7 sm:h-8 text-xs sm:text-sm"
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedTariff('custom');
@@ -162,12 +162,12 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             autoFocus={false}
                             tabIndex={-1}
                           />
-                          <span className="text-sm text-gray-600">₽</span>
+                          <span className="text-xs sm:text-sm text-gray-600">₽</span>
                         </div>
                       ) : (
-                        <div className="text-xl font-bold text-gray-900">{tariff.price}</div>
+                        <div className="text-sm sm:text-xl font-bold text-gray-900">{tariff.price}</div>
                       )}
-                      <div className={`w-4 h-4 rounded-full border-2 ${
+                      <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 ${
                         selectedTariff === tariff.id 
                           ? 'border-primary bg-primary' 
                           : 'border-gray-300'
