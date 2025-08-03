@@ -97,7 +97,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="w-[88vw] max-w-md max-h-[95vh] overflow-y-auto overflow-x-hidden p-3 sm:p-6">
+      <DialogContent className="w-[98vw] sm:w-[90vw] max-w-none sm:max-w-lg max-h-[95vh] overflow-y-auto overflow-x-hidden p-3 sm:p-6 mx-1 sm:mx-auto">
         <DialogHeader>
           <DialogTitle className="text-lg sm:text-xl font-bold text-gray-900">
             Оплата услуг
@@ -115,7 +115,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
               {tariffs.map((tariff) => (
                 <div 
                   key={tariff.id}
-                  className={`relative border-2 rounded-lg p-2 sm:p-4 pr-3 sm:pr-5 cursor-pointer transition-all ${
+                  className={`relative border-2 rounded-lg p-3 sm:p-4 pr-4 sm:pr-5 cursor-pointer transition-all ${
                     selectedTariff === tariff.id 
                       ? 'border-primary bg-primary/5' 
                       : 'border-gray-200 hover:border-gray-300'
@@ -140,7 +140,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                    <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
                       {tariff.id === 'custom' ? (
                         <div className="flex items-center gap-1">
                           <Input
@@ -153,7 +153,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             }}
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
-                            className="w-12 sm:w-20 h-5 sm:h-7 text-xs px-1 sm:px-2"
+                            className="w-16 sm:w-20 h-6 sm:h-7 text-xs px-2"
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedTariff('custom');
@@ -165,16 +165,16 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                           <span className="text-xs text-gray-600">₽</span>
                         </div>
                       ) : (
-                        <div className="text-sm sm:text-base font-bold text-gray-900 whitespace-nowrap">{tariff.price}</div>
+                        <div className="text-base sm:text-lg font-bold text-gray-900 whitespace-nowrap">{tariff.price}</div>
                       )}
-                      <div className={`w-2.5 h-2.5 sm:w-4 sm:h-4 rounded-full border-2 ${
+                      <div className={`w-4 h-4 sm:w-4 sm:h-4 rounded-full border-2 ${
                         selectedTariff === tariff.id 
                           ? 'border-primary bg-primary' 
                           : 'border-gray-300'
                       }`}>
                         {selectedTariff === tariff.id && (
                           <div className="w-full h-full rounded-full bg-primary flex items-center justify-center">
-                            <div className="w-0.5 h-0.5 sm:w-1.5 sm:h-1.5 bg-white rounded-full"></div>
+                            <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 bg-white rounded-full"></div>
                           </div>
                         )}
                       </div>
