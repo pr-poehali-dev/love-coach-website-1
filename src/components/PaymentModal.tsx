@@ -135,7 +135,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                       </div>
                     </div>
                     <div className="text-right flex items-center space-x-3">
-                      {tariff.id === 'custom' ? (
+                      {tariff.id === 'custom' && selectedTariff === 'custom' ? (
                         <div className="flex items-center space-x-2">
                           <Input
                             type="number"
@@ -147,7 +147,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             className="w-24 h-8 text-sm"
                             onClick={(e) => e.stopPropagation()}
                             min="100"
-                            autoFocus={false}
+                            tabIndex={selectedTariff === 'custom' ? 0 : -1}
                           />
                           <span className="text-sm text-gray-600">₽</span>
                         </div>
