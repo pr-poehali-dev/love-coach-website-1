@@ -8,10 +8,10 @@ interface HeroSectionProps {
 
 const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
   return (
-    <section className="relative py-12 xs:py-16 md:py-32 overflow-hidden"
+    <section className="relative py-12 xs:py-16 md:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-pink-50"></div>
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 xs:gap-12 items-center"
+        <div className="grid md:grid-cols-2 gap-8 xs:gap-12 items-center">
           <div className="animate-fade-in">
             <Badge className="mb-4 bg-primary/10 text-primary">Эмоциональный коучинг</Badge>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
