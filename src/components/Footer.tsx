@@ -32,20 +32,6 @@ const Footer = ({ scrollToSection }: FooterProps) => {
             <p className="text-gray-400 mb-6">
               Помогаем строить крепкие и счастливые отношения через понимание, принятие и любовь.
             </p>
-            <div className="space-y-2 text-gray-400">
-              <div className="flex items-center">
-                <Icon name="Phone" className="h-4 w-4 mr-2" />
-                <span>+7 (999) 123-45-67</span>
-              </div>
-              <div className="flex items-center">
-                <Icon name="Mail" className="h-4 w-4 mr-2" />
-                <span>info@workstab.com</span>
-              </div>
-              <div className="flex items-center">
-                <Icon name="Clock" className="h-4 w-4 mr-2" />
-                <span>Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-18:00</span>
-              </div>
-            </div>
           </div>
           
           <div>
