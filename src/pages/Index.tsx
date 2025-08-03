@@ -268,10 +268,233 @@ const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: {
   );
 };
 
+// Payment Modal Component
+const PaymentModal = ({ isOpen, onClose }: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
+  const [selectedTariff, setSelectedTariff] = useState('individual');
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: ''
+  });
+  const { toast } = useToast();
+
+  const tariffs = [
+    {
+      id: 'individual',
+      title: 'Индивидуальная сессия',
+      price: '3,000₽',
+      duration: '60 минут',
+      description: 'Персональная работа 1 на 1',
+      icon: 'User',
+      popular: false
+    },
+    {
+      id: 'couple',
+      title: 'Сессия для пары',
+      price: '5,000₽',
+      duration: '90 минут',
+      description: 'Совместная работа над отношениями',
+      icon: 'Users',
+      popular: true
+    },
+    {
+      id: 'support',
+      title: 'Поддержка в чате',
+      price: '4,000₽',
+      duration: '7 дней',
+      description: 'Круглосуточная поддержка',
+      icon: 'MessageCircle',
+      popular: false
+    }
+  ];
+
+  const selectedTariffData = tariffs.find(t => t.id === selectedTariff);
+
+  const handlePayment = () => {
+    if (!formData.fullName || !formData.email || !formData.phone) {
+      toast({
+        title: "Заполните все поля",
+        description: "Все поля обязательны для заполнения",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Переход к оплате",
+      description: "Вы будете перенаправлены на страницу оплаты",
+    });
+    
+    // Здесь будет интеграция с платёжной системой
+    console.log('Payment data:', { ...formData, tariff: selectedTariff });
+  };
+
+  const handleClose = () => {
+    setFormData({ fullName: '', email: '', phone: '' });
+    setSelectedTariff('individual');
+    onClose();
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900">
+            Оплата услуг
+          </DialogTitle>
+          <DialogDescription className="text-sm sm:text-base text-gray-600">
+            Выберите тариф и заполните данные для оплаты
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="space-y-6 mt-4">
+          {/* Выбор тарифа */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Выберите тариф</h3>
+            <div className="grid gap-3">
+              {tariffs.map((tariff) => (
+                <div 
+                  key={tariff.id}
+                  className={`relative border-2 rounded-lg p-4 cursor-pointer transition-all ${
+                    selectedTariff === tariff.id 
+                      ? 'border-primary bg-primary/5' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => setSelectedTariff(tariff.id)}
+                >
+                  {tariff.popular && (
+                    <div className="absolute -top-2 left-4">
+                      <span className="bg-secondary text-white text-xs px-2 py-1 rounded">
+                        Популярное
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        selectedTariff === tariff.id ? 'bg-primary/20' : 'bg-gray-100'
+                      }`}>
+                        <Icon 
+                          name={tariff.icon as any} 
+                          className={`h-5 w-5 ${
+                            selectedTariff === tariff.id ? 'text-primary' : 'text-gray-600'
+                          }`} 
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{tariff.title}</h4>
+                        <p className="text-sm text-gray-600">{tariff.description}</p>
+                        <p className="text-xs text-gray-500">{tariff.duration}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xl font-bold text-gray-900">{tariff.price}</div>
+                      <div className={`w-4 h-4 rounded-full border-2 ${
+                        selectedTariff === tariff.id 
+                          ? 'border-primary bg-primary' 
+                          : 'border-gray-300'
+                      }`}>
+                        {selectedTariff === tariff.id && (
+                          <div className="w-full h-full rounded-full bg-primary flex items-center justify-center">
+                            <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Форма данных */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Контактные данные</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  ФИО *
+                </label>
+                <Input
+                  placeholder="Иванов Иван Иванович"
+                  value={formData.fullName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email *
+                </label>
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Телефон *
+                </label>
+                <Input
+                  type="tel"
+                  placeholder="+7 (999) 123-45-67"
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Итого */}
+          <div className="border-t pt-4">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h4 className="font-semibold text-gray-900">{selectedTariffData?.title}</h4>
+                <p className="text-sm text-gray-600">{selectedTariffData?.duration}</p>
+              </div>
+              <div className="text-2xl font-bold text-primary">
+                {selectedTariffData?.price}
+              </div>
+            </div>
+            
+            <Button 
+              onClick={handlePayment}
+              className="w-full bg-primary hover:bg-primary/90" 
+              size="lg"
+            >
+              <Icon name="CreditCard" className="mr-2 h-5 w-5" />
+              Перейти к оплате
+            </Button>
+            
+            <p className="text-xs text-gray-500 mt-2 text-center">
+              Нажимая кнопку, вы соглашаетесь с{' '}
+              <button onClick={() => window.open('/offer', '_blank')} className="text-primary hover:underline">
+                офертой
+              </button>
+              {' '}и{' '}
+              <button onClick={() => window.open('/privacy', '_blank')} className="text-primary hover:underline">
+                политикой конфиденциальности
+              </button>
+            </p>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -725,22 +948,35 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">3 000 ₽</div>
                 <p className="text-gray-600 mb-6">60 минут</p>
-                <Button 
-                  onClick={() => setShowContactForm(true)}
-                  className="w-full" 
-                  size="lg"
-                >
-                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                  Записаться
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full mt-3" 
-                  onClick={() => setSelectedTariff('individual')}
-                >
-                  <Icon name="Info" className="mr-2 h-4 w-4" />
-                  Узнать больше
-                </Button>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button 
+                      onClick={() => setShowContactForm(true)}
+                      className="bg-primary hover:bg-primary/90" 
+                      size="lg"
+                    >
+                      <Icon name="Calendar" className="mr-1 h-4 w-4" />
+                      Записаться
+                    </Button>
+                    <Button 
+                      onClick={() => setShowPaymentModal(true)}
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary/5"
+                      size="lg"
+                    >
+                      <Icon name="CreditCard" className="mr-1 h-4 w-4" />
+                      Оплата
+                    </Button>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={() => setSelectedTariff('individual')}
+                  >
+                    <Icon name="Info" className="mr-2 h-4 w-4" />
+                    Узнать больше
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -769,14 +1005,36 @@ const Index = () => {
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-secondary/80 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full mt-3" 
-                  onClick={() => setSelectedTariff('couple')}
-                >
-                  <Icon name="Info" className="mr-2 h-4 w-4" />
-                  Узнать больше
-                </Button>
+                <div className="space-y-3 mt-4">
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button 
+                      onClick={() => setShowContactForm(true)}
+                      className="bg-primary hover:bg-primary/90" 
+                      size="sm"
+                    >
+                      <Icon name="Calendar" className="mr-1 h-4 w-4" />
+                      Записаться
+                    </Button>
+                    <Button 
+                      onClick={() => setShowPaymentModal(true)}
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary/5"
+                      size="sm"
+                    >
+                      <Icon name="CreditCard" className="mr-1 h-4 w-4" />
+                      Оплата
+                    </Button>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={() => setSelectedTariff('couple')}
+                    size="sm"
+                  >
+                    <Icon name="Info" className="mr-2 h-4 w-4" />
+                    Узнать больше
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -791,22 +1049,35 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">4 000 ₽</div>
                 <p className="text-gray-600 mb-6">Неделя поддержки</p>
-                <Button 
-                  onClick={() => setShowContactForm(true)}
-                  className="w-full" 
-                  size="lg"
-                >
-                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                  Записаться
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="w-full mt-3" 
-                  onClick={() => setSelectedTariff('support')}
-                >
-                  <Icon name="Info" className="mr-2 h-4 w-4" />
-                  Узнать больше
-                </Button>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button 
+                      onClick={() => setShowContactForm(true)}
+                      className="bg-primary hover:bg-primary/90" 
+                      size="lg"
+                    >
+                      <Icon name="Calendar" className="mr-1 h-4 w-4" />
+                      Записаться
+                    </Button>
+                    <Button 
+                      onClick={() => setShowPaymentModal(true)}
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary/5"
+                      size="lg"
+                    >
+                      <Icon name="CreditCard" className="mr-1 h-4 w-4" />
+                      Оплата
+                    </Button>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={() => setSelectedTariff('support')}
+                  >
+                    <Icon name="Info" className="mr-2 h-4 w-4" />
+                    Узнать больше
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -1025,6 +1296,12 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Payment Modal */}
+      <PaymentModal 
+        isOpen={showPaymentModal} 
+        onClose={() => setShowPaymentModal(false)} 
+      />
     </div>
   );
 };
