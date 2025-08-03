@@ -12,6 +12,8 @@ interface PaymentModalProps {
 
 const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   const [selectedTariff, setSelectedTariff] = useState('individual');
+  const [customAmount, setCustomAmount] = useState('');
+  const [isAmountFocused, setIsAmountFocused] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -46,6 +48,15 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
       description: 'Круглосуточная поддержка',
       icon: 'MessageCircle',
       popular: false
+    },
+    {
+      id: 'custom',
+      title: 'Расширенный план',
+      price: 'По согласованию',
+      duration: 'Индивидуально',
+      description: 'Гибкий формат работы',
+      icon: 'Settings',
+      popular: false
     }
   ];
 
@@ -73,6 +84,8 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   const handleClose = () => {
     setFormData({ fullName: '', email: '', phone: '' });
     setSelectedTariff('individual');
+    setCustomAmount('');
+    setIsAmountFocused(false);
     onClose();
   };
 
@@ -117,12 +130,33 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">{tariff.title}</h4>
-                        <p className="text-sm text-gray-600">{tariff.description}</p>
+                        <p className="text-sm text-gray-600">
+                          {tariff.id === 'custom' && selectedTariff === 'custom' && isAmountFocused
+                            ? 'Введите сумму согласованную заранее'
+                            : tariff.description}
+                        </p>
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xl font-bold text-gray-900">{tariff.price}</div>
+                    <div className="text-right flex items-center space-x-3">
+                      {tariff.id === 'custom' && selectedTariff === 'custom' ? (
+                        <div className="flex items-center space-x-2">
+                          <Input
+                            type="number"
+                            placeholder="Сумма"
+                            value={customAmount}
+                            onChange={(e) => setCustomAmount(e.target.value)}
+                            onFocus={() => setIsAmountFocused(true)}
+                            onBlur={() => setIsAmountFocused(false)}
+                            className="w-24 h-8 text-sm"
+                            onClick={(e) => e.stopPropagation()}
+                            min="100"
+                          />
+                          <span className="text-sm text-gray-600">₽</span>
+                        </div>
+                      ) : (
+                        <div className="text-xl font-bold text-gray-900">{tariff.price}</div>
+                      )}
                       <div className={`w-4 h-4 rounded-full border-2 ${
                         selectedTariff === tariff.id 
                           ? 'border-primary bg-primary' 
@@ -191,7 +225,9 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                 <p className="text-sm text-gray-600">{selectedTariffData?.duration}</p>
               </div>
               <div className="text-2xl font-bold text-primary">
-                {selectedTariffData?.price}
+                {selectedTariff === 'custom' && customAmount 
+                  ? `${customAmount}₽` 
+                  : selectedTariffData?.price}
               </div>
             </div>
             
