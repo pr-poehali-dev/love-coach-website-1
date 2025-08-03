@@ -109,11 +109,12 @@ const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: {
   onClose: () => void;
   scrollToSection: (id: string) => void; 
 }) => {
+  const [showForm, setShowForm] = useState(false);
   const tariffData = {
     'individual': {
       title: 'Индивидуальный коучинг',
       description: 'Персональная работа с эмоциональными блоками и развитием навыков общения',
-      price: '8,000₽',
+      price: '3,000₽',
       duration: '60 минут',
       features: [
         'Глубокая диагностика эмоциональных паттернов',
@@ -133,7 +134,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: {
     'couple': {
       title: 'Парный коучинг',
       description: 'Совместная работа пары над улучшением взаимопонимания и решением конфликтов',
-      price: '12,000₽',
+      price: '5,000₽',
       duration: '90 минут',
       features: [
         'Диагностика паттернов взаимодействия',
@@ -153,7 +154,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: {
     'support': {
       title: 'Поддержка в чате',
       description: 'Круглосуточная поддержка и консультации в сложных ситуациях',
-      price: '15,000₽',
+      price: '4,000₽',
       duration: '7 дней',
       features: [
         'Ответы на сообщения в течение 2 часов',
@@ -175,60 +176,92 @@ const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: {
   const data = tariffData[tariff as keyof typeof tariffData];
   if (!data) return null;
 
+  const handleClose = () => {
+    setShowForm(false);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-gray-900">
-            {data.title}
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900">
+            {showForm ? 'Записаться на консультацию' : data.title}
           </DialogTitle>
-          <DialogDescription className="text-lg text-gray-600 mt-2">
-            {data.description}
-          </DialogDescription>
+          {!showForm && (
+            <DialogDescription className="text-base sm:text-lg text-gray-600 mt-2">
+              {data.description}
+            </DialogDescription>
+          )}
         </DialogHeader>
         
-        <div className="space-y-6 mt-6">
-          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg">
-            <div>
-              <div className="text-3xl font-bold text-primary">{data.price}</div>
-              <div className="text-sm text-gray-600">{data.duration}</div>
+        <div className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
+          {showForm ? (
+            <div className="space-y-4">
+              <div className="p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-primary">{data.title}</div>
+                <div className="text-lg sm:text-xl font-semibold text-gray-700">{data.price}</div>
+                <div className="text-sm text-gray-600">{data.duration}</div>
+              </div>
+              <ContactForm />
+              <Button 
+                variant="outline" 
+                onClick={() => setShowForm(false)}
+                className="w-full"
+              >
+                <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
+                Назад к описанию
+              </Button>
             </div>
-            <Button onClick={() => scrollToSection('contact')} size="lg" className="bg-primary hover:bg-primary/90">
-              <Icon name="Calendar" className="mr-2 h-5 w-5" />
-              Записаться
-            </Button>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Что включено:</h3>
-            <div className="grid gap-2">
-              {data.features.map((feature, index) => (
-                <div key={index} className="flex items-start">
-                  <Icon name="Check" className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">{feature}</span>
+          ) : (
+            <>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg gap-4">
+                <div className="text-center sm:text-left">
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">{data.price}</div>
+                  <div className="text-sm text-gray-600">{data.duration}</div>
                 </div>
-              ))}
-            </div>
-          </div>
+                <Button 
+                  onClick={() => setShowForm(true)} 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
+                >
+                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                  Записаться
+                </Button>
+              </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Результаты:</h3>
-            <div className="grid gap-2">
-              {data.benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start">
-                  <Icon name="Star" className="h-5 w-5 text-yellow-500 mr-3 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">{benefit}</span>
+              <div>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">Что включено:</h3>
+                <div className="grid gap-2">
+                  {data.features.map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <Icon name="Check" className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-gray-700">{feature}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
 
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm text-gray-600">
-              <Icon name="Info" className="h-4 w-4 text-primary inline mr-2" />
-              Первая консультация всегда бесплатная. Мы обсудим ваши цели и подберём оптимальный формат работы.
-            </p>
-          </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">Результаты:</h3>
+                <div className="grid gap-2">
+                  {data.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start">
+                      <Icon name="Star" className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-gray-700">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
+                <p className="text-xs sm:text-sm text-gray-600">
+                  <Icon name="Info" className="h-3 w-3 sm:h-4 sm:w-4 text-primary inline mr-1 sm:mr-2" />
+                  Первая консультация всегда бесплатная. Мы обсудим ваши цели и подберём оптимальный формат работы.
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </DialogContent>
     </Dialog>
@@ -238,6 +271,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, scrollToSection }: {
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
+  const [showContactForm, setShowContactForm] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -691,8 +725,13 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">3 000 ₽</div>
                 <p className="text-gray-600 mb-6">60 минут</p>
-                <Button className="w-full" size="lg">
-                  Оплатить
+                <Button 
+                  onClick={() => setShowContactForm(true)}
+                  className="w-full" 
+                  size="lg"
+                >
+                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                  Записаться
                 </Button>
                 <Button 
                   variant="outline" 
@@ -719,10 +758,14 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">5 000 ₽</div>
                 <p className="text-gray-600 mb-6">90 минут</p>
-                <Button className="w-full bg-secondary hover:bg-secondary/90 group relative overflow-hidden" size="lg">
+                <Button 
+                  onClick={() => setShowContactForm(true)}
+                  className="w-full bg-secondary hover:bg-secondary/90 group relative overflow-hidden" 
+                  size="lg"
+                >
                   <span className="relative z-10 flex items-center justify-center">
-                    <Icon name="CreditCard" className="mr-2 h-5 w-5" />
-                    Оплатить
+                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                    Записаться
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-secondary/80 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
@@ -748,8 +791,13 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">4 000 ₽</div>
                 <p className="text-gray-600 mb-6">Неделя поддержки</p>
-                <Button className="w-full" size="lg">
-                  Оплатить
+                <Button 
+                  onClick={() => setShowContactForm(true)}
+                  className="w-full" 
+                  size="lg"
+                >
+                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                  Записаться
                 </Button>
                 <Button 
                   variant="outline" 
@@ -960,6 +1008,23 @@ const Index = () => {
         onClose={() => setSelectedTariff(null)}
         scrollToSection={scrollToSection}
       />
+
+      {/* Contact Form Modal */}
+      <Dialog open={showContactForm} onOpenChange={setShowContactForm}>
+        <DialogContent className="max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900">
+              Записаться на консультацию
+            </DialogTitle>
+            <DialogDescription className="text-sm sm:text-base text-gray-600">
+              Заполните форму и мы свяжемся с вами в течение 24 часов
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            <ContactForm />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
