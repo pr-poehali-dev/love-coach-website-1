@@ -147,6 +147,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             className="w-24 h-8 text-sm"
                             onClick={(e) => e.stopPropagation()}
                             min="100"
+                            autoFocus={false}
                           />
                           <span className="text-sm text-gray-600">₽</span>
                         </div>
