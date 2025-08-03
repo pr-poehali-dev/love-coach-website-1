@@ -123,21 +123,12 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Settings" className="h-8 w-8 text-accent" />
               </div>
-              <CardTitle className="text-2xl">Индивидуальный формат</CardTitle>
-              <CardDescription>Нестандартные задачи</CardDescription>
+              <CardTitle className="text-2xl">Расширенный план</CardTitle>
+              <CardDescription>Индивидуальные условия</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <div className="text-3xl font-bold text-gray-900 mb-2">По согласованию</div>
-              <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                Формат для нестандартных задач, которые требуют индивидуального подхода. 
-                Подходит для ситуаций, не укладывающихся в рамки стандартных пакетов.
-              </p>
-              <div className="text-sm text-gray-500 mb-6">
-                <p>Например:</p>
-                <p className="text-xs mt-1">• Личная встреча с коучем</p>
-                <p className="text-xs">• Связь в любое время суток</p>
-                <p className="text-xs">• И другие задачи</p>
-              </div>
+              <p className="text-gray-600 mb-6">Гибкий формат работы</p>
               <div className="space-y-3">
                 <Button 
                   onClick={() => setShowContactForm(true)}

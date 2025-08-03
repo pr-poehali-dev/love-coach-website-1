@@ -60,7 +60,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
       icon: "MessageSquare"
     },
     custom: {
-      title: "Индивидуальный формат",
+      title: "Расширенный план",
       price: "По согласованию",
       duration: "Индивидуально",
       description: "Формат для нестандартных задач, требующих индивидуального подхода",
