@@ -54,7 +54,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
       title: 'Расширенный план',
       price: 'По согласованию',
       duration: 'Индивидуально',
-      description: 'Гибкий формат работы',
+      description: 'Введите сумму согласованную заранее',
       icon: 'Settings',
       popular: false
     }
@@ -130,16 +130,12 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900">{tariff.title}</h4>
-                        <p className="text-sm text-gray-600">
-                          {tariff.id === 'custom' && selectedTariff === 'custom' && isAmountFocused
-                            ? 'Введите сумму согласованную заранее'
-                            : tariff.description}
-                        </p>
+                        <p className="text-sm text-gray-600">{tariff.description}</p>
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
                     <div className="text-right flex items-center space-x-3">
-                      {tariff.id === 'custom' && selectedTariff === 'custom' ? (
+                      {tariff.id === 'custom' ? (
                         <div className="flex items-center space-x-2">
                           <Input
                             type="number"
