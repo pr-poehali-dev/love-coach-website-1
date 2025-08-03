@@ -36,7 +36,7 @@ const AboutSection = () => {
             Мы помогаем людям строить здоровые и счастливые отношения через понимание и принятие
           </p>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="text-center">
                 <div className={`w-16 h-16 ${feature.bgColor} rounded-full flex items-center justify-center mx-auto mb-4`}>

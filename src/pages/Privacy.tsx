@@ -10,11 +10,11 @@ const Privacy = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Icon name="Heart" className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">Workstab.com</span>
             </div>
             <Button variant="outline" onClick={() => navigate('/')}>
               <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
@@ -29,7 +29,7 @@ const Privacy = () => {
         <div className="max-w-4xl mx-auto">
           <Card className="border-0 shadow-lg">
             <CardHeader className="text-center bg-gradient-to-r from-primary/5 to-secondary/5 rounded-t-lg">
-              <CardTitle className="text-3xl font-bold text-gray-900 mb-4">
+              <CardTitle className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                 Политика конфиденциальности
               </CardTitle>
               <p className="text-gray-600">
@@ -37,10 +37,10 @@ const Privacy = () => {
               </p>
             </CardHeader>
             
-            <CardContent className="p-8 space-y-8">
+            <CardContent className="p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
               {/* Общие положения */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Общие положения</h2>
+                <h2 className="text-xl md:text-xl md:text-2xl font-semibold text-gray-900 mb-4">1. Общие положения</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     1.1. Настоящая Политика конфиденциальности (далее — «Политика») разработана 
@@ -63,7 +63,7 @@ const Privacy = () => {
 
               {/* Виды обрабатываемых данных */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Виды обрабатываемых персональных данных</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">2. Виды обрабатываемых персональных данных</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>2.1. Мы обрабатываем следующие категории персональных данных:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -83,7 +83,7 @@ const Privacy = () => {
 
               {/* Цели обработки */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Цели обработки персональных данных</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">3. Цели обработки персональных данных</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>3.1. Персональные данные обрабатываются в следующих целях:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -99,7 +99,7 @@ const Privacy = () => {
 
               {/* Правовые основания */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Правовые основания обработки</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">4. Правовые основания обработки</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>4.1. Обработка персональных данных ИП осуществляется на основании:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -113,7 +113,7 @@ const Privacy = () => {
 
               {/* Способы обработки */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Способы и сроки обработки</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">5. Способы и сроки обработки</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     5.1. Обработка персональных данных осуществляется с использованием 
@@ -130,7 +130,7 @@ const Privacy = () => {
 
               {/* Передача третьим лицам */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Передача персональных данных третьим лицам</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">6. Передача персональных данных третьим лицам</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     6.1. Персональные данные НЕ передаются третьим лицам, за исключением случаев, 
@@ -147,7 +147,7 @@ const Privacy = () => {
 
               {/* Защита данных */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Защита персональных данных</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">7. Защита персональных данных</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>7.1. Мы применяем следующие меры защиты:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -161,7 +161,7 @@ const Privacy = () => {
 
               {/* Права субъектов */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Права субъектов персональных данных</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">8. Права субъектов персональных данных</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>8.1. Вы имеете право:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -178,7 +178,7 @@ const Privacy = () => {
 
               {/* Cookies */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Использование файлов cookie</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">9. Использование файлов cookie</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     9.1. Сайт использует файлы cookie для улучшения пользовательского опыта.
@@ -192,7 +192,7 @@ const Privacy = () => {
 
               {/* Изменения политики */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Изменения в Политике</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">10. Изменения в Политике</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     10.1. Мы оставляем за собой право вносить изменения в настоящую Политику.
@@ -205,7 +205,7 @@ const Privacy = () => {
 
               {/* Контакты */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Контактная информация</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">11. Контактная информация</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>11.1. По вопросам обработки персональных данных обращайтесь:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">

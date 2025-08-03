@@ -14,10 +14,10 @@ const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
             <Badge className="mb-4 bg-primary/10 text-primary">Эмоциональный коучинг</Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Коучинг для пар и индивидуальных отношений
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
               Пойми друг друга. Услышь. Почувствуй.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -48,7 +48,7 @@ const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
             <img 
               src="/img/d79b259a-f752-49d3-a266-4caf5221b9c6.jpg" 
               alt="Счастливая пара"
-              className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+              className="relative rounded-3xl shadow-2xl w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover"
             />
           </div>
         </div>

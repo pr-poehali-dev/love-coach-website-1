@@ -24,11 +24,11 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="User" className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle className="text-2xl">Индивидуальная сессия</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl">Индивидуальная сессия</CardTitle>
               <CardDescription>Персональная работа 1 на 1</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <div className="text-4xl font-bold text-gray-900 mb-2">3 000 ₽</div>
+              <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">3 000 ₽</div>
               <p className="text-gray-600 mb-6">60 минут</p>
               <div className="space-y-3">
                 <Button 
@@ -59,11 +59,11 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Users" className="h-8 w-8 text-secondary" />
               </div>
-              <CardTitle className="text-2xl">Сессия для пары</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl">Сессия для пары</CardTitle>
               <CardDescription>Совместная работа</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <div className="text-4xl font-bold text-gray-900 mb-2">5 000 ₽</div>
+              <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">5 000 ₽</div>
               <p className="text-gray-600 mb-6">90 минут</p>
               <div className="space-y-3">
                 <Button 
@@ -91,11 +91,11 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="MessageSquare" className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle className="text-2xl">Поддержка 7 дней</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl">Поддержка 7 дней</CardTitle>
               <CardDescription>Помощь в чате</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <div className="text-4xl font-bold text-gray-900 mb-2">4 000 ₽</div>
+              <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">4 000 ₽</div>
               <p className="text-gray-600 mb-6">Неделя поддержки</p>
               <div className="space-y-3">
                 <Button 
@@ -123,13 +123,13 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Settings" className="h-8 w-8 text-accent" />
               </div>
-              <CardTitle className="text-2xl">Расширенный план</CardTitle>
+              <CardTitle className="text-xl sm:text-2xl">Расширенный план</CardTitle>
               <CardDescription>Индивидуальные условия</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <div className="mb-2">
                 <div className="relative inline-block">
-                  <div className="text-4xl font-bold text-gray-400">0 ₽</div>
+                  <div className="text-3xl sm:text-4xl font-bold text-gray-400">0 ₽</div>
                   <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2 -rotate-[20deg] origin-center scale-110"></div>
                 </div>
                 <p className="text-xs text-gray-500 mt-2 font-medium">Стоимость определяется индивидуально, до начала консультации</p>

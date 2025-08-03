@@ -10,11 +10,11 @@ const Offer = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Icon name="Heart" className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">Workstab.com</span>
             </div>
             <Button variant="outline" onClick={() => navigate('/')}>
               <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
@@ -29,7 +29,7 @@ const Offer = () => {
         <div className="max-w-4xl mx-auto">
           <Card className="border-0 shadow-lg">
             <CardHeader className="text-center bg-gradient-to-r from-primary/5 to-secondary/5 rounded-t-lg">
-              <CardTitle className="text-3xl font-bold text-gray-900 mb-4">
+              <CardTitle className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                 Договор публичной оферты
               </CardTitle>
               <p className="text-gray-600">
@@ -37,10 +37,10 @@ const Offer = () => {
               </p>
             </CardHeader>
             
-            <CardContent className="p-8 space-y-8">
+            <CardContent className="p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
               {/* Общие положения */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Общие положения</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">1. Общие положения</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     1.1. Настоящий договор является публичной офертой (предложением) Индивидуального предпринимателя 
@@ -61,7 +61,7 @@ const Offer = () => {
 
               {/* Предмет договора */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Предмет договора</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">2. Предмет договора</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     2.1. ИП обязуется предоставить Заказчику немедицинские консультационные услуги 
@@ -87,7 +87,7 @@ const Offer = () => {
 
               {/* Стоимость и порядок оплаты */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Стоимость и порядок оплаты</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">3. Стоимость и порядок оплаты</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>3.1. Стоимость услуг указана на сайте и составляет:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -108,7 +108,7 @@ const Offer = () => {
 
               {/* Права и обязанности сторон */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Права и обязанности сторон</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">4. Права и обязанности сторон</h2>
                 <div className="text-gray-700 space-y-4">
                   <p><strong>4.1. Исполнитель обязуется:</strong></p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
@@ -127,7 +127,7 @@ const Offer = () => {
 
               {/* Возврат средств */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Возврат средств</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">5. Возврат средств</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     5.1. Возврат денежных средств возможен в течение 14 дней с момента оплаты, 
@@ -144,7 +144,7 @@ const Offer = () => {
 
               {/* Конфиденциальность */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Конфиденциальность</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">6. Конфиденциальность</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     6.1. Исполнитель гарантирует конфиденциальность всей информации, 
@@ -159,7 +159,7 @@ const Offer = () => {
 
               {/* Ответственность */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Ответственность</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">7. Ответственность</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     7.1. Исполнитель не несёт ответственности за результаты применения полученных рекомендаций.
@@ -173,7 +173,7 @@ const Offer = () => {
 
               {/* Заключительные положения */}
               <section>
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Заключительные положения</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">8. Заключительные положения</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>
                     8.1. Настоящий договор вступает в силу с момента акцепта оферты (оплаты).

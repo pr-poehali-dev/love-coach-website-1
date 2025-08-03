@@ -22,11 +22,11 @@ const Footer = ({ scrollToSection }: FooterProps) => {
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="sm:col-span-2 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Icon name="Heart" className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold">Workstab.com</span>
+              <span className="text-xl sm:text-2xl font-bold">Workstab.com</span>
             </div>
             <p className="text-gray-400 mb-4">
               Помогаем строить крепкие и счастливые отношения через понимание, принятие и любовь.
@@ -34,7 +34,7 @@ const Footer = ({ scrollToSection }: FooterProps) => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Услуги</h3>
+            <h3 className="text-base sm:text-lg font-semibold mb-4">Услуги</h3>
             <ul className="space-y-2 text-gray-400">
               {services.map((service, index) => (
                 <li key={index}>
@@ -50,7 +50,7 @@ const Footer = ({ scrollToSection }: FooterProps) => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Информация</h3>
+            <h3 className="text-base sm:text-lg font-semibold mb-4">Информация</h3>
             <ul className="space-y-2 text-gray-400">
               {infoLinks.map((link, index) => (
                 <li key={index}>
