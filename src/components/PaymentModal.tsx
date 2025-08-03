@@ -145,7 +145,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
                             className="w-24 h-8 text-sm"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedTariff('custom');
+                            }}
                             min="100"
                             autoFocus={false}
                             tabIndex={-1}
@@ -186,6 +189,8 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                   value={formData.fullName}
                   onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
                   required
+                  autoFocus={false}
+                  tabIndex={0}
                 />
               </div>
               <div>
