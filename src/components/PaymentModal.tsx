@@ -97,7 +97,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
+      <DialogContent className="w-[95vw] sm:w-[90vw] max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto p-3 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg sm:text-2xl font-bold text-gray-900">
             Оплата услуг
@@ -107,15 +107,15 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 mt-4">
+        <div className="space-y-4 sm:space-y-6 mt-3 sm:mt-4">
           {/* Выбор тарифа */}
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Выберите тариф</h3>
-            <div className="grid gap-3">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Выберите тариф</h3>
+            <div className="grid gap-2 sm:gap-3">
               {tariffs.map((tariff) => (
                 <div 
                   key={tariff.id}
-                  className={`relative border-2 rounded-lg p-3 sm:p-4 cursor-pointer transition-all ${
+                  className={`relative border-2 rounded-lg p-2 sm:p-4 cursor-pointer transition-all ${
                     selectedTariff === tariff.id 
                       ? 'border-primary bg-primary/5' 
                       : 'border-gray-200 hover:border-gray-300'
@@ -187,10 +187,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
           {/* Форма данных */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Контактные данные</h3>
-            <div className="space-y-4">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Контактные данные</h3>
+            <div className="space-y-3 sm:space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   ФИО *
                 </label>
                 <Input
@@ -203,7 +203,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Email *
                 </label>
                 <Input
@@ -215,7 +215,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Телефон *
                 </label>
                 <Input
@@ -230,13 +230,13 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
           </div>
 
           {/* Итого */}
-          <div className="border-t pt-4">
-            <div className="flex items-center justify-between mb-4">
+          <div className="border-t pt-3 sm:pt-4">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
               <div>
-                <h4 className="font-semibold text-gray-900">{selectedTariffData?.title}</h4>
-                <p className="text-sm text-gray-600">{selectedTariffData?.duration}</p>
+                <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{selectedTariffData?.title}</h4>
+                <p className="text-xs sm:text-sm text-gray-600">{selectedTariffData?.duration}</p>
               </div>
-              <div className="text-2xl font-bold text-primary">
+              <div className="text-lg sm:text-2xl font-bold text-primary">
                 {selectedTariff === 'custom' && customAmount 
                   ? `${formatAmount(customAmount)} ₽` 
                   : selectedTariffData?.price}
