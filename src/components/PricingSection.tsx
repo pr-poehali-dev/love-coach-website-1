@@ -127,7 +127,10 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <CardDescription>Индивидуальные условия</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-2">По согласованию</div>
+              <div className="mb-2">
+                <div className="text-4xl font-bold text-gray-900 line-through decoration-red-500 decoration-2">0 ₽</div>
+                <p className="text-xs text-gray-500 mt-1">Стоимость определяется индивидуально</p>
+              </div>
               <p className="text-gray-600 mb-6">Гибкий формат работы</p>
               <div className="space-y-3">
                 <Button 
