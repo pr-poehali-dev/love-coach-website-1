@@ -89,7 +89,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto w-[95vw] sm:w-full mx-2 xs:mx-4">
+      <DialogContent className="max-w-2xl h-screen sm:h-auto sm:max-h-[95vh] overflow-y-auto w-screen sm:w-full mx-0 sm:mx-auto p-4 sm:p-6 sm:rounded-lg rounded-none">
         <DialogHeader>
           <DialogTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
             <div className="w-8 h-8 xs:w-10 xs:h-10 bg-primary/10 rounded-full flex items-center justify-center mr-2 xs:mr-3 flex-shrink-0">
