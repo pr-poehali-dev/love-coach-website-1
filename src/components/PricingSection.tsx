@@ -18,7 +18,7 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
           <p className="text-xl text-gray-600">Выберите формат, который подходит именно вам</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           <Card className="relative hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -110,6 +110,47 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
                   variant="outline" 
                   className="w-full" 
                   onClick={() => setSelectedTariff('support')}
+                >
+                  <Icon name="Info" className="mr-2 h-4 w-4" />
+                  Узнать больше
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="relative hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Icon name="Settings" className="h-8 w-8 text-accent" />
+              </div>
+              <CardTitle className="text-2xl">Индивидуальный формат</CardTitle>
+              <CardDescription>Нестандартные задачи</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center">
+              <div className="text-3xl font-bold text-gray-900 mb-2">По согласованию</div>
+              <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                Формат для нестандартных задач, которые требуют индивидуального подхода. 
+                Подходит для ситуаций, не укладывающихся в рамки стандартных пакетов.
+              </p>
+              <div className="text-sm text-gray-500 mb-6">
+                <p>Например:</p>
+                <p className="text-xs mt-1">• Личная встреча с коучем</p>
+                <p className="text-xs">• Связь в любое время суток</p>
+                <p className="text-xs">• И другие задачи</p>
+              </div>
+              <div className="space-y-3">
+                <Button 
+                  onClick={() => setShowContactForm(true)}
+                  className="w-full bg-primary hover:bg-primary/90" 
+                  size="lg"
+                >
+                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                  Записаться
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  onClick={() => setSelectedTariff('custom')}
                 >
                   <Icon name="Info" className="mr-2 h-4 w-4" />
                   Узнать больше
