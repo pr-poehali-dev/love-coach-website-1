@@ -130,7 +130,7 @@ const PricingSection = ({ setShowContactForm, setSelectedTariff }: PricingSectio
               <div className="mb-2">
                 <div className="relative inline-block">
                   <div className="text-4xl font-bold text-gray-400">0 ₽</div>
-                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2 -rotate-12 origin-center"></div>
+                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2 -rotate-[20deg] origin-center scale-110"></div>
                 </div>
                 <p className="text-xs text-gray-500 mt-2 font-medium">Стоимость определяется индивидуально</p>
               </div>
