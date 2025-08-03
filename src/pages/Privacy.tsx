@@ -193,7 +193,12 @@ const Privacy = () => {
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">10. Изменения Политики</h2>
                 <div className="text-gray-700 space-y-4">
                   <p>10.1. Оператор вправе изменять Политику.</p>
-                  <p>10.2. Обновлённая версия публикуется на Сайте по адресу https://workstab.com/privacy.</p>
+                  <p>
+                    10.2. Обновлённая версия публикуется на Сайте по адресу{' '}
+                    <a href="https://workstab.com/privacy" className="text-primary hover:underline">
+                      https://workstab.com/privacy
+                    </a>.
+                  </p>
                 </div>
               </section>
 
@@ -204,7 +209,6 @@ const Privacy = () => {
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>Email: hello@workstab.com</li>
                     <li>Телефон: +7 (999) 123-45-67</li>
-                    <li>Telegram: @workstab_support</li>
                   </ul>
                 </div>
               </section>
