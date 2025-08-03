@@ -25,7 +25,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'individual',
       title: 'Индивидуальная сессия',
-      price: '3,000₽',
+      price: '3 000₽',
       duration: '60 минут',
       description: 'Персональная работа 1 на 1',
       icon: 'User',
@@ -34,7 +34,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'couple',
       title: 'Сессия для пары',
-      price: '5,000₽',
+      price: '5 000₽',
       duration: '90 минут',
       description: 'Совместная работа над отношениями',
       icon: 'Users',
@@ -43,7 +43,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     {
       id: 'support',
       title: 'Поддержка в чате',
-      price: '4,000₽',
+      price: '4 000₽',
       duration: '7 дней',
       description: 'Круглосуточная поддержка',
       icon: 'MessageCircle',
@@ -61,6 +61,12 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   ];
 
   const selectedTariffData = tariffs.find(t => t.id === selectedTariff);
+
+  const formatAmount = (amount: string) => {
+    if (!amount) return '';
+    const number = parseInt(amount.replace(/\s/g, ''));
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
 
   const handlePayment = () => {
     if (!formData.fullName || !formData.email || !formData.phone) {
@@ -141,7 +147,10 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                             type="number"
                             placeholder="Сумма"
                             value={customAmount}
-                            onChange={(e) => setCustomAmount(e.target.value)}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\s/g, '');
+                              setCustomAmount(value);
+                            }}
                             onFocus={() => setIsAmountFocused(true)}
                             onBlur={() => setIsAmountFocused(false)}
                             className="w-24 h-8 text-sm"
@@ -229,7 +238,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
               </div>
               <div className="text-2xl font-bold text-primary">
                 {selectedTariff === 'custom' && customAmount 
-                  ? `${customAmount}₽` 
+                  ? `${formatAmount(customAmount)} ₽` 
                   : selectedTariffData?.price}
               </div>
             </div>
