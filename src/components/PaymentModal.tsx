@@ -135,7 +135,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                       </div>
                     </div>
                     <div className="text-right flex items-center space-x-3">
-                      {tariff.id === 'custom' && selectedTariff === 'custom' ? (
+                      {tariff.id === 'custom' ? (
                         <div className="flex items-center space-x-2">
                           <Input
                             type="number"
