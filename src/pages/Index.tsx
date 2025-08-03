@@ -24,8 +24,11 @@ const Index = () => {
               <a href="#faq" className="text-gray-600 hover:text-primary transition-colors">Вопросы</a>
               <a href="#contact" className="text-gray-600 hover:text-primary transition-colors">Контакты</a>
             </div>
-            <Button className="bg-primary hover:bg-primary/90">
-              Записаться
+            <Button className="bg-primary hover:bg-primary/90 group relative overflow-hidden">
+              <span className="relative z-10">
+                Записаться
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></div>
             </Button>
           </div>
         </div>
@@ -45,12 +48,15 @@ const Index = () => {
                 Пойми друг друга. Услышь. Почувствуй.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-4">
-                  <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                  Записаться на консультацию
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-4 group relative overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                  <span className="relative z-10 flex items-center">
+                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                    Записаться на консультацию
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-4">
-                  <Icon name="Play" className="mr-2 h-5 w-5" />
+                <Button variant="outline" size="lg" className="text-lg px-8 py-4 group hover:bg-primary/5 transition-all duration-300">
+                  <Icon name="Play" className="mr-2 h-5 w-5 group-hover:text-primary transition-colors" />
                   Узнать больше
                 </Button>
               </div>
@@ -63,6 +69,92 @@ const Index = () => {
                 className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-r from-primary/5 to-secondary/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary">Отзывы</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Что говорят наши клиенты</h2>
+            <p className="text-xl text-gray-600">Реальные истории изменений и роста</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2 animate-slide-in-left">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-6">
+                  <img 
+                    src="/img/fc53113c-98d3-457c-b43b-ed3bc861dd3c.jpg" 
+                    alt="Анна"
+                    className="w-16 h-16 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Анна, 32 года</h4>
+                    <p className="text-sm text-gray-600">Индивидуальный коучинг</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  "После трёх сессий я научилась лучше понимать свои эмоции и выражать их партнёру. 
+                  Наши отношения стали гораздо глубже и теплее."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2 animate-scale-in">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-6">
+                  <img 
+                    src="/img/3f3146b0-c9d8-49c7-9d2e-64536bc2e132.jpg" 
+                    alt="Михаил"
+                    className="w-16 h-16 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Михаил и Елена</h4>
+                    <p className="text-sm text-gray-600">Парный коучинг</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  "Мы были на грани расставания. За месяц работы научились слышать друг друга 
+                  и решать конфликты конструктивно. Спасибо!"
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2 animate-slide-in-right">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4">
+                    <Icon name="User" className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Дарья, 28 лет</h4>
+                    <p className="text-sm text-gray-600">Поддержка в чате</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  "Постоянная поддержка в течение недели помогла пережить сложный период. 
+                  Чувствую себя увереннее в отношениях."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -80,41 +172,47 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <Icon name="Users" className="h-8 w-8 text-primary" />
-                </div>
-                <CardTitle>Эмоциональная зрелость</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Развиваем навыки здорового общения и эмоционального интеллекта</p>
-              </CardContent>
-            </Card>
+            <div className="animate-slide-in-left">
+              <Card className="text-center hover:shadow-lg transition-all duration-300 border-0 shadow-md hover:-translate-y-2 group">
+                <CardHeader>
+                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors animate-float">
+                    <Icon name="Users" className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle>Эмоциональная зрелость</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Развиваем навыки здорового общения и эмоционального интеллекта</p>
+                </CardContent>
+              </Card>
+            </div>
 
-            <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
-                  <Icon name="Heart" className="h-8 w-8 text-secondary" />
-                </div>
-                <CardTitle>Эмпатия</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Учимся понимать и чувствовать друг друга на более глубоком уровне</p>
-              </CardContent>
-            </Card>
+            <div className="animate-scale-in">
+              <Card className="text-center hover:shadow-lg transition-all duration-300 border-0 shadow-md hover:-translate-y-2 group">
+                <CardHeader>
+                  <div className="mx-auto w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors animate-bounce-gentle">
+                    <Icon name="Heart" className="h-8 w-8 text-secondary" />
+                  </div>
+                  <CardTitle>Эмпатия</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Учимся понимать и чувствовать друг друга на более глубоком уровне</p>
+                </CardContent>
+              </Card>
+            </div>
 
-            <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
-              <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <Icon name="Brain" className="h-8 w-8 text-primary" />
-                </div>
-                <CardTitle>Осознанность</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Практикуем mindfulness и осознанное отношение к партнёру</p>
-              </CardContent>
-            </Card>
+            <div className="animate-slide-in-right">
+              <Card className="text-center hover:shadow-lg transition-all duration-300 border-0 shadow-md hover:-translate-y-2 group">
+                <CardHeader>
+                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors animate-float">
+                    <Icon name="Brain" className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle>Осознанность</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Практикуем mindfulness и осознанное отношение к партнёру</p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -212,8 +310,12 @@ const Index = () => {
               <CardContent className="text-center">
                 <div className="text-4xl font-bold text-gray-900 mb-2">5 000 ₽</div>
                 <p className="text-gray-600 mb-6">90 минут</p>
-                <Button className="w-full bg-secondary hover:bg-secondary/90" size="lg">
-                  Оплатить
+                <Button className="w-full bg-secondary hover:bg-secondary/90 group relative overflow-hidden" size="lg">
+                  <span className="relative z-10 flex items-center justify-center">
+                    <Icon name="CreditCard" className="mr-2 h-5 w-5" />
+                    Оплатить
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-secondary/80 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </Button>
               </CardContent>
             </Card>
