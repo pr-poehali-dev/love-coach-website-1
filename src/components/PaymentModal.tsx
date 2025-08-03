@@ -97,7 +97,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="w-[95vw] max-w-lg max-h-[95vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6">
+      <DialogContent className="w-[90vw] max-w-lg max-h-[95vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg sm:text-xl font-bold text-gray-900">
             Оплата услуг
@@ -115,7 +115,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
               {tariffs.map((tariff) => (
                 <div 
                   key={tariff.id}
-                  className={`relative border-2 rounded-lg p-3 sm:p-4 cursor-pointer transition-all ${
+                  className={`relative border-2 rounded-lg p-3 sm:p-4 pr-4 sm:pr-5 cursor-pointer transition-all ${
                     selectedTariff === tariff.id 
                       ? 'border-primary bg-primary/5' 
                       : 'border-gray-200 hover:border-gray-300'
@@ -140,7 +140,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                         <p className="text-xs text-gray-500">{tariff.duration}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
                       {tariff.id === 'custom' ? (
                         <div className="flex items-center gap-1">
                           <Input
