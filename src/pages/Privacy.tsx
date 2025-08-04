@@ -13,8 +13,14 @@ const Privacy = () => {
         <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Icon name="Heart" className="h-8 w-8 text-primary" />
-              <span className="text-xl sm:text-2xl font-bold text-gray-900">Workstab.com</span>
+              <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.7 }} />
+              <div className="relative">
+                <span className="text-xl sm:text-2xl font-bold text-gray-900">workstab</span>
+                <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
+                  <div className="text-primary font-bold text-xs leading-none">▁▂▄▆█▆▄▂▁</div>
+                  <span className="text-base font-bold text-primary">.com</span>
+                </div>
+              </div>
             </div>
             <Button variant="outline" onClick={() => navigate('/')}>
               <Icon name="ArrowLeft" className="mr-2 h-4 w-4" />
