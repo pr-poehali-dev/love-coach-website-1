@@ -40,7 +40,7 @@ const ScrollProgressBar = () => {
       isVisible ? 'h-1 opacity-100' : 'h-0 opacity-0'
     } bg-gray-200/30 backdrop-blur-sm`}>
       <div 
-        className="h-full bg-gradient-to-r from-primary via-secondary to-primary shadow-glow transition-none"
+        className="h-full bg-primary shadow-glow transition-none"
         style={{ 
           width: `${scrollProgress}%`,
           boxShadow: scrollProgress > 0 ? '0 0 8px hsl(var(--primary) / 0.4)' : 'none'
