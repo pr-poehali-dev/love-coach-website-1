@@ -23,15 +23,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="relative">
-              <Icon name="Heart" className="h-8 w-8 text-red-500 burning-heart" />
-              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-700 pointer-events-none">
-                ︶
-              </div>
-            </div>
+            <Icon name="Heart" className="h-8 w-8 text-primary" />
             <div className="flex flex-col">
               <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
-              <span className="text-sm text-red-500 font-medium -mt-1">Решаем с душой!</span>
+              <span className="text-sm text-primary font-medium -mt-1">Решаем с душой!</span>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-8">
@@ -78,15 +73,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
               <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto max-h-screen">
                 <div className="flex flex-col space-y-6 mt-6">
                   <div className="flex items-center space-x-2 mb-6">
-                    <div className="relative">
-                      <Icon name="Heart" className="h-8 w-8 text-red-500 burning-heart" />
-                      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-700 pointer-events-none">
-                        ︶
-                      </div>
-                    </div>
+                    <Icon name="Heart" className="h-8 w-8 text-primary" />
                     <div className="flex flex-col">
                       <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
-                      <span className="text-sm text-red-500 font-medium -mt-1">Решаем с душой!</span>
+                      <span className="text-sm text-primary font-medium -mt-1">Решаем с душой!</span>
                     </div>
                   </div>
                   
