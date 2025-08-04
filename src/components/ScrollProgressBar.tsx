@@ -18,7 +18,7 @@ const ScrollProgressBar = () => {
   }, []);
 
   return (
-    <div className="fixed top-[80px] left-0 right-0 z-40 h-1 bg-gray-200/50 backdrop-blur-sm">
+    <div className="fixed top-20 left-0 right-0 z-40 h-1 bg-gray-200/50 backdrop-blur-sm">
       <div 
         className="h-full bg-gradient-to-r from-primary via-secondary to-primary transition-all duration-300 ease-out shadow-glow"
         style={{ 
