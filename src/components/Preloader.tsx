@@ -11,13 +11,12 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
   useEffect(() => {
     let progressInterval: NodeJS.Timeout;
-    let loadTimeout: NodeJS.Timeout;
+    let finishInterval: NodeJS.Timeout;
 
     const startProgress = () => {
       progressInterval = setInterval(() => {
         setProgress(prev => {
           if (prev >= 90) {
-            clearInterval(progressInterval);
             return 90;
           }
           return prev + Math.random() * 8 + 2;
@@ -25,37 +24,46 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       }, 100);
     };
 
+    const finishLoading = () => {
+      clearInterval(progressInterval);
+      
+      finishInterval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(finishInterval);
+            setTimeout(() => {
+              setIsVisible(false);
+              onComplete?.();
+            }, 300);
+            return 100;
+          }
+          return prev + 5;
+        });
+      }, 50);
+    };
+
     const checkIfLoaded = () => {
       if (document.readyState === 'complete') {
-        clearInterval(progressInterval);
-        
-        // Быстро доводим до 100%
-        const finishProgress = () => {
-          setProgress(prev => {
-            if (prev >= 100) {
-              setTimeout(() => {
-                setIsVisible(false);
-                onComplete?.();
-              }, 300);
-              return 100;
-            }
-            return prev + 5;
-          });
-        };
-        
-        const finishInterval = setInterval(finishProgress, 50);
-        setTimeout(() => clearInterval(finishInterval), 200);
+        finishLoading();
       } else {
-        loadTimeout = setTimeout(checkIfLoaded, 100);
+        setTimeout(checkIfLoaded, 100);
       }
     };
 
     startProgress();
-    checkIfLoaded();
+    
+    // Проверяем сразу и через window.onload
+    if (document.readyState === 'complete') {
+      setTimeout(finishLoading, 500);
+    } else {
+      window.addEventListener('load', finishLoading);
+      checkIfLoaded();
+    }
 
     return () => {
       clearInterval(progressInterval);
-      clearTimeout(loadTimeout);
+      clearInterval(finishInterval);
+      window.removeEventListener('load', finishLoading);
     };
   }, [onComplete]);
 
