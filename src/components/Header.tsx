@@ -26,10 +26,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
             <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.7 }} />
             <div className="relative">
               <span className="text-2xl font-bold text-gray-900">workstab</span>
-              <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
-                <div className="text-primary font-bold text-xs leading-none">▁▂▄▆█▆▄▂▁</div>
-                <span className="text-base font-bold text-primary">.com</span>
-              </div>
+              <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-8">
@@ -79,10 +76,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.7 }} />
                     <div className="relative">
                       <span className="text-2xl font-bold text-gray-900">workstab</span>
-                      <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
-                        <div className="text-primary font-bold text-xs leading-none">▁▂▄▆█▆▄▂▁</div>
-                        <span className="text-base font-bold text-primary">.com</span>
-                      </div>
+                      <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
                     </div>
                   </div>
                   
