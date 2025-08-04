@@ -25,8 +25,11 @@ const Footer = ({ scrollToSection }: FooterProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
           <div className="sm:col-span-2 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Icon name="Heart" className="h-8 w-8 text-primary" />
-              <span className="text-xl sm:text-2xl font-bold">Workstab.com</span>
+              <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.5 }} />
+              <div className="relative">
+                <span className="text-xl sm:text-2xl font-bold text-white">workstab</span>
+                <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
+              </div>
             </div>
             <p className="text-gray-400 mb-6">
               Помогаем строить крепкие и счастливые отношения через понимание, принятие и любовь.
