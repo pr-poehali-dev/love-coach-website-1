@@ -16,6 +16,8 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import TariffDetails from "@/components/TariffDetails";
 import PaymentModal from "@/components/PaymentModal";
+import StickyButton from "@/components/StickyButton";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,6 +41,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white pt-20">
+      <ScrollProgressBar />
       <Header 
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
