@@ -4,7 +4,6 @@ const ScrollProgressBar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const rafRef = useRef<number>();
-  const progressRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,8 +17,7 @@ const ScrollProgressBar = () => {
         const progress = totalHeight > 0 ? (currentScroll / totalHeight) * 100 : 0;
         const clampedProgress = Math.min(Math.max(progress, 0), 100);
         
-        // Прямое обновление без интерполяции для точности
-        progressRef.current = clampedProgress;
+        // Прямое обновление для синхронности со скроллом
         setScrollProgress(clampedProgress);
         
         setIsVisible(currentScroll > 10);
@@ -42,7 +40,7 @@ const ScrollProgressBar = () => {
       isVisible ? 'h-1 opacity-100' : 'h-0 opacity-0'
     } bg-gray-200/30 backdrop-blur-sm`}>
       <div 
-        className="h-full bg-gradient-to-r from-primary via-secondary to-primary shadow-glow transition-all duration-100 ease-out"
+        className="h-full bg-gradient-to-r from-primary via-secondary to-primary shadow-glow transition-none"
         style={{ 
           width: `${scrollProgress}%`,
           boxShadow: scrollProgress > 0 ? '0 0 8px hsl(var(--primary) / 0.4)' : 'none'

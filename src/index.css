@@ -102,6 +102,11 @@
     font-family: "Inter", sans-serif;
   }
 
+  /* Плавная прокрутка для синхронизации с прогресс-баром */
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* Убираем горизонтальную прокрутку и предотвращаем overflow */
   html,
   body {
