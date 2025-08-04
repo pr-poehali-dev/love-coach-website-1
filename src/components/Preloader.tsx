@@ -37,11 +37,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 2500 }) =>
       <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
         <div className="text-center space-y-6">
           {/* Логотип */}
-          <div className="flex items-center justify-center space-x-2">
-            <Icon name="Heart" className="h-12 w-12 text-primary heartbeat" style={{ strokeWidth: 2.7 }} />
+          <div className="flex items-center space-x-2">
+            <Icon name="Heart" className="h-7 w-7 text-primary heartbeat" style={{ strokeWidth: 2.7 }} />
             <div className="relative">
-              <span className="text-4xl font-bold text-gray-900">workstab</span>
-              <span className="absolute -bottom-3 -right-2 text-2xl font-bold text-primary">.com</span>
+              <span className="text-2xl font-bold text-gray-900">workstab</span>
+              <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
             </div>
           </div>
         </div>
