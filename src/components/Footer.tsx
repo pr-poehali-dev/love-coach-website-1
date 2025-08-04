@@ -28,7 +28,10 @@ const Footer = ({ scrollToSection }: FooterProps) => {
               <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.7 }} />
               <div className="relative">
                 <span className="text-xl sm:text-2xl font-bold text-white">workstab</span>
-                <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
+                <div className="absolute -bottom-3 -right-2 flex items-center space-x-1">
+                  <span className="text-base font-bold text-primary">.com</span>
+                  <Icon name="Activity" className="h-3 w-3 text-primary" style={{ strokeWidth: 2.7 }} />
+                </div>
               </div>
             </div>
             <p className="text-gray-400 mb-6">
