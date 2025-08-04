@@ -3,30 +3,61 @@ import Icon from '@/components/ui/icon';
 
 interface PreloaderProps {
   onComplete?: () => void;
-  duration?: number;
 }
 
-const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 2500 }) => {
+const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsVisible(false);
-            onComplete?.();
-          }, 300);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, duration / 50);
+    let progressInterval: NodeJS.Timeout;
+    let loadTimeout: NodeJS.Timeout;
 
-    return () => clearInterval(interval);
-  }, [duration, onComplete]);
+    const startProgress = () => {
+      progressInterval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90;
+          }
+          return prev + Math.random() * 8 + 2;
+        });
+      }, 100);
+    };
+
+    const checkIfLoaded = () => {
+      if (document.readyState === 'complete') {
+        clearInterval(progressInterval);
+        
+        // Быстро доводим до 100%
+        const finishProgress = () => {
+          setProgress(prev => {
+            if (prev >= 100) {
+              setTimeout(() => {
+                setIsVisible(false);
+                onComplete?.();
+              }, 300);
+              return 100;
+            }
+            return prev + 5;
+          });
+        };
+        
+        const finishInterval = setInterval(finishProgress, 50);
+        setTimeout(() => clearInterval(finishInterval), 200);
+      } else {
+        loadTimeout = setTimeout(checkIfLoaded, 100);
+      }
+    };
+
+    startProgress();
+    checkIfLoaded();
+
+    return () => {
+      clearInterval(progressInterval);
+      clearTimeout(loadTimeout);
+    };
+  }, [onComplete]);
 
   if (!isVisible) return null;
 
@@ -45,7 +76,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 2500 }) =>
         }
       `}</style>
       <div className="fixed inset-0 bg-white z-[9999] flex items-center justify-center">
-        <div className="text-center space-y-8">
+        <div className="flex flex-col items-center space-y-6">
           {/* Логотип */}
           <div className="flex items-center space-x-2">
             <Icon name="Heart" className="h-7 w-7 text-primary heartbeat" style={{ strokeWidth: 2.7 }} />
@@ -56,14 +87,14 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 2500 }) =>
           </div>
 
           {/* Прогресс бар */}
-          <div className="w-48 mx-auto">
+          <div className="w-48">
             <div className="bg-gray-200 rounded-full h-1.5 overflow-hidden">
               <div 
                 className="bg-primary h-full rounded-full transition-all duration-100 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="mt-3 text-primary font-semibold text-sm">
+            <div className="mt-3 text-primary font-semibold text-sm text-center">
               {Math.round(progress)}%
             </div>
           </div>
