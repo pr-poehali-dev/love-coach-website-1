@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Icon from '@/components/ui/icon';
 
 interface PreloaderProps {
   onComplete?: () => void;
@@ -36,22 +37,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete, duration = 2500 }) =>
       <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
         <div className="text-center space-y-6">
           {/* Логотип */}
-          <div className="relative">
-            <div className="text-4xl font-bold text-gray-900 mb-2">
-              workstab
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="text-primary font-bold text-lg">
-                ▁▂▄▆█▆▄▂▁
-              </div>
-              <span className="text-2xl font-bold text-primary">.com</span>
-            </div>
-          </div>
-
-          {/* Бьющееся сердце */}
-          <div className="flex justify-center">
-            <div className="text-5xl text-red-500 heartbeat">
-              ❤️
+          <div className="flex items-center justify-center space-x-2">
+            <Icon name="Heart" className="h-12 w-12 text-primary heartbeat" style={{ strokeWidth: 2.7 }} />
+            <div className="relative">
+              <span className="text-4xl font-bold text-gray-900">workstab</span>
+              <span className="absolute -bottom-3 -right-2 text-2xl font-bold text-primary">.com</span>
             </div>
           </div>
         </div>
