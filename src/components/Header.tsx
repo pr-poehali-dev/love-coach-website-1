@@ -26,9 +26,9 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
             <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.7 }} />
             <div className="relative">
               <span className="text-2xl font-bold text-gray-900">workstab</span>
-              <div className="absolute -bottom-3 -right-2 flex items-center space-x-1">
+              <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
+                <Icon name="Activity" className="h-3 w-6 text-primary" style={{ strokeWidth: 2.7 }} />
                 <span className="text-base font-bold text-primary">.com</span>
-                <Icon name="Activity" className="h-3 w-3 text-primary" style={{ strokeWidth: 2.7 }} />
               </div>
             </div>
           </div>
@@ -79,9 +79,9 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <Icon name="Heart" className="h-7 w-7 text-primary" style={{ strokeWidth: 2.7 }} />
                     <div className="relative">
                       <span className="text-2xl font-bold text-gray-900">workstab</span>
-                      <div className="absolute -bottom-3 -right-2 flex items-center space-x-1">
+                      <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
+                        <Icon name="Activity" className="h-3 w-6 text-primary" style={{ strokeWidth: 2.7 }} />
                         <span className="text-base font-bold text-primary">.com</span>
-                        <Icon name="Activity" className="h-3 w-3 text-primary" style={{ strokeWidth: 2.7 }} />
                       </div>
                     </div>
                   </div>
