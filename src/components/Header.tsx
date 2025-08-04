@@ -26,7 +26,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
             <Icon name="Heart" className="h-8 w-8 text-primary" />
             <div className="relative">
               <span className="text-2xl font-bold text-gray-900">workstab</span>
-              <span className="absolute -bottom-2 right-0 text-sm font-bold text-primary">.com</span>
+              <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-8">
@@ -76,7 +76,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <Icon name="Heart" className="h-8 w-8 text-primary" />
                     <div className="relative">
                       <span className="text-2xl font-bold text-gray-900">workstab</span>
-                      <span className="absolute -bottom-2 right-0 text-sm font-bold text-primary">.com</span>
+                      <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
                     </div>
                   </div>
                   
