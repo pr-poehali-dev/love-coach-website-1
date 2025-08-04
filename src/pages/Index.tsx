@@ -16,6 +16,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import TariffDetails from "@/components/TariffDetails";
 import PaymentModal from "@/components/PaymentModal";
+import StickyButton from "@/components/StickyButton";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -93,6 +94,8 @@ const Index = () => {
         isOpen={showPaymentModal}
         onClose={() => setShowPaymentModal(false)}
       />
+
+      <StickyButton onClick={() => setShowContactForm(true)} />
     </div>
   );
 };
