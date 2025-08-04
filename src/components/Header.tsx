@@ -27,7 +27,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
             <div className="relative">
               <span className="text-2xl font-bold text-gray-900">workstab</span>
               <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
-                <Icon name="Activity" className="h-3 w-10 text-primary" style={{ strokeWidth: 2.7 }} />
+                <Icon name="Activity" className="h-3 w-16 text-primary" style={{ strokeWidth: 2.7, transform: 'scaleX(2)' }} />
                 <span className="text-base font-bold text-primary">.com</span>
               </div>
             </div>
@@ -80,7 +80,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <div className="relative">
                       <span className="text-2xl font-bold text-gray-900">workstab</span>
                       <div className="absolute -bottom-3 left-0 flex items-center space-x-1">
-                        <Icon name="Activity" className="h-3 w-10 text-primary" style={{ strokeWidth: 2.7 }} />
+                        <Icon name="Activity" className="h-3 w-16 text-primary" style={{ strokeWidth: 2.7, transform: 'scaleX(2)' }} />
                         <span className="text-base font-bold text-primary">.com</span>
                       </div>
                     </div>
