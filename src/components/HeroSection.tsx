@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
   return (
-    <section className="relative py-12 xs:py-16 md:py-32 overflow-hidden">
+    <section className="relative pt-20 pb-12 xs:pt-24 xs:pb-16 md:pt-32 md:pb-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-pink-50"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 xs:gap-12 items-center">

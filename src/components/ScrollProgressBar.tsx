@@ -18,32 +18,29 @@ const ScrollProgressBar = () => {
         const progress = totalHeight > 0 ? (currentScroll / totalHeight) * 100 : 0;
         const clampedProgress = Math.min(Math.max(progress, 0), 100);
         
-        // Плавная интерполяция для устранения рывков
-        const smoothProgress = progressRef.current + (clampedProgress - progressRef.current) * 0.1;
-        progressRef.current = smoothProgress;
+        // Адаптивная интерполяция - быстрее для больших изменений
+        const diff = Math.abs(clampedProgress - progressRef.current);
+        const interpolationSpeed = diff > 20 ? 0.3 : diff > 5 ? 0.2 : 0.1;
+        const smoothProgress = progressRef.current + (clampedProgress - progressRef.current) * interpolationSpeed;
         
-        setScrollProgress(smoothProgress);
-        setIsVisible(currentScroll > 10); // Показываем только после небольшой прокрутки
+        // Если очень близко к цели, сразу устанавливаем точное значение
+        if (Math.abs(clampedProgress - smoothProgress) < 0.5) {
+          progressRef.current = clampedProgress;
+          setScrollProgress(clampedProgress);
+        } else {
+          progressRef.current = smoothProgress;
+          setScrollProgress(smoothProgress);
+        }
+        
+        setIsVisible(currentScroll > 10);
       });
     };
 
-    // Добавляем throttling для лучшей производительности
-    let ticking = false;
-    const throttledScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', throttledScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Вызываем сразу для установки начального значения
 
     return () => {
-      window.removeEventListener('scroll', throttledScroll);
+      window.removeEventListener('scroll', handleScroll);
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }
