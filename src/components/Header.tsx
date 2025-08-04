@@ -24,9 +24,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Icon name="Heart" className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-gray-900">
-              workstab<span className="text-primary">.com</span>
-            </span>
+            <div className="relative">
+              <span className="text-2xl font-bold text-gray-900">workstab</span>
+              <span className="absolute -bottom-1 right-0 text-sm font-medium text-primary">.com</span>
+            </div>
           </div>
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
@@ -73,9 +74,10 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                 <div className="flex flex-col space-y-6 mt-6">
                   <div className="flex items-center space-x-2 mb-6">
                     <Icon name="Heart" className="h-8 w-8 text-primary" />
-                    <span className="text-2xl font-bold text-gray-900">
-                      workstab<span className="text-primary">.com</span>
-                    </span>
+                    <div className="relative">
+                      <span className="text-2xl font-bold text-gray-900">workstab</span>
+                      <span className="absolute -bottom-1 right-0 text-sm font-medium text-primary">.com</span>
+                    </div>
                   </div>
                   
                   {navItems.map((item) => (
