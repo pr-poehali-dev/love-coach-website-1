@@ -25,6 +25,9 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
           <div className="flex items-center space-x-2">
             <div className="relative">
               <Icon name="Heart" className="h-8 w-8 text-primary burning-heart" />
+              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-700 pointer-events-none">
+                ︶
+              </div>
             </div>
             <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
           </div>
@@ -74,6 +77,9 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                   <div className="flex items-center space-x-2 mb-6">
                     <div className="relative">
                       <Icon name="Heart" className="h-8 w-8 text-primary burning-heart" />
+                      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-700 pointer-events-none">
+                        ︶
+                      </div>
                     </div>
                     <span className="text-2xl font-bold text-gray-900">Workstab.com</span>
                   </div>
