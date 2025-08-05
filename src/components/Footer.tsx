@@ -14,6 +14,7 @@ const Footer = ({ scrollToSection }: FooterProps) => {
 
   const infoLinks = [
     { label: "О нас", section: "about" },
+    { label: "Блог", href: "/blog" },
     { label: "Вопросы и ответы", section: "faq" },
     { label: "Публичная оферта", href: "/offer" },
     { label: "Политика конфиденциальности", href: "/privacy" }

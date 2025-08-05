@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Icon from "@/components/ui/icon";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   isMenuOpen: boolean;
@@ -10,10 +11,12 @@ interface HeaderProps {
 }
 
 const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSection }: HeaderProps) => {
+  const navigate = useNavigate();
   const navItems = [
     { href: "services", label: "Услуги" },
     { href: "about", label: "О нас" },
     { href: "prices", label: "Цены" },
+    { href: "blog", label: "Блог", isExternal: true },
     { href: "faq", label: "Вопросы" },
     { href: "contact", label: "Контакты" }
   ];
@@ -33,7 +36,13 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
             {navItems.map((item) => (
               <button 
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => {
+                  if (item.isExternal) {
+                    navigate(`/${item.href}`);
+                  } else {
+                    scrollToSection(item.href);
+                  }
+                }}
                 className="text-gray-600 hover:text-primary transition-colors relative group"
               >
                 {item.label}
@@ -84,7 +93,11 @@ const Header = ({ isMenuOpen, setIsMenuOpen, setShowPaymentModal, scrollToSectio
                     <button 
                       key={item.href}
                       onClick={() => {
-                        scrollToSection(item.href);
+                        if (item.isExternal) {
+                          navigate(`/${item.href}`);
+                        } else {
+                          scrollToSection(item.href);
+                        }
                         setTimeout(() => setIsMenuOpen(false), 100);
                       }}
                       className="text-lg text-gray-700 hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/5 text-left w-full"

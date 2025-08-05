@@ -1,52 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import { blogPosts } from "@/data/blogData";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: 'Удаленная работа в 2024: Полное руководство по эффективности',
-    excerpt: 'Все секреты успешной удаленной работы: от организации рабочего места до управления временем.',
-    author: 'Анна Петрова',
-    date: '15 февраля 2024',
-    category: 'Продуктивность',
-    readTime: '8 мин',
-    image: '/api/placeholder/400/300'
-  },
-  {
-    id: 2,
-    title: 'Как найти работу мечты: Пошаговый план действий',
-    excerpt: 'Практическое руководство по поиску работы: от составления резюме до успешного прохождения собеседований.',
-    author: 'Михаил Соколов',
-    date: '10 февраля 2024',
-    category: 'Карьера',
-    readTime: '10 мин',
-    image: '/api/placeholder/400/300'
-  },
-  {
-    id: 3,
-    title: 'Топ-10 профессий будущего: Куда двигаться в 2024 году',
-    excerpt: 'Анализ самых перспективных профессий ближайших лет и советы по их освоению.',
-    author: 'Елена Кузнецова',
-    date: '5 февраля 2024',
-    category: 'Тренды',
-    readTime: '12 мин',
-    image: '/api/placeholder/400/300'
-  }
-];
+// Берем первые 3 статьи для превью
+const previewPosts = blogPosts.slice(0, 3);
 
 const BlogPreview = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-12 sm:py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Блог о карьере и работе
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+            Блог о отношениях и близости
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Практические советы, тренды рынка труда и истории успеха для вашего профессионального роста
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
+            Практические советы семейного психолога для укрепления отношений и развития близости
           </p>
           <Button
             onClick={() => navigate('/blog')}
@@ -58,8 +29,8 @@ const BlogPreview = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {previewPosts.map((post) => (
             <article
               key={post.id}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
@@ -68,41 +39,42 @@ const BlogPreview = () => {
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="p-6">
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
-                  <span className="bg-primary/10 text-primary px-2 py-1 rounded-full">
+              <div className="p-4 sm:p-6">
+                <div className="flex items-center justify-between text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
+                  <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs">
                     {post.category}
                   </span>
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
                     <div className="flex items-center">
-                      <Icon name="Calendar" className="w-4 h-4 mr-1" />
-                      {post.date}
+                      <Icon name="Calendar" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                      <span className="hidden sm:inline">{post.date}</span>
+                      <span className="sm:hidden">{post.date.split(' ')[0]} {post.date.split(' ')[1]}</span>
                     </div>
                     <div className="flex items-center">
-                      <Icon name="Clock" className="w-4 h-4 mr-1" />
+                      <Icon name="Clock" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                       {post.readTime}
                     </div>
                   </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h3>
 
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
 
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <Icon name="User" className="w-4 h-4 mr-1" />
+                  <div className="flex items-center text-xs sm:text-sm text-gray-500">
+                    <Icon name="User" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                     {post.author}
                   </div>
-                  <div className="flex items-center text-primary font-medium text-sm group-hover:underline">
-                    Читать далее
-                    <Icon name="ArrowRight" className="w-4 h-4 ml-1" />
+                  <div className="flex items-center text-primary font-medium text-xs sm:text-sm group-hover:underline">
+                    Читать
+                    <Icon name="ArrowRight" className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
                   </div>
                 </div>
               </div>
