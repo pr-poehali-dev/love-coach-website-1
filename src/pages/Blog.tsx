@@ -1,12 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import SimpleHeader from '@/components/SimpleHeader';
 import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
+import BlogReactions from '@/components/BlogReactions';
+import BlogComments from '@/components/BlogComments';
+import BlogCTA from '@/components/BlogCTA';
+import BlogContent from '@/components/BlogContent';
 import { blogPosts, categories } from '@/data/blogData';
 
 const Blog = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('Все');
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
+
+  useEffect(() => {
+    if (id) {
+      const post = blogPosts.find(p => p.id === parseInt(id));
+      if (post) {
+        setSelectedPost(post);
+        window.scrollTo(0, 0);
+      } else {
+        navigate('/blog');
+      }
+    } else {
+      setSelectedPost(null);
+    }
+  }, [id, navigate]);
 
   const filteredPosts = selectedCategory === 'Все' 
     ? blogPosts 
@@ -19,7 +40,7 @@ const Blog = () => {
         <main className="pt-20">
           <article className="container mx-auto px-4 py-8 max-w-4xl">
             <button
-              onClick={() => setSelectedPost(null)}
+              onClick={() => navigate('/blog')}
               className="flex items-center text-primary hover:text-primary/80 mb-6"
             >
               <Icon name="ArrowLeft" className="w-4 h-4 mr-2" />
@@ -56,71 +77,7 @@ const Blog = () => {
                   {selectedPost.title}
                 </h1>
                 
-                <div className="prose prose-lg max-w-none">
-                  {selectedPost.content.split('\n').map((paragraph, index) => {
-                    if (paragraph.startsWith('## ')) {
-                      return (
-                        <h2 key={index} className="text-2xl font-bold text-gray-900 mt-8 mb-4">
-                          {paragraph.replace('## ', '')}
-                        </h2>
-                      );
-                    }
-                    if (paragraph.startsWith('### ')) {
-                      return (
-                        <h3 key={index} className="text-xl font-semibold text-gray-800 mt-6 mb-3">
-                          {paragraph.replace('### ', '')}
-                        </h3>
-                      );
-                    }
-                    if (paragraph.startsWith('#### ')) {
-                      return (
-                        <h4 key={index} className="text-lg font-semibold text-gray-800 mt-4 mb-2">
-                          {paragraph.replace('#### ', '')}
-                        </h4>
-                      );
-                    }
-                    if (paragraph.startsWith('- **') && paragraph.includes('**')) {
-                      const match = paragraph.match(/- \*\*(.*?)\*\*(.*)/);
-                      if (match) {
-                        return (
-                          <li key={index} className="mb-2">
-                            <strong className="text-gray-900">{match[1]}</strong>
-                            <span className="text-gray-700">{match[2]}</span>
-                          </li>
-                        );
-                      }
-                    }
-                    if (paragraph.startsWith('- ')) {
-                      return (
-                        <li key={index} className="mb-1 text-gray-700">
-                          {paragraph.replace('- ', '')}
-                        </li>
-                      );
-                    }
-                    if (paragraph.match(/^\d+\./)) {
-                      return (
-                        <li key={index} className="mb-2 text-gray-700">
-                          {paragraph.replace(/^\d+\.\s/, '')}
-                        </li>
-                      );
-                    }
-                    if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-                      return (
-                        <p key={index} className="mb-4 font-semibold text-gray-800">
-                          {paragraph.replace(/\*\*/g, '')}
-                        </p>
-                      );
-                    }
-                    if (paragraph.trim() === '') {
-                      return <br key={index} />;
-                    }
-                    return (
-                      <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                        {paragraph}
-                      </p>
-                    );
-                  })}
-                </div>
+                <BlogContent content={selectedPost.content} />
                 
                 <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-gray-200">
                   {selectedPost.tags.map((tag, index) => (
@@ -131,6 +88,16 @@ const Blog = () => {
                       #{tag}
                     </span>
                   ))}
+                </div>
+                
+                <BlogCTA />
+                
+                <div className="mt-8">
+                  <BlogReactions postId={selectedPost.id} />
+                </div>
+                
+                <div className="mt-8">
+                  <BlogComments postId={selectedPost.id} />
                 </div>
               </div>
             </div>
@@ -176,7 +143,7 @@ const Blog = () => {
               <article 
                 key={post.id}
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
-                onClick={() => setSelectedPost(post)}
+                onClick={() => navigate(`/blog/${post.id}`)}
               >
                 <img 
                   src={post.image} 
@@ -208,7 +175,7 @@ const Blog = () => {
                     {post.excerpt}
                   </p>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center text-sm text-gray-500">
                       <Icon name="User" className="w-4 h-4 mr-1" />
                       {post.author}
@@ -218,6 +185,8 @@ const Blog = () => {
                       <Icon name="ArrowRight" className="w-4 h-4 ml-1" />
                     </div>
                   </div>
+                  
+                  <BlogReactions postId={post.id} compact={true} />
                 </div>
               </article>
             ))}

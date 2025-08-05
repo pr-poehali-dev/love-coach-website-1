@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import BlogReactions from "@/components/BlogReactions";
 import { blogPosts } from "@/data/blogData";
 
 // Берем первые 3 статьи для превью
@@ -20,7 +21,10 @@ const BlogPreview = () => {
             Практические советы семейного психолога для укрепления отношений и развития близости
           </p>
           <Button
-            onClick={() => navigate('/blog')}
+            onClick={() => {
+              navigate('/blog');
+              setTimeout(() => window.scrollTo(0, 0), 100);
+            }}
             variant="outline"
             className="border-primary text-primary hover:bg-primary hover:text-white"
           >
@@ -34,7 +38,7 @@ const BlogPreview = () => {
             <article
               key={post.id}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate(`/blog/${post.id}`)}
             >
               <img
                 src={post.image}
@@ -67,7 +71,7 @@ const BlogPreview = () => {
                   {post.excerpt}
                 </p>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center text-xs sm:text-sm text-gray-500">
                     <Icon name="User" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                     {post.author}
@@ -77,6 +81,8 @@ const BlogPreview = () => {
                     <Icon name="ArrowRight" className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
                   </div>
                 </div>
+                
+                <BlogReactions postId={post.id} compact={true} />
               </div>
             </article>
           ))}
