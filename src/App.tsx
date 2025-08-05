@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Offer from "./pages/Offer";
 import Privacy from "./pages/Privacy";
 import CustomPayment from "./pages/CustomPayment";
+import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import Preloader from "./components/Preloader";
 
@@ -26,6 +27,7 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/offer" element={<Offer />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/custom-payment" element={<CustomPayment />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

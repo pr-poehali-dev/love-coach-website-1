@@ -18,6 +18,7 @@ import TariffDetails from "@/components/TariffDetails";
 import PaymentModal from "@/components/PaymentModal";
 import StickyButton from "@/components/StickyButton";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import BlogPreview from "@/components/BlogPreview";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,6 +64,8 @@ const Index = () => {
         setShowContactForm={setShowContactForm}
         setSelectedTariff={setSelectedTariff}
       />
+
+      <BlogPreview />
 
       <FaqSection />
 
