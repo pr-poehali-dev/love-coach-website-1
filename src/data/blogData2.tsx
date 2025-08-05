@@ -248,7 +248,7 @@ export const blogPosts2 = [
     date: '5 февраля 2024',
     category: 'Близость',
     readTime: '18 мин',
-    image: '/img/2c0b31cf-130b-4aec-89d4-f16352f9e620.jpg',
+    image: '/img/0247c666-e82e-4857-944b-1306cf9ad345.jpg',
     tags: ['эмоциональная близость', 'интимность', 'понимание', 'практики для пар']
   },
   {
@@ -489,7 +489,7 @@ export const blogPosts2 = [
     date: '1 февраля 2024',
     category: 'Конфликты',
     readTime: '16 мин',
-    image: '/img/9b2280bf-a7aa-4c77-bdb4-89dc4c94e471.jpg',
+    image: '/img/cd739da5-55f1-4820-8967-f3a993341fe5.jpg',
     tags: ['конфликты', 'ссоры', 'общение', 'решение проблем']
   }
 ];

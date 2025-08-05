@@ -217,7 +217,7 @@ export const blogPosts4 = [
     date: '20 января 2024',
     category: 'Близость',
     readTime: '16 мин',
-    image: '/img/2c0b31cf-130b-4aec-89d4-f16352f9e620.jpg',
+    image: '/img/9f290af9-cff6-4779-bc34-e79442b89aec.jpg',
     tags: ['языки любви', 'понимание', 'выражение чувств', 'близость']
   },
   {
@@ -466,7 +466,7 @@ export const blogPosts4 = [
     date: '15 января 2024',
     category: 'Конфликты',
     readTime: '14 мин',
-    image: '/img/9b2280bf-a7aa-4c77-bdb4-89dc4c94e471.jpg',
+    image: '/img/cd739da5-55f1-4820-8967-f3a993341fe5.jpg',
     tags: ['ревность', 'доверие', 'самооценка', 'здоровые границы']
   },
   {
@@ -749,7 +749,7 @@ export const blogPosts4 = [
     date: '10 января 2024',
     category: 'Близость',
     readTime: '19 мин',
-    image: '/img/2c0b31cf-130b-4aec-89d4-f16352f9e620.jpg',
+    image: '/img/9f290af9-cff6-4779-bc34-e79442b89aec.jpg',
     tags: ['интимность', 'родители', 'послеродовой период', 'восстановление близости']
   }
 ];
