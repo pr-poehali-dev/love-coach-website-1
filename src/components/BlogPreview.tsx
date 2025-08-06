@@ -4,6 +4,16 @@ import Icon from "@/components/ui/icon";
 import BlogReactions from "@/components/BlogReactions";
 import { blogPosts } from "@/data/blogData";
 
+// Иконки для категорий
+const categoryIcons: Record<string, string> = {
+  'Все': 'Grid3X3',
+  'Отношения': 'Heart',
+  'Кризис': 'AlertTriangle',
+  'Близость': 'Users',
+  'Конфликты': 'MessageSquareX',
+  'Кризисы': 'Shield'
+};
+
 // Берем первые 3 статьи для превью
 const previewPosts = blogPosts.slice(0, 3);
 
@@ -47,7 +57,12 @@ const BlogPreview = () => {
               />
               <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
-                  <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs">
+                  <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs flex items-center gap-1">
+                    <Icon 
+                      name={categoryIcons[post.category] || 'Tag'} 
+                      className="w-3 h-3"
+                      style={{ color: '#5047e5' }}
+                    />
                     {post.category}
                   </span>
                   <div className="flex items-center">
