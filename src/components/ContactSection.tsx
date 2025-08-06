@@ -43,27 +43,93 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Декоративные иконки */}
-      <div className="absolute inset-0 pointer-events-none">
-        <Icon name="Heart" className="absolute top-20 left-10 text-primary/15 w-6 h-6 animate-pulse" />
-        <Icon name="Users" className="absolute top-32 right-16 text-primary/10 w-5 h-5" />
-        <Icon name="MessageCircle" className="absolute top-48 left-1/4 text-primary/20 w-4 h-4" />
-        <Icon name="Heart" className="absolute top-24 right-1/3 text-primary/8 w-7 h-7" />
-        <Icon name="Sparkles" className="absolute bottom-40 left-8 text-primary/15 w-5 h-5" />
-        <Icon name="Star" className="absolute bottom-56 right-20 text-primary/12 w-4 h-4" />
-        <Icon name="Heart" className="absolute bottom-28 left-1/3 text-primary/18 w-6 h-6 animate-pulse" />
-        <Icon name="Smile" className="absolute bottom-72 right-1/4 text-primary/10 w-5 h-5" />
-        <Icon name="Users" className="absolute top-40 left-1/2 text-primary/12 w-4 h-4" />
-        <Icon name="MessageCircle" className="absolute bottom-44 right-1/2 text-primary/15 w-5 h-5" />
-        <Icon name="Sparkles" className="absolute top-64 left-20 text-primary/8 w-6 h-6" />
-        <Icon name="Star" className="absolute bottom-20 right-12 text-primary/12 w-4 h-4" />
-        <Icon name="Heart" className="absolute top-80 right-8 text-primary/15 w-5 h-5" />
-        <Icon name="Users" className="absolute bottom-64 left-16 text-primary/10 w-4 h-4" />
-        <Icon name="Sparkles" className="absolute top-52 right-1/2 text-primary/12 w-6 h-6 animate-pulse" />
-        <Icon name="Smile" className="absolute bottom-36 left-1/2 text-primary/18 w-5 h-5" />
-        <Icon name="Star" className="absolute top-36 left-3/4 text-primary/8 w-4 h-4" />
-        <Icon name="Heart" className="absolute bottom-52 right-3/4 text-primary/12 w-7 h-7" />
+      {/* Креативный анимированный фон */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Плавающие сердечки */}
+        <div className="floating-hearts">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className={`floating-heart heart-${i + 1}`}
+              style={{
+                left: `${15 + i * 12}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${4 + i * 0.3}s`
+              }}
+            >
+              ♥
+            </div>
+          ))}
+        </div>
+        
+        {/* Градиентные круги */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-16 w-24 h-24 bg-gradient-to-tl from-primary/8 to-primary/3 rounded-full blur-lg animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-gradient-to-r from-primary/6 to-primary/2 rounded-full blur-md animate-pulse" style={{animationDelay: '2s'}}></div>
+        
+        {/* Волновые линии */}
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0,100 Q250,50 500,100 T1000,100"
+            stroke="url(#gradient)"
+            strokeWidth="2"
+            fill="none"
+            opacity="0.1"
+            className="animate-pulse"
+          />
+          <path
+            d="M0,200 Q300,150 600,200 T1200,200"
+            stroke="url(#gradient)"
+            strokeWidth="1.5"
+            fill="none"
+            opacity="0.08"
+            className="animate-pulse"
+            style={{animationDelay: '1.5s'}}
+          />
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgb(219 39 119)" stopOpacity="0" />
+              <stop offset="50%" stopColor="rgb(219 39 119)" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="rgb(219 39 119)" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
+      
+      <style jsx>{`
+        .floating-heart {
+          position: absolute;
+          color: rgb(219 39 119);
+          font-size: 20px;
+          animation: floatUp linear infinite;
+        }
+        
+        @keyframes floatUp {
+          0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.3;
+          }
+          90% {
+            opacity: 0.3;
+          }
+          100% {
+            transform: translateY(-50px) rotate(360deg);
+            opacity: 0;
+          }
+        }
+        
+        .heart-1 { font-size: 16px; }
+        .heart-2 { font-size: 24px; }
+        .heart-3 { font-size: 18px; }
+        .heart-4 { font-size: 20px; }
+        .heart-5 { font-size: 22px; }
+        .heart-6 { font-size: 16px; }
+        .heart-7 { font-size: 26px; }
+        .heart-8 { font-size: 18px; }
+      `}</style>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
