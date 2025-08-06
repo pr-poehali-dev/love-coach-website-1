@@ -18,7 +18,6 @@ const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('Все');
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(4);
-  const [visiblePosts, setVisiblePosts] = useState(4);
 
   useEffect(() => {
     if (id) {
