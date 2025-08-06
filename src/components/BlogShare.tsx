@@ -58,48 +58,56 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
   };
 
   return (
-    <div className="bg-gray-50 rounded-xl p-6 my-8">
-      <div className="flex items-center justify-between">
+    <div className="bg-gray-50 rounded-xl p-4 sm:p-6 my-6 sm:my-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
         <div className="flex items-center">
           <Icon name="Share2" className="w-5 h-5 mr-2 text-primary" />
-          <span className="font-medium text-gray-900">Поделиться статьей</span>
+          <span className="font-medium text-gray-900 text-sm sm:text-base">Поделиться статьей</span>
         </div>
         
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 justify-center sm:justify-end">
           <Button
             onClick={() => handleShare('telegram')}
             variant="outline"
             size="sm"
-            className="hover:bg-blue-50 hover:border-blue-300"
+            className="hover:bg-blue-50 hover:border-blue-300 flex-1 sm:flex-initial min-w-0"
+            title="Telegram"
           >
             <Icon name="MessageCircle" className="w-4 h-4" />
+            <span className="ml-1 text-xs sm:hidden">Telegram</span>
           </Button>
           
           <Button
             onClick={() => handleShare('whatsapp')}
             variant="outline"
             size="sm"
-            className="hover:bg-green-50 hover:border-green-300"
+            className="hover:bg-green-50 hover:border-green-300 flex-1 sm:flex-initial min-w-0"
+            title="WhatsApp"
           >
             <Icon name="MessageSquare" className="w-4 h-4" />
+            <span className="ml-1 text-xs sm:hidden">WhatsApp</span>
           </Button>
           
           <Button
             onClick={() => handleShare('vk')}
             variant="outline"
             size="sm"
-            className="hover:bg-blue-50 hover:border-blue-300"
+            className="hover:bg-blue-50 hover:border-blue-300 flex-1 sm:flex-initial min-w-0"
+            title="ВКонтакте"
           >
             <Icon name="Users" className="w-4 h-4" />
+            <span className="ml-1 text-xs sm:hidden">VK</span>
           </Button>
           
           <Button
             onClick={() => handleShare()}
             variant="outline"
             size="sm"
-            className="hover:bg-primary hover:text-white"
+            className="hover:bg-primary hover:text-white flex-1 sm:flex-initial min-w-0"
+            title="Скопировать ссылку"
           >
             <Icon name="Copy" className="w-4 h-4" />
+            <span className="ml-1 text-xs sm:hidden">Копировать</span>
           </Button>
         </div>
       </div>
