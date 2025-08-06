@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SimpleHeader from '@/components/SimpleHeader';
 import Footer from '@/components/Footer';
@@ -33,28 +33,21 @@ const Blog = () => {
     }
   }, [id, navigate]);
 
-  const filteredPosts = useMemo(() => 
-    selectedCategory === 'Все' 
-      ? blogPosts 
-      : blogPosts.filter(post => post.category === selectedCategory),
-    [selectedCategory]
-  );
+  const filteredPosts = selectedCategory === 'Все' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory);
 
-  const displayedPosts = useMemo(() => 
-    filteredPosts.slice(0, visiblePosts),
-    [filteredPosts, visiblePosts]
-  );
-
+  const displayedPosts = filteredPosts.slice(0, visiblePosts);
   const hasMorePosts = filteredPosts.length > visiblePosts;
 
-  const handleLoadMore = useCallback(() => {
+  const handleLoadMore = () => {
     setVisiblePosts(prev => prev + 4);
-  }, []);
+  };
 
-  const handleCategoryChange = useCallback((category: string) => {
+  const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setVisiblePosts(4);
-  }, []);
+    setVisiblePosts(4); // Сброс пагинации при смене категории
+  };
 
   if (selectedPost) {
     return (

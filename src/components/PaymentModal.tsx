@@ -84,9 +84,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
     });
     
     // Здесь будет интеграция с платёжной системой
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Payment data:', { ...formData, tariff: selectedTariff });
-    }
+    console.log('Payment data:', { ...formData, tariff: selectedTariff });
   };
 
   const handleClose = () => {
