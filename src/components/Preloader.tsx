@@ -13,48 +13,59 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     let progressInterval: NodeJS.Timeout;
     let finishInterval: NodeJS.Timeout;
 
+    // Быстрая загрузка для кешированного контента
+    const isCachedContent = document.readyState === 'complete' && 
+                           performance.navigation?.type === 0; // navigate, not reload
+
+    const progressSpeed = isCachedContent ? 25 : 100; // Быстрее для кеша
+    const progressIncrement = isCachedContent ? 15 : 6;
+
     const startProgress = () => {
       progressInterval = setInterval(() => {
         setProgress(prev => {
-          if (prev >= 90) {
-            return 90;
+          const maxProgress = isCachedContent ? 95 : 90;
+          if (prev >= maxProgress) {
+            return maxProgress;
           }
-          return prev + Math.random() * 8 + 2;
+          return prev + Math.random() * progressIncrement + 2;
         });
-      }, 100);
+      }, progressSpeed);
     };
 
     const finishLoading = () => {
       clearInterval(progressInterval);
       
+      const finishSpeed = isCachedContent ? 30 : 50;
       finishInterval = setInterval(() => {
         setProgress(prev => {
           if (prev >= 100) {
             clearInterval(finishInterval);
+            const hideDelay = isCachedContent ? 100 : 300;
             setTimeout(() => {
               setIsVisible(false);
               onComplete?.();
-            }, 300);
+            }, hideDelay);
             return 100;
           }
-          return prev + 5;
+          return prev + 8;
         });
-      }, 50);
+      }, finishSpeed);
     };
 
     const checkIfLoaded = () => {
       if (document.readyState === 'complete') {
         finishLoading();
       } else {
-        setTimeout(checkIfLoaded, 100);
+        setTimeout(checkIfLoaded, 50);
       }
     };
 
     startProgress();
     
-    // Проверяем сразу и через window.onload
+    const initialDelay = isCachedContent ? 100 : 500;
+    
     if (document.readyState === 'complete') {
-      setTimeout(finishLoading, 500);
+      setTimeout(finishLoading, initialDelay);
     } else {
       window.addEventListener('load', finishLoading);
       checkIfLoaded();

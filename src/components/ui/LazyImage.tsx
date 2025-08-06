@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import SteppedLoader from './SteppedLoader';
+import ImageLoader from './ImageLoader';
 
 interface LazyImageProps {
   src: string;
@@ -26,13 +26,32 @@ const LazyImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [needsLoader, setNeedsLoader] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  
+  // Проверяем кеш изображения
+  const isImageCached = (src: string): boolean => {
+    const img = new Image();
+    img.src = src;
+    return img.complete && img.naturalHeight !== 0;
+  };
 
   useEffect(() => {
+    // Сначала проверяем кеш
+    if (isImageCached(src)) {
+      setIsLoaded(true);
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
+          // Показываем лоадер только если изображение не в кеше
+          if (!isImageCached(src)) {
+            setNeedsLoader(true);
+          }
           observer.disconnect();
         }
       },
@@ -47,10 +66,11 @@ const LazyImage = ({
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [src]);
 
   const handleLoad = () => {
     setIsLoaded(true);
+    setNeedsLoader(false);
     onLoad?.();
   };
 
@@ -74,9 +94,9 @@ const LazyImage = ({
         />
       ) : (
         <>
-          {!isLoaded && !hasError && (
+          {needsLoader && !isLoaded && !hasError && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
-              <SteppedLoader size="sm" />
+              <ImageLoader size="sm" className="text-primary" />
             </div>
           )}
           <img

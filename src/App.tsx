@@ -16,18 +16,43 @@ const Blog = lazy(() => import("./pages/Blog"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const AppContent = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const location = useLocation();
+  
+  // Проверяем нужен ли прелоадер
+  const shouldShowLoader = () => {
+    // На первой загрузке показываем всегда
+    if (isInitialLoad && document.readyState !== 'complete') {
+      return true;
+    }
+    
+    // При переходах показываем только если требуется время на загрузку
+    if (performance.navigation?.type === 1) { // reload
+      return true;
+    }
+    
+    return false;
+  };
   
   // Сбрасываем прелоадер при смене маршрута
   useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
+    if (shouldShowLoader()) {
+      setIsLoading(true);
+      
+      // Минимальное время показа для плавности UX
+      const minTime = isInitialLoad ? 1200 : 300;
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setIsInitialLoad(false);
+      }, minTime);
+      
+      return () => clearTimeout(timer);
+    } else {
       setIsLoading(false);
-    }, 800);
-    
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
+      setIsInitialLoad(false);
+    }
+  }, [location.pathname, isInitialLoad]);
   
   // Не показываем прелоадер на странице оплаты
   const shouldShowPreloader = isLoading && location.pathname !== '/custom-payment';
