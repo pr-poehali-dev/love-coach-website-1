@@ -35,26 +35,6 @@ const LazyImage = ({
     img.src = src;
     return img.complete && img.naturalHeight !== 0;
   };
-  
-  // Принудительная загрузка через таймаут (защита от зависания)
-  useEffect(() => {
-    if (needsLoader && !isLoaded && !hasError) {
-      // Адаптивный таймаут в зависимости от типа соединения
-      const baseTimeout = 8000;
-      // @ts-ignore - navigator.connection может не существовать
-      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      const isSlowConnection = connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
-      const timeout = isSlowConnection ? baseTimeout * 2 : baseTimeout;
-      
-      const forceLoadTimeout = setTimeout(() => {
-        console.warn('Image force loaded due to timeout:', src);
-        setHasError(true); // Помечаем как ошибку вместо загруженного
-        setNeedsLoader(false);
-      }, timeout);
-      
-      return () => clearTimeout(forceLoadTimeout);
-    }
-  }, [needsLoader, isLoaded, hasError, src]);
 
   useEffect(() => {
     // Сначала проверяем кеш
@@ -119,27 +99,18 @@ const LazyImage = ({
               <ImageLoader size="sm" className="text-primary" />
             </div>
           )}
-          {hasError ? (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-400">
-              <div className="text-center">
-                <div className="text-2xl mb-2">📷</div>
-                <div className="text-xs">Изображение недоступно</div>
-              </div>
-            </div>
-          ) : (
-            <img
-              src={isInView ? src : placeholder}
-              alt={alt}
-              className={cn(
-                "w-full h-full object-cover transition-opacity duration-300",
-                isLoaded ? "opacity-100" : "opacity-0"
-              )}
-              onLoad={handleLoad}
-              onError={handleError}
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+          <img
+            src={isInView ? src : placeholder}
+            alt={alt}
+            className={cn(
+              "w-full h-full object-cover transition-opacity duration-300",
+              isLoaded ? "opacity-100" : "opacity-0"
+            )}
+            onLoad={handleLoad}
+            onError={handleError}
+            loading="lazy"
+            decoding="async"
+          />
         </>
       )}
     </div>

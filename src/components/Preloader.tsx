@@ -12,7 +12,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   useEffect(() => {
     let progressInterval: NodeJS.Timeout;
     let finishInterval: NodeJS.Timeout;
-    let forceFinishTimeout: NodeJS.Timeout;
 
     // Быстрая загрузка для кешированного контента
     const isCachedContent = document.readyState === 'complete' && 
@@ -20,9 +19,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
     const progressSpeed = isCachedContent ? 25 : 100; // Быстрее для кеша
     const progressIncrement = isCachedContent ? 15 : 6;
-    
-    // Максимальное время показа прелоадера (защита от зависания)
-    const maxLoadTime = isCachedContent ? 2000 : 8000;
 
     const startProgress = () => {
       progressInterval = setInterval(() => {
@@ -66,12 +62,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
     startProgress();
     
-    // Принудительное завершение через максимальное время
-    forceFinishTimeout = setTimeout(() => {
-      console.warn('Preloader force finished due to timeout');
-      finishLoading();
-    }, maxLoadTime);
-    
     const initialDelay = isCachedContent ? 100 : 500;
     
     if (document.readyState === 'complete') {
@@ -84,7 +74,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     return () => {
       clearInterval(progressInterval);
       clearInterval(finishInterval);
-      clearTimeout(forceFinishTimeout);
       window.removeEventListener('load', finishLoading);
     };
   }, [onComplete]);

@@ -42,25 +42,12 @@ const AppContent = () => {
       
       // Минимальное время показа для плавности UX
       const minTime = isInitialLoad ? 1200 : 300;
-      // Максимальное время показа (защита от зависания)
-      const maxTime = isInitialLoad ? 5000 : 2000;
-      
       const timer = setTimeout(() => {
         setIsLoading(false);
         setIsInitialLoad(false);
       }, minTime);
       
-      // Принудительное скрытие
-      const forceHideTimer = setTimeout(() => {
-        console.warn('App preloader force hidden due to timeout');
-        setIsLoading(false);
-        setIsInitialLoad(false);
-      }, maxTime);
-      
-      return () => {
-        clearTimeout(timer);
-        clearTimeout(forceHideTimer);
-      };
+      return () => clearTimeout(timer);
     } else {
       setIsLoading(false);
       setIsInitialLoad(false);
