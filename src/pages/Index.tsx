@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
+import useSEO from "@/hooks/useSEO";
+import { getOrganizationStructuredData, getWebsiteStructuredData, getServiceStructuredData } from "@/utils/structuredData";
 
 // Импорт созданных компонентов
 import ContactForm from "@/components/ContactForm";
@@ -27,6 +29,23 @@ const Index = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showTariffForm, setShowTariffForm] = useState(false);
   const { toast } = useToast();
+
+  // SEO оптимизация главной страницы
+  useSEO({
+    title: "Коучинг отношений - Укрепление пар и развитие близости | workstab.com",
+    description: "Профессиональный коучинг отношений и близости. Помогаем парам укрепить связь, преодолеть кризисы и построить счастливые отношения. Консультации онлайн.",
+    keywords: "коучинг отношений, коуч по отношениям, близость в отношениях, семейный коуч, отношения, кризис в отношениях, парная терапия",
+    url: "https://workstab.com",
+    type: "website",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        getOrganizationStructuredData(),
+        getWebsiteStructuredData(),
+        getServiceStructuredData()
+      ]
+    }
+  });
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
