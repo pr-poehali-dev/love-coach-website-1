@@ -43,26 +43,26 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Декоративные эмодзи */}
+      {/* Декоративные иконки */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 text-primary/20 text-2xl animate-pulse">💕</div>
-        <div className="absolute top-32 right-16 text-primary/15 text-xl">💖</div>
-        <div className="absolute top-48 left-1/4 text-primary/20 text-lg">💝</div>
-        <div className="absolute top-24 right-1/3 text-primary/10 text-2xl">💗</div>
-        <div className="absolute bottom-40 left-8 text-primary/20 text-xl">💘</div>
-        <div className="absolute bottom-56 right-20 text-primary/15 text-lg">💓</div>
-        <div className="absolute bottom-28 left-1/3 text-primary/20 text-2xl">💞</div>
-        <div className="absolute bottom-72 right-1/4 text-primary/10 text-xl">💟</div>
-        <div className="absolute top-40 left-1/2 text-primary/15 text-lg">❤️</div>
-        <div className="absolute bottom-44 right-1/2 text-primary/20 text-xl">💌</div>
-        <div className="absolute top-64 left-20 text-primary/10 text-2xl">🌹</div>
-        <div className="absolute bottom-20 right-12 text-primary/15 text-lg">💐</div>
-        <div className="absolute top-80 right-8 text-primary/20 text-xl">🎈</div>
-        <div className="absolute bottom-64 left-16 text-primary/10 text-lg">💑</div>
-        <div className="absolute top-52 right-1/2 text-primary/15 text-2xl">💍</div>
-        <div className="absolute bottom-36 left-1/2 text-primary/20 text-xl">🥰</div>
-        <div className="absolute top-36 left-3/4 text-primary/10 text-lg">😍</div>
-        <div className="absolute bottom-52 right-3/4 text-primary/15 text-2xl">💫</div>
+        <Icon name="Heart" className="absolute top-20 left-10 text-primary/15 w-6 h-6 animate-pulse" />
+        <Icon name="Users" className="absolute top-32 right-16 text-primary/10 w-5 h-5" />
+        <Icon name="MessageCircle" className="absolute top-48 left-1/4 text-primary/20 w-4 h-4" />
+        <Icon name="Heart" className="absolute top-24 right-1/3 text-primary/8 w-7 h-7" />
+        <Icon name="Sparkles" className="absolute bottom-40 left-8 text-primary/15 w-5 h-5" />
+        <Icon name="Star" className="absolute bottom-56 right-20 text-primary/12 w-4 h-4" />
+        <Icon name="Heart" className="absolute bottom-28 left-1/3 text-primary/18 w-6 h-6 animate-pulse" />
+        <Icon name="Smile" className="absolute bottom-72 right-1/4 text-primary/10 w-5 h-5" />
+        <Icon name="Users" className="absolute top-40 left-1/2 text-primary/12 w-4 h-4" />
+        <Icon name="MessageCircle" className="absolute bottom-44 right-1/2 text-primary/15 w-5 h-5" />
+        <Icon name="Sparkles" className="absolute top-64 left-20 text-primary/8 w-6 h-6" />
+        <Icon name="Star" className="absolute bottom-20 right-12 text-primary/12 w-4 h-4" />
+        <Icon name="Heart" className="absolute top-80 right-8 text-primary/15 w-5 h-5" />
+        <Icon name="Users" className="absolute bottom-64 left-16 text-primary/10 w-4 h-4" />
+        <Icon name="Sparkles" className="absolute top-52 right-1/2 text-primary/12 w-6 h-6 animate-pulse" />
+        <Icon name="Smile" className="absolute bottom-36 left-1/2 text-primary/18 w-5 h-5" />
+        <Icon name="Star" className="absolute top-36 left-3/4 text-primary/8 w-4 h-4" />
+        <Icon name="Heart" className="absolute bottom-52 right-3/4 text-primary/12 w-7 h-7" />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
