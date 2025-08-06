@@ -9,6 +9,13 @@
     <meta name="author" content="workstab.com"/>
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
     <meta name="theme-color" content="#5C7CFA"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-TileColor" content="#5C7CFA">
+    <meta name="msapplication-config" content="/browserconfig.xml">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon-32x32.svg">
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon-16x16.svg">
@@ -32,8 +39,19 @@
     <meta name="twitter:site" content="@workstab">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdn.poehali.dev">
+    <link rel="dns-prefetch" href="//mc.yandex.ru">
+    
+    <!-- Preload критических ресурсов -->
+    <link rel="preload" href="/src/main.tsx" as="script">
+    <link rel="preload" href="/src/App.tsx" as="script">
+    
+    <!-- Resource hints для улучшения производительности -->
+    <link rel="prefetch" href="/manifest.json">
 
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS COMMENT! -->
 
