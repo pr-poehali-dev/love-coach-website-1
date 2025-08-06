@@ -43,76 +43,72 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Креативная сеть связей */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
-          {/* Узлы сети */}
-          <circle cx="120" cy="100" r="3" fill="rgb(219 39 119)" opacity="0.4" className="animate-pulse">
-            <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="300" cy="80" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '0.5s'}}>
-            <animate attributeName="r" values="2;3;2" dur="2.5s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="480" cy="150" r="3" fill="rgb(219 39 119)" opacity="0.5" className="animate-pulse" style={{animationDelay: '1s'}}>
-            <animate attributeName="r" values="2;5;2" dur="4s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="200" cy="220" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '1.5s'}}>
-            <animate attributeName="r" values="2;4;2" dur="3.5s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="650" cy="180" r="3" fill="rgb(219 39 119)" opacity="0.4" className="animate-pulse" style={{animationDelay: '2s'}}>
-            <animate attributeName="r" values="2;4;2" dur="2.8s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="400" cy="300" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '0.8s'}}>
-            <animate attributeName="r" values="2;3;2" dur="3.2s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="150" cy="400" r="3" fill="rgb(219 39 119)" opacity="0.5" className="animate-pulse" style={{animationDelay: '2.5s'}}>
-            <animate attributeName="r" values="2;5;2" dur="3.8s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="600" cy="420" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '1.2s'}}>
-            <animate attributeName="r" values="2;4;2" dur="2.9s" repeatCount="indefinite" />
-          </circle>
-
-          {/* Связующие линии с анимацией */}
-          <line x1="120" y1="100" x2="300" y2="80" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.15">
-            <animate attributeName="opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite" />
-          </line>
-          <line x1="300" y1="80" x2="480" y2="150" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.2">
-            <animate attributeName="opacity" values="0.1;0.4;0.1" dur="5s" repeatCount="indefinite" begin="0.5s" />
-          </line>
-          <line x1="120" y1="100" x2="200" y2="220" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.12">
-            <animate attributeName="opacity" values="0.05;0.25;0.05" dur="3.5s" repeatCount="indefinite" begin="1s" />
-          </line>
-          <line x1="480" y1="150" x2="650" y2="180" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.18">
-            <animate attributeName="opacity" values="0.1;0.35;0.1" dur="4.2s" repeatCount="indefinite" begin="1.5s" />
-          </line>
-          <line x1="200" y1="220" x2="400" y2="300" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.15">
-            <animate attributeName="opacity" values="0.08;0.28;0.08" dur="3.8s" repeatCount="indefinite" begin="0.8s" />
-          </line>
-          <line x1="400" y1="300" x2="150" y2="400" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.13">
-            <animate attributeName="opacity" values="0.05;0.3;0.05" dur="4.5s" repeatCount="indefinite" begin="2s" />
-          </line>
-          <line x1="150" y1="400" x2="600" y2="420" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.16">
-            <animate attributeName="opacity" values="0.1;0.32;0.1" dur="3.3s" repeatCount="indefinite" begin="1.8s" />
-          </line>
-          <line x1="650" y1="180" x2="600" y2="420" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.14">
-            <animate attributeName="opacity" values="0.06;0.26;0.06" dur="4.8s" repeatCount="indefinite" begin="2.3s" />
-          </line>
-
-          {/* Градиенты */}
-          <defs>
-            <linearGradient id="connectionGradient" gradientUnits="objectBoundingBox">
-              <stop offset="0%" stopColor="rgb(219 39 119)" stopOpacity="0.1" />
-              <stop offset="50%" stopColor="rgb(219 39 119)" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="rgb(219 39 119)" stopOpacity="0.1" />
-            </linearGradient>
-          </defs>
-        </svg>
+      {/* Морфирующие формы */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Основная морфирующая форма */}
+        <div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 opacity-5"
+          style={{
+            background: 'conic-gradient(from 0deg, transparent, rgb(219 39 119), transparent, rgb(147 51 234), transparent)',
+            borderRadius: '50% 30% 70% 40%',
+            filter: 'blur(60px)',
+            animation: 'morphing 12s ease-in-out infinite',
+            transform: 'scale(1.2)',
+          }}
+        />
         
-        {/* Дополнительные геометрические элементы */}
-        <div className="absolute top-20 right-20 w-1 h-16 bg-gradient-to-b from-primary/20 to-transparent transform rotate-12 animate-pulse"></div>
-        <div className="absolute bottom-32 left-16 w-12 h-1 bg-gradient-to-r from-transparent via-primary/15 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 right-1/4 w-8 h-8 border border-primary/10 rounded-full transform rotate-45 animate-spin" style={{animationDuration: '20s'}}></div>
+        {/* Вторичная форма */}
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 opacity-4"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgb(219 39 119), transparent 70%)',
+            borderRadius: '60% 40% 30% 70%',
+            filter: 'blur(40px)',
+            animation: 'morphing2 15s ease-in-out infinite reverse',
+            animationDelay: '3s',
+          }}
+        />
+
+        {/* Минималистичные акценты */}
+        <div className="absolute top-20 right-1/3 w-px h-24 bg-gradient-to-b from-transparent via-primary/20 to-transparent transform rotate-12"></div>
+        <div className="absolute bottom-32 left-1/3 w-24 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent"></div>
       </div>
+      
+      <style jsx>{`
+        @keyframes morphing {
+          0%, 100% {
+            border-radius: 50% 30% 70% 40%;
+            transform: scale(1.2) rotate(0deg);
+          }
+          25% {
+            border-radius: 30% 70% 50% 60%;
+            transform: scale(1.4) rotate(90deg);
+          }
+          50% {
+            border-radius: 70% 50% 30% 40%;
+            transform: scale(1.1) rotate(180deg);
+          }
+          75% {
+            border-radius: 40% 60% 70% 30%;
+            transform: scale(1.3) rotate(270deg);
+          }
+        }
+        
+        @keyframes morphing2 {
+          0%, 100% {
+            border-radius: 60% 40% 30% 70%;
+            transform: scale(1) rotate(0deg);
+          }
+          33% {
+            border-radius: 30% 60% 70% 40%;
+            transform: scale(1.2) rotate(120deg);
+          }
+          66% {
+            border-radius: 70% 30% 40% 60%;
+            transform: scale(0.9) rotate(240deg);
+          }
+        }
+      `}</style>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
