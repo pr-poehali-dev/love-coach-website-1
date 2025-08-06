@@ -50,16 +50,9 @@ const BlogPreview = () => {
                   <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs">
                     {post.category}
                   </span>
-                  <div className="flex items-center space-x-2 sm:space-x-3">
-                    <div className="flex items-center">
-                      <Icon name="Calendar" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                      <span className="hidden sm:inline">{post.date}</span>
-                      <span className="sm:hidden">{post.date.split(' ')[0]} {post.date.split(' ')[1]}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Icon name="Clock" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                      {post.readTime}
-                    </div>
+                  <div className="flex items-center">
+                    <Icon name="Clock" className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                    {post.readTime}
                   </div>
                 </div>
 
