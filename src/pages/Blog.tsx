@@ -77,7 +77,8 @@ const Blog = () => {
                   <span className="bg-primary/10 text-primary px-3 py-1 rounded-full flex items-center gap-2">
                     <Icon 
                       name={categoryIcons[selectedPost.category] || 'Tag'} 
-                      className="w-4 h-4 text-purple-500"
+                      className="w-4 h-4"
+                      style={{ color: '#5047e5' }}
                     />
                     {selectedPost.category}
                   </span>
@@ -155,8 +156,11 @@ const Blog = () => {
                 <Icon 
                   name={categoryIcons[category] || 'Tag'} 
                   className={`w-4 h-4 ${
-                    selectedCategory === category ? 'text-white' : 'text-purple-500'
+                    selectedCategory === category ? 'text-white' : ''
                   }`}
+                  style={{
+                    color: selectedCategory === category ? undefined : '#5047e5'
+                  }}
                 />
                 {category}
               </button>
@@ -180,7 +184,8 @@ const Blog = () => {
                     <span className="bg-primary/10 text-primary px-2 py-1 rounded-full flex items-center gap-1">
                       <Icon 
                         name={categoryIcons[post.category] || 'Tag'} 
-                        className="w-3 h-3 text-purple-500"
+                        className="w-3 h-3"
+                        style={{ color: '#5047e5' }}
                       />
                       {post.category}
                     </span>
