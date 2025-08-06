@@ -40,9 +40,9 @@ const BlogCTA = () => {
             onClick={() => scrollToSection('services')}
             variant="outline" 
             size="lg"
-            className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-3 bg-transparent"
+            className="border-white border-2 text-white hover:bg-white hover:text-primary font-semibold px-8 py-3 bg-transparent transition-all duration-300"
           >
-            <Icon name="Info" className="w-5 h-5 mr-2 text-white hover:text-primary" />
+            <Icon name="Info" className="w-5 h-5 mr-2" />
             Узнать о услугах
           </Button>
         </div>

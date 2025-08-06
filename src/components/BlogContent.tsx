@@ -79,7 +79,7 @@ const BlogContent = ({ content }: BlogContentProps) => {
         const match = line.match(/- \*\*(.*?)\*\*(.*)/);
         if (match) {
           listItems.push(
-            `<strong class="text-gray-900 font-semibold">${match[1]}</strong><span class="text-gray-700">${match[2]}</span>`
+            `${match[1]}${match[2]}`
           );
         }
       }

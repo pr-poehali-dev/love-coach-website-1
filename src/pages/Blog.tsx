@@ -7,6 +7,8 @@ import BlogReactions from '@/components/BlogReactions';
 import BlogComments from '@/components/BlogComments';
 import BlogCTA from '@/components/BlogCTA';
 import BlogContent from '@/components/BlogContent';
+import BlogReadingProgress from '@/components/BlogReadingProgress';
+import BlogShare from '@/components/BlogShare';
 import { blogPosts, categories } from '@/data/blogData';
 
 const Blog = () => {
@@ -36,6 +38,7 @@ const Blog = () => {
   if (selectedPost) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
+        <BlogReadingProgress />
         <SimpleHeader />
         <main className="pt-20">
           <article className="container mx-auto px-4 py-8 max-w-4xl">
@@ -78,6 +81,8 @@ const Blog = () => {
                 </h1>
                 
                 <BlogContent content={selectedPost.content} />
+                
+                <BlogShare title={selectedPost.title} />
                 
                 <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-gray-200">
                   {selectedPost.tags.map((tag, index) => (
