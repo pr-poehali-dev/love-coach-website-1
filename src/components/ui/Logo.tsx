@@ -32,9 +32,10 @@ const Logo = ({ className = "", onClick, showText = true }: LogoProps) => {
         </svg>
       </div>
       {showText && (
-        <span className="text-xl font-bold text-gray-900">
-          Семейный психолог
-        </span>
+        <div className="relative">
+          <span className="text-2xl font-bold text-gray-900">workstab</span>
+          <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
+        </div>
       )}
     </div>
   );
