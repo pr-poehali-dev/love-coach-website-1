@@ -11,7 +11,7 @@ import BlogCTA from '@/components/BlogCTA';
 import BlogContent from '@/components/BlogContent';
 import BlogReadingProgress from '@/components/BlogReadingProgress';
 import BlogShare from '@/components/BlogShare';
-import { blogPosts, categories } from '@/data/blogData';
+import { blogPosts, categories, categoryIcons } from '@/data/blogData';
 
 const Blog = () => {
   const { id } = useParams();
@@ -74,7 +74,11 @@ const Blog = () => {
               
               <div className="p-6 md:p-8">
                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">
+                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full flex items-center gap-2">
+                    <Icon 
+                      name={categoryIcons[selectedPost.category] || 'Tag'} 
+                      className="w-4 h-4 text-purple-500"
+                    />
                     {selectedPost.category}
                   </span>
 
@@ -142,12 +146,18 @@ const Blog = () => {
               <button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
                   selectedCategory === category
                     ? 'bg-primary text-white'
                     : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
                 }`}
               >
+                <Icon 
+                  name={categoryIcons[category] || 'Tag'} 
+                  className={`w-4 h-4 ${
+                    selectedCategory === category ? 'text-white' : 'text-purple-500'
+                  }`}
+                />
                 {category}
               </button>
             ))}
@@ -167,7 +177,11 @@ const Blog = () => {
                 />
                 <div className="p-6">
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
-                    <span className="bg-primary/10 text-primary px-2 py-1 rounded-full">
+                    <span className="bg-primary/10 text-primary px-2 py-1 rounded-full flex items-center gap-1">
+                      <Icon 
+                        name={categoryIcons[post.category] || 'Tag'} 
+                        className="w-3 h-3 text-purple-500"
+                      />
                       {post.category}
                     </span>
                     <div className="flex items-center">

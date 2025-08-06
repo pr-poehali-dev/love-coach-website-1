@@ -1,6 +1,6 @@
 import { blogPosts1 } from './blogData1';
 import { blogPosts2 } from './blogData2';
-import { blogPosts3, categories } from './blogData3';
+import { blogPosts3, categories, categoryIcons } from './blogData3';
 import { blogPosts4 } from './blogData4';
 import { newBlogArticles } from './blog/newBlogArticles';
 import { additionalBlogContent } from './blog/additionalBlogContent';
@@ -16,4 +16,4 @@ export const blogPosts = [
   ...extendedBlogContent
 ];
 
-export { categories };
+export { categories, categoryIcons };

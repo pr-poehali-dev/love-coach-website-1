@@ -339,3 +339,13 @@ export const blogPosts3 = [
 ];
 
 export const categories = ['Все', 'Отношения', 'Кризис', 'Близость', 'Конфликты', 'Кризисы'];
+
+// Иконки для категорий блога
+export const categoryIcons: Record<string, string> = {
+  'Все': 'Grid3X3',
+  'Отношения': 'Heart',
+  'Кризис': 'AlertTriangle', 
+  'Близость': 'Users',
+  'Конфликты': 'MessageSquareX',
+  'Кризисы': 'Shield'
+};
