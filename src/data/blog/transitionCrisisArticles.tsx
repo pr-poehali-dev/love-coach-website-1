@@ -197,7 +197,7 @@ export const transitionCrisisArticles = [
     author: "Наталья Соколова",
     category: "Кризисы",
     readTime: "21 мин",  
-    image: "/img/de209f44-a785-4b6f-98d7-f9795379e402.jpg",
+    image: "/img/a9ca778e-e1fd-4090-82c8-81676b0d4c99.jpg",
     tags: ["переходные кризисы", "жизненные изменения", "взаимная поддержка", "адаптация"],
     reactions: {
       likes: 856,

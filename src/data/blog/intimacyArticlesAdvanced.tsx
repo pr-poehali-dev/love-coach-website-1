@@ -164,7 +164,7 @@ export const intimacyArticlesAdvanced = [
     author: "Екатерина Романова",
     category: "Близость",
     readTime: "24 мин",
-    image: "/img/967e0232-6cf5-4bc5-8a6f-658e7e3e2d59.jpg",
+    image: "/img/e2c78e84-abce-4ddc-a36e-ca2c8a61d932.jpg",
     tags: ["эротика", "страсть", "интимность", "соблазнение"],
     reactions: {
       likes: 1456,

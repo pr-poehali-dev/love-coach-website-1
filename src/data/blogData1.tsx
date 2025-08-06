@@ -133,7 +133,7 @@ export const blogPosts1 = [
     date: '15 февраля 2024',
     category: 'Отношения',
     readTime: '12 мин',
-    image: '/img/4c4b79aa-ef0a-41ad-9849-37f40b185f6a.jpg',
+    image: '/img/ef4b70e6-83ad-4d1b-9daa-cb41eb9ee891.jpg',
     tags: ['здоровые отношения', 'общение', 'близость', 'семейная психология']
   },
   {
@@ -353,7 +353,7 @@ export const blogPosts1 = [
     date: '10 февраля 2024',
     category: 'Кризис',
     readTime: '15 мин',
-    image: '/img/9f290af9-cff6-4779-bc34-e79442b89aec.jpg',
+    image: '/img/3f255f80-8d89-4022-ab01-0c70ff063f69.jpg',
     tags: ['доверие', 'измена', 'кризис в отношениях', 'восстановление']
   }
 ];

@@ -405,7 +405,7 @@ export const conflictArticles2 = [
     author: "Елена Морозова",
     category: "Конфликты",
     readTime: "21 мин",
-    image: "/img/47144c05-bb9f-4c1c-8c01-aee30169d590.jpg",
+    image: "/img/f9353e0e-33ad-411f-b047-10c537d1f1a6.jpg",
     tags: ["прощение", "исцеление обид", "восстановление доверия", "эмоциональное здоровье"],
     reactions: {
       likes: 1156,
