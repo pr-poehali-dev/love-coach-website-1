@@ -48,14 +48,9 @@ const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
           <div className="relative animate-slide-up">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl sm:rounded-3xl transform rotate-3"></div>
             <img 
-              src="/img/67d1e3e4-3e64-40fd-bdc3-94811c01be4a.jpg" 
+              src="/img/d79b259a-f752-49d3-a266-4caf5221b9c6.jpg" 
               alt="Счастливая пара"
               className="relative rounded-2xl sm:rounded-3xl shadow-2xl w-full h-[250px] xs:h-[300px] sm:h-[400px] md:h-[500px] object-cover"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              width="800"
-              height="600"
             />
           </div>
         </div>

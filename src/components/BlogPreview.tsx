@@ -2,10 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import BlogReactions from "@/components/BlogReactions";
-import { blogPreviewPosts, categoryIcons } from "@/data/blogDataLazy";
+import { blogPosts } from "@/data/blogData";
 
-// Используем оптимизированные данные для превью
-const previewPosts = blogPreviewPosts;
+// Иконки для категорий
+const categoryIcons: Record<string, string> = {
+  'Все': 'Grid3X3',
+  'Отношения': 'Heart',
+  'Кризис': 'AlertTriangle',
+  'Близость': 'Users',
+  'Конфликты': 'MessageSquareX',
+  'Кризисы': 'Shield'
+};
+
+// Берем первые 3 статьи для превью
+const previewPosts = blogPosts.slice(0, 3);
 
 const BlogPreview = () => {
   const navigate = useNavigate();
@@ -44,10 +54,6 @@ const BlogPreview = () => {
                 src={post.image}
                 alt={post.title}
                 className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-                decoding="async"
-                width="400"
-                height="200"
               />
               <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
