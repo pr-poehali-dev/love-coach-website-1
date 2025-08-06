@@ -14,8 +14,10 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     let finishInterval: NodeJS.Timeout;
 
     // Быстрая загрузка для кешированного контента
+    const navigationEntries = performance.getEntriesByType('navigation');
+    const navigationTiming = navigationEntries.length > 0 ? navigationEntries[0] as PerformanceNavigationTiming : null;
     const isCachedContent = document.readyState === 'complete' && 
-                           performance.navigation?.type === 0; // navigate, not reload
+                           navigationTiming?.type === 'navigate'; // navigate, not reload
 
     const progressSpeed = isCachedContent ? 25 : 100; // Быстрее для кеша
     const progressIncrement = isCachedContent ? 15 : 6;

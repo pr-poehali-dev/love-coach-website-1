@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Icon from "@/components/ui/icon";
 import ContactForm from "@/components/ContactForm";
+import { type TariffDetails as TariffDetailsType } from "@/types/tariff";
 
 interface TariffDetailsProps {
   tariff: string | null;
@@ -13,7 +14,7 @@ interface TariffDetailsProps {
 }
 
 const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShowContactForm }: TariffDetailsProps) => {
-  const tariffData = {
+  const tariffData: Record<string, TariffDetailsType> = {
     individual: {
       title: "Индивидуальная сессия",
       price: "3 000 ₽",
@@ -57,7 +58,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
         "Практические советы"
       ],
       process: "Получаете доступ к личному чату с коучем на неделю. Отвечаем на вопросы, даём советы и поддерживаем в трудные моменты.",
-      icon: "MessageSquare"
+      icon: "MessageCircle"
     },
     custom: {
       title: "Расширенный план",
@@ -93,7 +94,7 @@ const TariffDetails = ({ tariff, isOpen, onClose, showForm, setShowForm, setShow
         <DialogHeader>
           <DialogTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
             <div className="w-8 h-8 xs:w-10 xs:h-10 bg-primary/10 rounded-full flex items-center justify-center mr-2 xs:mr-3 flex-shrink-0">
-              <Icon name={currentTariff.icon as any} className="h-4 w-4 xs:h-6 xs:w-6 text-primary" />
+              <Icon name={currentTariff.icon} className="h-4 w-4 xs:h-6 xs:w-6 text-primary" />
             </div>
             {currentTariff.title}
           </DialogTitle>

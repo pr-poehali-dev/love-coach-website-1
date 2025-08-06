@@ -1,43 +1,68 @@
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import Icon from '@/components/ui/icon';
+import { cn } from '@/lib/utils';
 
 interface LogoProps {
+  size?: 'sm' | 'md' | 'lg';
+  textColor?: string;
+  iconColor?: string;
   className?: string;
   onClick?: () => void;
-  showText?: boolean;
 }
 
-const Logo = ({ className = "", onClick, showText = true }: LogoProps) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    } else {
-      navigate('/');
+const Logo: React.FC<LogoProps> = ({ 
+  size = 'md',
+  textColor = 'text-gray-900',
+  iconColor = 'text-primary',
+  className,
+  onClick
+}) => {
+  const sizeClasses = {
+    sm: {
+      icon: 'h-5 w-5',
+      text: 'text-lg',
+      domain: 'text-sm'
+    },
+    md: {
+      icon: 'h-7 w-7',
+      text: 'text-2xl',
+      domain: 'text-base'
+    },
+    lg: {
+      icon: 'h-9 w-9',
+      text: 'text-3xl',
+      domain: 'text-lg'
     }
   };
 
+  const Component = onClick ? 'button' : 'div';
+
   return (
-    <div 
-      className={`flex items-center cursor-pointer ${className}`}
-      onClick={handleClick}
-    >
-      <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mr-3">
-        <svg
-          viewBox="0 0 24 24"
-          className="w-5 h-5 text-white"
-          fill="currentColor"
-        >
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-      </div>
-      {showText && (
-        <div className="relative">
-          <span className="text-2xl font-bold text-gray-900">workstab</span>
-          <span className="absolute -bottom-3 -right-2 text-base font-bold text-primary">.com</span>
-        </div>
+    <Component 
+      onClick={onClick}
+      className={cn(
+        "flex items-center space-x-2",
+        onClick && "hover:opacity-80 transition-opacity cursor-pointer",
+        className
       )}
-    </div>
+    >
+      <Icon 
+        name="Heart" 
+        className={cn(sizeClasses[size].icon, iconColor)} 
+        style={{ strokeWidth: 2.7 }} 
+      />
+      <div className="relative">
+        <span className={cn(sizeClasses[size].text, "font-bold", textColor)}>
+          workstab
+        </span>
+        <span className={cn(
+          sizeClasses[size].domain,
+          "absolute -bottom-3 -right-2 font-bold text-primary"
+        )}>
+          .com
+        </span>
+      </div>
+    </Component>
   );
 };
 

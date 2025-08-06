@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import type { DependencyList } from 'react';
 
 export const useDebounce = <T extends (...args: any[]) => any>(
   callback: T,
@@ -31,7 +32,7 @@ export const useThrottle = <T extends (...args: any[]) => any>(
   ) as T;
 };
 
-export const useMemoizedValue = <T>(value: T, deps: React.DependencyList): T => {
+export const useMemoizedValue = <T>(value: T, deps: DependencyList): T => {
   return useMemo(() => value, deps);
 };
 

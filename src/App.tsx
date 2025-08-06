@@ -28,8 +28,12 @@ const AppContent = () => {
     }
     
     // При переходах показываем только если требуется время на загрузку
-    if (performance.navigation?.type === 1) { // reload
-      return true;
+    const navigationEntries = performance.getEntriesByType('navigation');
+    if (navigationEntries.length > 0) {
+      const navigationTiming = navigationEntries[0] as PerformanceNavigationTiming;
+      if (navigationTiming.type === 'reload') {
+        return true;
+      }
     }
     
     return false;

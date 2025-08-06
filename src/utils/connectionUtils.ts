@@ -1,7 +1,20 @@
 // Утилиты для определения скорости соединения
+
+interface NavigatorConnection extends Navigator {
+  connection?: {
+    effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';
+  };
+  mozConnection?: {
+    effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';
+  };
+  webkitConnection?: {
+    effectiveType?: '2g' | '3g' | '4g' | 'slow-2g';
+  };
+}
+
 export const getConnectionSpeed = (): 'slow' | 'medium' | 'fast' => {
-  // @ts-ignore - navigator.connection может не существовать
-  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const nav = navigator as NavigatorConnection;
+  const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
   
   if (!connection) return 'medium';
   

@@ -1,4 +1,5 @@
 // Performance monitoring utilities
+import React from 'react';
 
 // Web Vitals мониторинг
 export const measureWebVitals = () => {

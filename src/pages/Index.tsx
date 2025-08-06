@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useToast } from "@/components/ui/use-toast";
 import useSEO from "@/hooks/useSEO";
 import { getOrganizationStructuredData, getWebsiteStructuredData, getServiceStructuredData } from "@/utils/structuredData";
 
@@ -28,7 +27,6 @@ const Index = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showTariffForm, setShowTariffForm] = useState(false);
-  const { toast } = useToast();
 
   // SEO оптимизация главной страницы
   useSEO({

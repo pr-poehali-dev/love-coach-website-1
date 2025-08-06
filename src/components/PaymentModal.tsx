@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import Icon from "@/components/ui/icon";
+import { type Tariff, type TariffIconName } from "@/types/tariff";
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -21,7 +22,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   });
   const { toast } = useToast();
 
-  const tariffs = [
+  const tariffs: Tariff[] = [
     {
       id: 'individual',
       title: 'Индивидуальная сессия',
@@ -128,7 +129,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                         selectedTariff === tariff.id ? 'bg-primary/20' : 'bg-gray-100'
                       }`}>
                         <Icon 
-                          name={tariff.icon as any} 
+                          name={tariff.icon} 
                           className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 ${
                             selectedTariff === tariff.id ? 'text-primary' : 'text-gray-600'
                           }`} 
