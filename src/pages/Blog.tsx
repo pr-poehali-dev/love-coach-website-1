@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import BlogReactions from '@/components/BlogReactions';
-import BlogComments from '@/components/BlogComments';
+
 import BlogCTA from '@/components/BlogCTA';
 import BlogContent from '@/components/BlogContent';
 import BlogReadingProgress from '@/components/BlogReadingProgress';
@@ -112,9 +112,7 @@ const Blog = () => {
                   <BlogReactions postId={selectedPost.id} />
                 </div>
                 
-                <div className="mt-8">
-                  <BlogComments postId={selectedPost.id} />
-                </div>
+
               </div>
             </div>
           </article>
