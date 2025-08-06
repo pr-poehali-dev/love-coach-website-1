@@ -77,19 +77,11 @@ const BlogComments = ({ postId }: BlogCommentsProps) => {
     } else {
       // Инициализируем заготовленные комментарии
       const initialComments: Comment[] = MOCK_COMMENTS.slice(0, Math.floor(Math.random() * 3) + 2).map((comment, index) => {
-        const date = new Date();
-        date.setDate(date.getDate() - comment.daysAgo);
-        
         return {
           id: `mock-${postId}-${index}`,
           author: comment.author,
           content: comment.content,
-          date: date.toLocaleDateString('ru-RU', { 
-            day: 'numeric', 
-            month: 'long',
-            hour: '2-digit',
-            minute: '2-digit'
-          }),
+          date: "",
           isUserComment: false,
           likes: Math.floor(Math.random() * 15) + 1,
           dislikes: Math.floor(Math.random() * 3),
@@ -111,12 +103,7 @@ const BlogComments = ({ postId }: BlogCommentsProps) => {
       id: `user-${Date.now()}`,
       author: userName,
       content: newComment.trim(),
-      date: new Date().toLocaleDateString('ru-RU', { 
-        day: 'numeric', 
-        month: 'long',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
+      date: "",
       isUserComment: true,
       likes: 0,
       dislikes: 0,
@@ -141,12 +128,7 @@ const BlogComments = ({ postId }: BlogCommentsProps) => {
       id: `reply-${Date.now()}`,
       author: userName,
       content: replyContent.trim(),
-      date: new Date().toLocaleDateString('ru-RU', { 
-        day: 'numeric', 
-        month: 'long',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
+      date: "",
       isUserComment: true,
       likes: 0,
       dislikes: 0,
@@ -242,7 +224,7 @@ const BlogComments = ({ postId }: BlogCommentsProps) => {
                   </span>
                 )}
               </h4>
-              <p className="text-xs sm:text-sm text-gray-500">{comment.date}</p>
+
             </div>
           </div>
         </div>

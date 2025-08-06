@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SimpleHeader from '@/components/SimpleHeader';
 import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import BlogReactions from '@/components/BlogReactions';
 import BlogComments from '@/components/BlogComments';
@@ -16,6 +17,8 @@ const Blog = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('Все');
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
+  const [visiblePosts, setVisiblePosts] = useState(4);
+  const [visiblePosts, setVisiblePosts] = useState(4);
 
   useEffect(() => {
     if (id) {
@@ -34,6 +37,18 @@ const Blog = () => {
   const filteredPosts = selectedCategory === 'Все' 
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
+
+  const displayedPosts = filteredPosts.slice(0, visiblePosts);
+  const hasMorePosts = filteredPosts.length > visiblePosts;
+
+  const handleLoadMore = () => {
+    setVisiblePosts(prev => prev + 4);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setVisiblePosts(4); // Сброс пагинации при смене категории
+  };
 
   if (selectedPost) {
     return (
@@ -62,10 +77,7 @@ const Blog = () => {
                   <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">
                     {selectedPost.category}
                   </span>
-                  <div className="flex items-center">
-                    <Icon name="Calendar" className="w-4 h-4 mr-1" />
-                    {selectedPost.date}
-                  </div>
+
                   <div className="flex items-center">
                     <Icon name="Clock" className="w-4 h-4 mr-1" />
                     {selectedPost.readTime}
@@ -131,7 +143,7 @@ const Blog = () => {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => handleCategoryChange(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedCategory === category
                     ? 'bg-primary text-white'
@@ -144,7 +156,7 @@ const Blog = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post) => (
+            {displayedPosts.map((post) => (
               <article 
                 key={post.id}
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
@@ -160,15 +172,9 @@ const Blog = () => {
                     <span className="bg-primary/10 text-primary px-2 py-1 rounded-full">
                       {post.category}
                     </span>
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center">
-                        <Icon name="Calendar" className="w-4 h-4 mr-1" />
-                        {post.date}
-                      </div>
-                      <div className="flex items-center">
-                        <Icon name="Clock" className="w-4 h-4 mr-1" />
-                        {post.readTime}
-                      </div>
+                    <div className="flex items-center">
+                      <Icon name="Clock" className="w-4 h-4 mr-1" />
+                      {post.readTime}
                     </div>
                   </div>
                   
@@ -196,6 +202,20 @@ const Blog = () => {
               </article>
             ))}
           </div>
+
+          {hasMorePosts && (
+            <div className="text-center mt-8">
+              <Button 
+                onClick={handleLoadMore}
+                variant="outline"
+                size="lg"
+                className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3"
+              >
+                <Icon name="Plus" className="w-4 h-4 mr-2" />
+                Показать больше
+              </Button>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
