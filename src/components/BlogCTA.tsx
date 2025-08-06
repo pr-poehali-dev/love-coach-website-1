@@ -30,10 +30,11 @@ const BlogCTA = () => {
           <Button
             onClick={() => scrollToSection('booking')}
             size="lg"
-            className="bg-white text-primary hover:bg-gray-100 font-semibold px-6 sm:px-8 py-3 w-full sm:w-auto text-sm sm:text-base"
+            className="bg-white text-primary hover:bg-gray-100 font-semibold px-3 sm:px-8 py-3 w-full sm:w-auto text-sm sm:text-base"
           >
             <Icon name="Calendar" className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-            Записаться на консультацию
+            <span className="hidden sm:inline">Записаться на консультацию</span>
+            <span className="sm:hidden">Записаться</span>
           </Button>
           
           <Button

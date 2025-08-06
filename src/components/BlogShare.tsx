@@ -74,7 +74,6 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
             title="Telegram"
           >
             <Icon name="MessageCircle" className="w-4 h-4" />
-            <span className="ml-1 text-xs sm:hidden">Telegram</span>
           </Button>
           
           <Button
@@ -85,7 +84,6 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
             title="WhatsApp"
           >
             <Icon name="MessageSquare" className="w-4 h-4" />
-            <span className="ml-1 text-xs sm:hidden">WhatsApp</span>
           </Button>
           
           <Button
@@ -96,7 +94,6 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
             title="ВКонтакте"
           >
             <Icon name="Users" className="w-4 h-4" />
-            <span className="ml-1 text-xs sm:hidden">VK</span>
           </Button>
           
           <Button
@@ -107,7 +104,6 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
             title="Скопировать ссылку"
           >
             <Icon name="Copy" className="w-4 h-4" />
-            <span className="ml-1 text-xs sm:hidden">Копировать</span>
           </Button>
         </div>
       </div>

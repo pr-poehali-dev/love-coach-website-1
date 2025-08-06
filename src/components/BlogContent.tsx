@@ -49,14 +49,14 @@ const BlogContent = ({ content }: BlogContentProps) => {
       if (line.startsWith('## ')) {
         flushList();
         elements.push(
-          <h2 key={index} className="text-3xl font-bold text-gray-900 mt-12 mb-6 first:mt-0">
+          <h2 key={index} className="text-3xl sm:text-4xl font-bold text-gray-900 mt-12 mb-8 first:mt-0 leading-tight">
             {line.replace('## ', '')}
           </h2>
         );
       } else if (line.startsWith('### ')) {
         flushList();
         elements.push(
-          <h3 key={index} className="text-2xl font-semibold text-gray-800 mt-10 mb-5 flex items-center">
+          <h3 key={index} className="text-2xl sm:text-3xl font-semibold text-gray-800 mt-10 mb-6 flex items-center leading-tight">
             <div className="w-1 h-8 bg-gradient-to-b from-primary to-pink-500 mr-4 rounded-full"></div>
             {line.replace('### ', '')}
           </h3>
@@ -64,7 +64,7 @@ const BlogContent = ({ content }: BlogContentProps) => {
       } else if (line.startsWith('#### ')) {
         flushList();
         elements.push(
-          <h4 key={index} className="text-xl font-semibold text-gray-800 mt-8 mb-4 flex items-center">
+          <h4 key={index} className="text-xl sm:text-2xl font-semibold text-gray-800 mt-8 mb-5 flex items-center leading-tight">
             <Icon name="Sparkles" className="w-5 h-5 mr-2 text-primary" />
             {line.replace('#### ', '')}
           </h4>
@@ -139,7 +139,7 @@ const BlogContent = ({ content }: BlogContentProps) => {
             <div key={index} className="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-6 rounded-r-lg">
               <div className="flex items-start">
                 <Icon name="AlertTriangle" className="w-5 h-5 text-yellow-600 mr-3 mt-0.5 flex-shrink-0" />
-                <p className="text-gray-800 leading-relaxed" dangerouslySetInnerHTML={{ __html: formatText(line) }}></p>
+                <p className="text-gray-800 leading-relaxed">{formatText(line)}</p>
               </div>
             </div>
           );
@@ -150,7 +150,7 @@ const BlogContent = ({ content }: BlogContentProps) => {
             <div key={index} className="bg-green-50 border-l-4 border-green-400 p-4 my-6 rounded-r-lg">
               <div className="flex items-start">
                 <Icon name="Lightbulb" className="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                <p className="text-gray-800 leading-relaxed" dangerouslySetInnerHTML={{ __html: formatText(line) }}></p>
+                <p className="text-gray-800 leading-relaxed">{formatText(line)}</p>
               </div>
             </div>
           );
@@ -158,7 +158,7 @@ const BlogContent = ({ content }: BlogContentProps) => {
         // Обычный текст
         else {
           elements.push(
-            <p key={index} className="mb-5 text-gray-700 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: formatText(line) }}></p>
+            <p key={index} className="mb-6 text-gray-800 leading-loose text-lg sm:text-xl font-light tracking-wide">{formatText(line)}</p>
           );
         }
       }
@@ -168,11 +168,45 @@ const BlogContent = ({ content }: BlogContentProps) => {
     return elements;
   };
 
-  const formatText = (text: string) => {
-    return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-      .replace(/"([^"]+)"/g, '<span class="text-primary font-medium">"$1"</span>');
+  const formatText = (text: string): JSX.Element[] => {
+    const parts: JSX.Element[] = [];
+    let remainingText = text;
+    let keyCounter = 0;
+    
+    while (remainingText.length > 0) {
+      // Поиск жирного текста **text**
+      const boldMatch = remainingText.match(/^(.*?)\*\*(.*?)\*\*(.*)/);
+      if (boldMatch) {
+        if (boldMatch[1]) parts.push(<span key={keyCounter++}>{boldMatch[1]}</span>);
+        parts.push(<strong key={keyCounter++} className="font-semibold text-gray-900">{boldMatch[2]}</strong>);
+        remainingText = boldMatch[3];
+        continue;
+      }
+      
+      // Поиск курсива *text*
+      const italicMatch = remainingText.match(/^(.*?)\*(.*?)\*(.*)/);
+      if (italicMatch) {
+        if (italicMatch[1]) parts.push(<span key={keyCounter++}>{italicMatch[1]}</span>);
+        parts.push(<em key={keyCounter++} className="italic">{italicMatch[2]}</em>);
+        remainingText = italicMatch[3];
+        continue;
+      }
+      
+      // Поиск кавычек "text"
+      const quoteMatch = remainingText.match(/^(.*?)"([^"]+)"(.*)/);
+      if (quoteMatch) {
+        if (quoteMatch[1]) parts.push(<span key={keyCounter++}>{quoteMatch[1]}</span>);
+        parts.push(<span key={keyCounter++} className="text-primary font-medium">"{quoteMatch[2]}"</span>);
+        remainingText = quoteMatch[3];
+        continue;
+      }
+      
+      // Если не найдено совпадений, добавляем оставшийся текст
+      parts.push(<span key={keyCounter++}>{remainingText}</span>);
+      break;
+    }
+    
+    return parts;
   };
 
   return (
