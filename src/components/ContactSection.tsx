@@ -42,17 +42,28 @@ const ContactSection = () => {
   ];
 
   return (
-    <section 
-      id="contact" 
-      className="py-20 bg-gray-50 relative"
-      style={{
-        backgroundImage: 'url(/img/b27e2c55-6494-479a-920a-e981700dad75.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      <div className="absolute inset-0 bg-white/85"></div>
+    <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
+      {/* Декоративные эмодзи */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 text-primary/20 text-2xl animate-pulse">💕</div>
+        <div className="absolute top-32 right-16 text-primary/15 text-xl">💖</div>
+        <div className="absolute top-48 left-1/4 text-primary/20 text-lg">💝</div>
+        <div className="absolute top-24 right-1/3 text-primary/10 text-2xl">💗</div>
+        <div className="absolute bottom-40 left-8 text-primary/20 text-xl">💘</div>
+        <div className="absolute bottom-56 right-20 text-primary/15 text-lg">💓</div>
+        <div className="absolute bottom-28 left-1/3 text-primary/20 text-2xl">💞</div>
+        <div className="absolute bottom-72 right-1/4 text-primary/10 text-xl">💟</div>
+        <div className="absolute top-40 left-1/2 text-primary/15 text-lg">❤️</div>
+        <div className="absolute bottom-44 right-1/2 text-primary/20 text-xl">💌</div>
+        <div className="absolute top-64 left-20 text-primary/10 text-2xl">🌹</div>
+        <div className="absolute bottom-20 right-12 text-primary/15 text-lg">💐</div>
+        <div className="absolute top-80 right-8 text-primary/20 text-xl">🎈</div>
+        <div className="absolute bottom-64 left-16 text-primary/10 text-lg">💑</div>
+        <div className="absolute top-52 right-1/2 text-primary/15 text-2xl">💍</div>
+        <div className="absolute bottom-36 left-1/2 text-primary/20 text-xl">🥰</div>
+        <div className="absolute top-36 left-3/4 text-primary/10 text-lg">😍</div>
+        <div className="absolute bottom-52 right-3/4 text-primary/15 text-2xl">💫</div>
+      </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
