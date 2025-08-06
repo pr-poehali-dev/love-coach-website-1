@@ -42,7 +42,19 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-primary/5">
+    <section 
+      id="contact" 
+      className="py-20 relative"
+      style={{
+        backgroundColor: '#f3f2f8',
+        backgroundImage: `
+          radial-gradient(circle at 20% 80%, rgba(219, 39, 119, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(219, 39, 119, 0.05) 0%, transparent 50%),
+          linear-gradient(135deg, rgba(147, 51, 234, 0.03) 0%, rgba(219, 39, 119, 0.03) 100%)
+        `
+      }}
+    >
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
