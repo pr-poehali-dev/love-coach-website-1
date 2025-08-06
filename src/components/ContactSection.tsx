@@ -42,8 +42,18 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section 
+      id="contact" 
+      className="py-20 bg-gray-50 relative"
+      style={{
+        backgroundImage: 'url(/img/cec1aa5c-7113-4b0f-ad0c-bf8e86bfa815.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="absolute inset-0 bg-white/85"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-primary/10 text-primary">Контакты</Badge>
