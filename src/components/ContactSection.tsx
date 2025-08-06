@@ -43,93 +43,76 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Креативный анимированный фон */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Плавающие сердечки */}
-        <div className="floating-hearts">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className={`floating-heart heart-${i + 1}`}
-              style={{
-                left: `${15 + i * 12}%`,
-                animationDelay: `${i * 0.5}s`,
-                animationDuration: `${4 + i * 0.3}s`
-              }}
-            >
-              ♥
-            </div>
-          ))}
-        </div>
-        
-        {/* Градиентные круги */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-16 w-24 h-24 bg-gradient-to-tl from-primary/8 to-primary/3 rounded-full blur-lg animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-gradient-to-r from-primary/6 to-primary/2 rounded-full blur-md animate-pulse" style={{animationDelay: '2s'}}></div>
-        
-        {/* Волновые линии */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0,100 Q250,50 500,100 T1000,100"
-            stroke="url(#gradient)"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.1"
-            className="animate-pulse"
-          />
-          <path
-            d="M0,200 Q300,150 600,200 T1200,200"
-            stroke="url(#gradient)"
-            strokeWidth="1.5"
-            fill="none"
-            opacity="0.08"
-            className="animate-pulse"
-            style={{animationDelay: '1.5s'}}
-          />
+      {/* Креативная сеть связей */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+          {/* Узлы сети */}
+          <circle cx="120" cy="100" r="3" fill="rgb(219 39 119)" opacity="0.4" className="animate-pulse">
+            <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="300" cy="80" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '0.5s'}}>
+            <animate attributeName="r" values="2;3;2" dur="2.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="480" cy="150" r="3" fill="rgb(219 39 119)" opacity="0.5" className="animate-pulse" style={{animationDelay: '1s'}}>
+            <animate attributeName="r" values="2;5;2" dur="4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="200" cy="220" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '1.5s'}}>
+            <animate attributeName="r" values="2;4;2" dur="3.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="650" cy="180" r="3" fill="rgb(219 39 119)" opacity="0.4" className="animate-pulse" style={{animationDelay: '2s'}}>
+            <animate attributeName="r" values="2;4;2" dur="2.8s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="400" cy="300" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '0.8s'}}>
+            <animate attributeName="r" values="2;3;2" dur="3.2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="150" cy="400" r="3" fill="rgb(219 39 119)" opacity="0.5" className="animate-pulse" style={{animationDelay: '2.5s'}}>
+            <animate attributeName="r" values="2;5;2" dur="3.8s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="600" cy="420" r="2" fill="rgb(219 39 119)" opacity="0.3" className="animate-pulse" style={{animationDelay: '1.2s'}}>
+            <animate attributeName="r" values="2;4;2" dur="2.9s" repeatCount="indefinite" />
+          </circle>
+
+          {/* Связующие линии с анимацией */}
+          <line x1="120" y1="100" x2="300" y2="80" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.15">
+            <animate attributeName="opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite" />
+          </line>
+          <line x1="300" y1="80" x2="480" y2="150" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.2">
+            <animate attributeName="opacity" values="0.1;0.4;0.1" dur="5s" repeatCount="indefinite" begin="0.5s" />
+          </line>
+          <line x1="120" y1="100" x2="200" y2="220" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.12">
+            <animate attributeName="opacity" values="0.05;0.25;0.05" dur="3.5s" repeatCount="indefinite" begin="1s" />
+          </line>
+          <line x1="480" y1="150" x2="650" y2="180" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.18">
+            <animate attributeName="opacity" values="0.1;0.35;0.1" dur="4.2s" repeatCount="indefinite" begin="1.5s" />
+          </line>
+          <line x1="200" y1="220" x2="400" y2="300" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.15">
+            <animate attributeName="opacity" values="0.08;0.28;0.08" dur="3.8s" repeatCount="indefinite" begin="0.8s" />
+          </line>
+          <line x1="400" y1="300" x2="150" y2="400" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.13">
+            <animate attributeName="opacity" values="0.05;0.3;0.05" dur="4.5s" repeatCount="indefinite" begin="2s" />
+          </line>
+          <line x1="150" y1="400" x2="600" y2="420" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.16">
+            <animate attributeName="opacity" values="0.1;0.32;0.1" dur="3.3s" repeatCount="indefinite" begin="1.8s" />
+          </line>
+          <line x1="650" y1="180" x2="600" y2="420" stroke="url(#connectionGradient)" strokeWidth="1" opacity="0.14">
+            <animate attributeName="opacity" values="0.06;0.26;0.06" dur="4.8s" repeatCount="indefinite" begin="2.3s" />
+          </line>
+
+          {/* Градиенты */}
           <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgb(219 39 119)" stopOpacity="0" />
-              <stop offset="50%" stopColor="rgb(219 39 119)" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="rgb(219 39 119)" stopOpacity="0" />
+            <linearGradient id="connectionGradient" gradientUnits="objectBoundingBox">
+              <stop offset="0%" stopColor="rgb(219 39 119)" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="rgb(219 39 119)" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="rgb(219 39 119)" stopOpacity="0.1" />
             </linearGradient>
           </defs>
         </svg>
+        
+        {/* Дополнительные геометрические элементы */}
+        <div className="absolute top-20 right-20 w-1 h-16 bg-gradient-to-b from-primary/20 to-transparent transform rotate-12 animate-pulse"></div>
+        <div className="absolute bottom-32 left-16 w-12 h-1 bg-gradient-to-r from-transparent via-primary/15 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 right-1/4 w-8 h-8 border border-primary/10 rounded-full transform rotate-45 animate-spin" style={{animationDuration: '20s'}}></div>
       </div>
-      
-      <style jsx>{`
-        .floating-heart {
-          position: absolute;
-          color: rgb(219 39 119);
-          font-size: 20px;
-          animation: floatUp linear infinite;
-        }
-        
-        @keyframes floatUp {
-          0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-          }
-          10% {
-            opacity: 0.3;
-          }
-          90% {
-            opacity: 0.3;
-          }
-          100% {
-            transform: translateY(-50px) rotate(360deg);
-            opacity: 0;
-          }
-        }
-        
-        .heart-1 { font-size: 16px; }
-        .heart-2 { font-size: 24px; }
-        .heart-3 { font-size: 18px; }
-        .heart-4 { font-size: 20px; }
-        .heart-5 { font-size: 22px; }
-        .heart-6 { font-size: 16px; }
-        .heart-7 { font-size: 26px; }
-        .heart-8 { font-size: 18px; }
-      `}</style>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
