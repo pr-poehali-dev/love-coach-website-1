@@ -46,7 +46,7 @@ const ContactSection = () => {
       id="contact" 
       className="py-20 bg-gray-50 relative"
       style={{
-        backgroundImage: 'url(/img/cec1aa5c-7113-4b0f-ad0c-bf8e86bfa815.jpg)',
+        backgroundImage: 'url(/img/b27e2c55-6494-479a-920a-e981700dad75.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
