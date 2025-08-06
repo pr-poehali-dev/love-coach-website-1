@@ -278,7 +278,7 @@ export const intimacyAfterBirthArticle = {
   date: '10 января 2024',
   category: 'Близость',
   readTime: '19 мин',
-  image: '/img/22ece001-495e-47ef-aa92-6019d21f6794.jpg',
+  image: '/img/cfa200d2-6711-4f94-ae37-42fe4c62a41e.jpg',
   tags: ['интимность', 'родители', 'послеродовой период', 'восстановление близости'],
   reactions: {
     likes: 287,
