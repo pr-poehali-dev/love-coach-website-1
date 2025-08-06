@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import BlogReactions from '@/components/BlogReactions';
+import LazyImage from '@/components/ui/LazyImage';
 
 import BlogCTA from '@/components/BlogCTA';
 import BlogContent from '@/components/BlogContent';
@@ -65,10 +66,10 @@ const Blog = () => {
             </button>
             
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <img 
+              <LazyImage 
                 src={selectedPost.image} 
                 alt={selectedPost.title}
-                className="w-full h-64 md:h-80 object-cover"
+                className="w-full h-64 md:h-80"
               />
               
               <div className="p-6 md:p-8">
@@ -159,10 +160,10 @@ const Blog = () => {
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
                 onClick={() => navigate(`/blog/${post.id}`)}
               >
-                <img 
+                <LazyImage 
                   src={post.image} 
                   alt={post.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-48 group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="p-6">
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-3">

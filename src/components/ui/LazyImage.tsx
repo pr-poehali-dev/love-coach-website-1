@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import SteppedLoader from './SteppedLoader';
 
 interface LazyImageProps {
   src: string;
@@ -74,12 +75,9 @@ const LazyImage = ({
       ) : (
         <>
           {!isLoaded && !hasError && (
-            <img
-              src={placeholder}
-              alt=""
-              className="w-full h-full object-cover opacity-20 animate-pulse"
-              aria-hidden="true"
-            />
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+              <SteppedLoader size="sm" />
+            </div>
           )}
           <img
             src={isInView ? src : placeholder}

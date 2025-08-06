@@ -19,6 +19,16 @@ const AppContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   
+  // Сбрасываем прелоадер при смене маршрута
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+  
   // Не показываем прелоадер на странице оплаты
   const shouldShowPreloader = isLoading && location.pathname !== '/custom-payment';
 
