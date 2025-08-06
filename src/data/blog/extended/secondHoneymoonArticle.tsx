@@ -203,7 +203,7 @@ export const secondHoneymoonArticle = {
     hearts: 1024,
     thoughtful: 367
   },
-  comments: [
+  comments: [ // Обновлено
     {
       id: 1,
       author: "OlgaSmirnova2010",
