@@ -39,7 +39,9 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
       try {
         await navigator.share(shareData);
       } catch (err) {
-        console.log('Error sharing:', err);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Error sharing:', err);
+        }
       }
     } else {
       // Fallback - copy to clipboard
@@ -52,7 +54,9 @@ const BlogShare = ({ title, url = window.location.href }: BlogShareProps) => {
         document.body.appendChild(toast);
         setTimeout(() => document.body.removeChild(toast), 3000);
       } catch (err) {
-        console.log('Error copying to clipboard:', err);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Error copying to clipboard:', err);
+        }
       }
     }
   };
