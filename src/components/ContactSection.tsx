@@ -42,73 +42,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Морфирующие формы */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Основная морфирующая форма */}
-        <div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 opacity-5"
-          style={{
-            background: 'conic-gradient(from 0deg, transparent, rgb(219 39 119), transparent, rgb(147 51 234), transparent)',
-            borderRadius: '50% 30% 70% 40%',
-            filter: 'blur(60px)',
-            animation: 'morphing 12s ease-in-out infinite',
-            transform: 'scale(1.2)',
-          }}
-        />
-        
-        {/* Вторичная форма */}
-        <div 
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 opacity-4"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgb(219 39 119), transparent 70%)',
-            borderRadius: '60% 40% 30% 70%',
-            filter: 'blur(40px)',
-            animation: 'morphing2 15s ease-in-out infinite reverse',
-            animationDelay: '3s',
-          }}
-        />
-
-        {/* Минималистичные акценты */}
-        <div className="absolute top-20 right-1/3 w-px h-24 bg-gradient-to-b from-transparent via-primary/20 to-transparent transform rotate-12"></div>
-        <div className="absolute bottom-32 left-1/3 w-24 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent"></div>
-      </div>
-      
-      <style jsx>{`
-        @keyframes morphing {
-          0%, 100% {
-            border-radius: 50% 30% 70% 40%;
-            transform: scale(1.2) rotate(0deg);
-          }
-          25% {
-            border-radius: 30% 70% 50% 60%;
-            transform: scale(1.4) rotate(90deg);
-          }
-          50% {
-            border-radius: 70% 50% 30% 40%;
-            transform: scale(1.1) rotate(180deg);
-          }
-          75% {
-            border-radius: 40% 60% 70% 30%;
-            transform: scale(1.3) rotate(270deg);
-          }
-        }
-        
-        @keyframes morphing2 {
-          0%, 100% {
-            border-radius: 60% 40% 30% 70%;
-            transform: scale(1) rotate(0deg);
-          }
-          33% {
-            border-radius: 30% 60% 70% 40%;
-            transform: scale(1.2) rotate(120deg);
-          }
-          66% {
-            border-radius: 70% 30% 40% 60%;
-            transform: scale(0.9) rotate(240deg);
-          }
-        }
-      `}</style>
+    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-primary/5">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
