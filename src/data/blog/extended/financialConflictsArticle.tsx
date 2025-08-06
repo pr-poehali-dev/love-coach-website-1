@@ -51,6 +51,7 @@ export const financialConflictsArticle = {
     thoughtful: 189
   },
   comments: [
+    // Обновленные комментарии
     {
       id: 1,
       author: "Анна М.",
