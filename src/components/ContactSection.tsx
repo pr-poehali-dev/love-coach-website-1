@@ -9,17 +9,18 @@ const ContactSection = () => {
       iconColor: "text-primary",
       bgColor: "bg-primary/10",
       title: "Email",
-      description: "info@workstab.com"
+      description: "hello@workstab.com"
     },
-
-
     {
-      icon: "Send",
-      iconColor: "text-blue-500",
-      bgColor: "bg-blue-500/10",
-      title: "Telegram",
-      description: "@workstab_support"
+      icon: "Phone",
+      iconColor: "text-primary",
+      bgColor: "bg-primary/10",
+      title: "Телефон",
+      description: "89147521875"
     },
+
+
+
     {
       icon: "Clock",
       iconColor: "text-primary",

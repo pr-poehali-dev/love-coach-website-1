@@ -17,7 +17,8 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   const [isAmountFocused, setIsAmountFocused] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
-    email: ''
+    email: '',
+    phone: ''
   });
   const { toast } = useToast();
 
@@ -88,7 +89,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   };
 
   const handleClose = () => {
-    setFormData({ fullName: '', email: '' });
+    setFormData({ fullName: '', email: '', phone: '' });
     setSelectedTariff('individual');
     setCustomAmount('');
     setIsAmountFocused(false);
@@ -214,7 +215,18 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                   required
                 />
               </div>
-
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                  Телефон *
+                </label>
+                <Input
+                  type="tel"
+                  placeholder="+7 (999) 123-45-67"
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  required
+                />
+              </div>
             </div>
           </div>
 
