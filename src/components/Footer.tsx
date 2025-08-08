@@ -82,8 +82,8 @@ const Footer = ({ scrollToSection }: FooterProps) => {
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
           <p>&copy; 2025 Workstab.com. Все права защищены.</p>
           <p className="mt-2 text-sm">
-            ИП Иванов Иван Иванович, ОГРНИП: 123456789012345, ИНН: 123456789012<br />
-            Телефон: +7 (999) 123-45-67, Email: info@workstab.com
+            ИП Симонов Сергей Сергеевич, ОГРНИП: 325650000019110, ИНН: 650703217742<br />
+            Телефон: 89147521875, Email: hello@workstab.com
           </p>
         </div>
       </div>
