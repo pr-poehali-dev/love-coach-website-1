@@ -61,7 +61,7 @@ const CustomPayment = () => {
             
             <div className="text-xs text-muted-foreground border-t pt-4">
               <p>
-                Услуги оказывает самозанятый Иванов И.И., ИНН 123456789012.<br />
+                Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742, тел. 89147521875.<br />
                 Оплачивая услугу, вы соглашаетесь с{" "}
                 <a href="/offer" target="_blank" className="underline hover:text-foreground">
                   публичной офертой
