@@ -24,22 +24,22 @@ const CustomPayment = () => {
         <meta name="referrer" content="no-referrer" />
       </Helmet>
       
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-3 xs:p-4 sm:p-6">
+        <Card className="w-full max-w-xs xs:max-w-sm sm:max-w-md shadow-lg">
+          <CardHeader className="text-center px-4 xs:px-6 py-4 xs:py-6">
+            <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold leading-tight">
               Оплата индивидуальной консультации
             </CardTitle>
-            <p className="text-sm text-muted-foreground mt-2">
+            <p className="text-xs xs:text-sm text-muted-foreground mt-2 leading-relaxed">
               Введите сумму, предварительно согласованную с консультантом. 
               Услуга носит информационно-консультационный характер и не является 
               медицинской или психологической помощью.
             </p>
           </CardHeader>
           
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 xs:space-y-6 px-4 xs:px-6 pb-4 xs:pb-6">
             <div className="space-y-2">
-              <Label htmlFor="amount">Сумма к оплате</Label>
+              <Label htmlFor="amount" className="text-sm xs:text-base font-medium">Сумма к оплате</Label>
               <Input
                 id="amount"
                 type="number"
@@ -47,26 +47,27 @@ const CustomPayment = () => {
                 placeholder="Введите сумму в ₽"
                 value={amount || ""}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="text-lg"
+                className="text-base xs:text-lg py-2 xs:py-3 px-3 xs:px-4"
               />
+              <p className="text-xs text-muted-foreground">Минимальная сумма: 100 ₽</p>
             </div>
             
             <Button 
               onClick={handlePayment}
-              className="w-full text-lg py-6"
+              className="w-full text-sm xs:text-base sm:text-lg py-3 xs:py-4 sm:py-6 font-semibold"
               size="lg"
             >
               Оплатить {amount > 0 && `${amount} ₽`}
             </Button>
             
-            <div className="text-xs text-muted-foreground border-t pt-4">
+            <div className="text-xs xs:text-sm text-muted-foreground border-t pt-3 xs:pt-4 leading-relaxed">
               <p>
                 Оплачивая услугу, вы соглашаетесь с{" "}
-                <a href="/offer" target="_blank" className="underline hover:text-foreground">
+                <a href="/offer" target="_blank" className="underline hover:text-foreground transition-colors">
                   публичной офертой
                 </a>{" "}
                 и{" "}
-                <a href="/privacy" target="_blank" className="underline hover:text-foreground">
+                <a href="/privacy" target="_blank" className="underline hover:text-foreground transition-colors">
                   политикой конфиденциальности
                 </a>.
               </p>
@@ -75,8 +76,8 @@ const CustomPayment = () => {
         </Card>
         
         {/* Реквизиты в самом низу */}
-        <div className="mt-8 text-center">
-          <p className="text-[10px] text-gray-400 opacity-60">
+        <div className="mt-4 xs:mt-6 sm:mt-8 text-center px-3">
+          <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight">
             Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
           </p>
         </div>
