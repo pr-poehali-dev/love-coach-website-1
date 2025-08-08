@@ -211,7 +211,6 @@ const Privacy = () => {
                 <div className="text-gray-700 space-y-4">
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>Email: hello@workstab.com</li>
-                    <li>Телефон: 89147521875</li>
                   </ul>
                 </div>
               </section>

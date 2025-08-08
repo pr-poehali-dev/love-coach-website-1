@@ -83,7 +83,7 @@ const Footer = ({ scrollToSection }: FooterProps) => {
           <p>&copy; 2025 Workstab.com. Все права защищены.</p>
           <p className="mt-2 text-sm">
             ИП Симонов Сергей Сергеевич, ОГРНИП: 325650000019110, ИНН: 650703217742<br />
-            Телефон: 89147521875, Email: hello@workstab.com
+            Email: hello@workstab.com
           </p>
         </div>
       </div>

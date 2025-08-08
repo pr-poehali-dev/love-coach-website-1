@@ -11,20 +11,8 @@ const ContactSection = () => {
       title: "Email",
       description: "info@workstab.com"
     },
-    {
-      icon: "Phone",
-      iconColor: "text-primary",
-      bgColor: "bg-primary/10",
-      title: "Телефон",
-      description: "+7 (999) 123-45-67"
-    },
-    {
-      icon: "MessageCircle",
-      iconColor: "text-green-500",
-      bgColor: "bg-green-500/10",
-      title: "WhatsApp",
-      description: "+7 (999) 123-45-67"
-    },
+
+
     {
       icon: "Send",
       iconColor: "text-blue-500",

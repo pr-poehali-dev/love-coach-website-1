@@ -221,7 +221,6 @@ const Offer = () => {
                   <p>8.3. Контакты Исполнителя:</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>E-mail: hello@workstab.com</li>
-                    <li>Телефон: 89147521875</li>
                   </ul>
                   <p>
                     Актуальная редакция оферты опубликована на{' '}
