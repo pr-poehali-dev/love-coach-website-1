@@ -61,7 +61,6 @@ const CustomPayment = () => {
             
             <div className="text-xs text-muted-foreground border-t pt-4">
               <p>
-                Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742, тел. 89147521875.<br />
                 Оплачивая услугу, вы соглашаетесь с{" "}
                 <a href="/offer" target="_blank" className="underline hover:text-foreground">
                   публичной офертой
@@ -74,6 +73,13 @@ const CustomPayment = () => {
             </div>
           </CardContent>
         </Card>
+        
+        {/* Реквизиты в самом низу */}
+        <div className="mt-8 text-center">
+          <p className="text-[10px] text-gray-400 opacity-60">
+            Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
+          </p>
+        </div>
       </div>
     </>
   );
