@@ -16,7 +16,7 @@ const ContactSection = () => {
       iconColor: "text-primary",
       bgColor: "bg-primary/10",
       title: "Телефон",
-      description: "89147521875"
+      description: "+7 (914) 752-18-75"
     },
 
 
