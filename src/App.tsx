@@ -12,6 +12,7 @@ const Index = lazy(() => import("./pages/Index"));
 const Offer = lazy(() => import("./pages/Offer"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const CustomPayment = lazy(() => import("./pages/CustomPayment"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Blog = lazy(() => import("./pages/Blog"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -72,6 +73,7 @@ const AppContent = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/custom-payment" element={<CustomPayment />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
