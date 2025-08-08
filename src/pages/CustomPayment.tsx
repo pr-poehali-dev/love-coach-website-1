@@ -49,7 +49,7 @@ const CustomPayment = () => {
                 onChange={(e) => setAmount(Number(e.target.value))}
                 className="text-base xs:text-lg py-2 xs:py-3 px-3 xs:px-4"
               />
-              <p className="text-xs text-muted-foreground">Минимальная сумма: 100 ₽</p>
+
             </div>
             
             <Button 
@@ -60,7 +60,7 @@ const CustomPayment = () => {
               Оплатить {amount > 0 && `${amount} ₽`}
             </Button>
             
-            <div className="text-xs xs:text-sm text-muted-foreground border-t pt-3 xs:pt-4 leading-relaxed">
+            <div className="text-xs xs:text-sm text-muted-foreground border-t pt-3 xs:pt-4 text-center leading-relaxed">
               <p>
                 Оплачивая услугу, вы соглашаетесь с{" "}
                 <a href="/offer" target="_blank" className="underline hover:text-foreground transition-colors">
@@ -75,12 +75,13 @@ const CustomPayment = () => {
           </CardContent>
         </Card>
         
-        {/* Реквизиты в самом низу */}
-        <div className="mt-4 xs:mt-6 sm:mt-8 text-center px-3">
-          <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight">
-            Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
-          </p>
-        </div>
+      </div>
+      
+      {/* Реквизиты в самом низу сайта */}
+      <div className="bg-gray-50 py-4 px-3">
+        <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight text-center">
+          Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
+        </p>
       </div>
     </>
   );
