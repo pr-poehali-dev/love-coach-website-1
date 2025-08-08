@@ -76,7 +76,7 @@ const CustomPayment = () => {
         </Card>
         
         {/* Реквизиты в самом низу сайта */}
-        <div className="mt-4 xs:mt-6 sm:mt-8 py-4 px-3">
+        <div className="mt-8 xs:mt-12 sm:mt-16 py-6 px-3">
           <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight text-center">
             Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
           </p>
