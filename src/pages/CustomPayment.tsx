@@ -24,7 +24,8 @@ const CustomPayment = () => {
         <meta name="referrer" content="no-referrer" />
       </Helmet>
       
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-3 xs:p-4 sm:p-6">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
+        <div className="flex-grow flex items-center justify-center p-3 xs:p-4 sm:p-6">
         <Card className="w-full max-w-xs xs:max-w-sm sm:max-w-md shadow-lg">
           <CardHeader className="text-center px-4 xs:px-6 py-4 xs:py-6">
             <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold leading-tight">
@@ -57,24 +58,24 @@ const CustomPayment = () => {
               Оплатить {amount > 0 && `${amount} ₽`}
             </Button>
             
-            <div className="text-xs xs:text-sm text-gray-500 opacity-70 border-t pt-3 xs:pt-4 text-center leading-relaxed">
+            <div className="text-[10px] xs:text-[11px] text-gray-400 opacity-50 border-t pt-3 xs:pt-4 text-center leading-tight">
               <p>
                 Оплачивая услугу, вы соглашаетесь с{" "}
-                <a href="/offer" target="_blank" className="underline hover:text-gray-700 transition-colors">
+                <a href="/offer" target="_blank" className="underline hover:text-gray-600 transition-colors">
                   публичной офертой
                 </a>{" "}
                 и{" "}
-                <a href="/privacy" target="_blank" className="underline hover:text-gray-700 transition-colors">
+                <a href="/privacy" target="_blank" className="underline hover:text-gray-600 transition-colors">
                   политикой конфиденциальности
                 </a>.
               </p>
             </div>
           </CardContent>
         </Card>
+        </div>
         
         {/* Реквизиты в самом низу сайта */}
-        <div className="flex-grow"></div>
-        <div className="mt-auto py-8 px-3">
+        <div className="py-8 px-3">
           <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight text-center">
             Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
           </p>
