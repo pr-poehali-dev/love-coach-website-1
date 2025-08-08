@@ -57,14 +57,14 @@ const CustomPayment = () => {
               Оплатить {amount > 0 && `${amount} ₽`}
             </Button>
             
-            <div className="text-xs xs:text-sm text-muted-foreground border-t pt-3 xs:pt-4 text-center leading-relaxed">
+            <div className="text-xs xs:text-sm text-gray-500 opacity-70 border-t pt-3 xs:pt-4 text-center leading-relaxed">
               <p>
                 Оплачивая услугу, вы соглашаетесь с{" "}
-                <a href="/offer" target="_blank" className="underline hover:text-foreground transition-colors">
+                <a href="/offer" target="_blank" className="underline hover:text-gray-700 transition-colors">
                   публичной офертой
                 </a>{" "}
                 и{" "}
-                <a href="/privacy" target="_blank" className="underline hover:text-foreground transition-colors">
+                <a href="/privacy" target="_blank" className="underline hover:text-gray-700 transition-colors">
                   политикой конфиденциальности
                 </a>.
               </p>
@@ -73,7 +73,8 @@ const CustomPayment = () => {
         </Card>
         
         {/* Реквизиты в самом низу сайта */}
-        <div className="mt-16 xs:mt-24 sm:mt-32 py-8 px-3">
+        <div className="flex-grow"></div>
+        <div className="mt-auto py-8 px-3">
           <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight text-center">
             Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
           </p>
