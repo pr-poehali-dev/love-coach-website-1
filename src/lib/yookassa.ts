@@ -73,18 +73,25 @@ export class YookassaConfig {
   }
 }
 
-// Сервис для работы с ЮКассой (только фронтенд часть)
+// Сервис для работы с ЮКассой
 export class YookassaService {
   private apiUrl: string;
+  private useDirectApi: boolean;
   
   constructor() {
     this.apiUrl = '/api/yookassa'; // Наш бэкенд прокси
+    this.useDirectApi = import.meta.env.VITE_YOOKASSA_TEST_MODE === 'true'; // Для тестирования
   }
   
   /**
-   * Создать платеж через наш бэкенд
+   * Создать платеж (пока мокаем для тестирования)
    */
   async createPayment(data: CreatePaymentData): Promise<YookassaPayment> {
+    if (this.useDirectApi) {
+      // ⚠️ ТОЛЬКО для тестирования! Мокаем ответ ЮКассы
+      return this.createMockPayment(data);
+    }
+    
     try {
       const response = await fetch(`${this.apiUrl}/payments`, {
         method: 'POST',
@@ -95,8 +102,8 @@ export class YookassaService {
       });
       
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Ошибка создания платежа');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `HTTP ${response.status}: Ошибка создания платежа`);
       }
       
       return await response.json();
@@ -107,9 +114,51 @@ export class YookassaService {
   }
   
   /**
+   * Мок для тестирования платежей (имитация ЮКассы)
+   */
+  private createMockPayment(data: CreatePaymentData): Promise<YookassaPayment> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const mockPayment: YookassaPayment = {
+          id: `mock_${Date.now()}`,
+          status: 'pending',
+          paid: false,
+          amount: data.amount,
+          confirmation: {
+            type: 'redirect',
+            return_url: data.confirmation.return_url,
+            confirmation_url: `https://yoomoney.ru/checkout/payments/v2/contract?orderId=mock_${Date.now()}`
+          },
+          created_at: new Date().toISOString(),
+          description: data.description,
+          metadata: data.metadata,
+          refundable: false,
+          test: true
+        };
+        
+        console.log('🧪 Создан тестовый платеж:', mockPayment);
+        resolve(mockPayment);
+      }, 500); // Имитируем задержку сети
+    });
+  }
+  
+  /**
    * Получить информацию о платеже
    */
   async getPayment(paymentId: string): Promise<YookassaPayment> {
+    if (this.useDirectApi && paymentId.startsWith('mock_')) {
+      // Мокаем успешный платеж для тестирования
+      return {
+        id: paymentId,
+        status: 'succeeded',
+        paid: true,
+        amount: { value: '100.00', currency: 'RUB' },
+        created_at: new Date().toISOString(),
+        refundable: true,
+        test: true
+      };
+    }
+    
     try {
       const response = await fetch(`${this.apiUrl}/payments/${paymentId}`, {
         method: 'GET',
@@ -119,7 +168,7 @@ export class YookassaService {
       });
       
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || 'Ошибка получения информации о платеже');
       }
       

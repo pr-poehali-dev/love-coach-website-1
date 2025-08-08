@@ -55,7 +55,21 @@ const CustomPayment = () => {
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
         <div className="flex-grow flex items-center justify-center p-3 xs:p-4 sm:p-6">
-        <Card className="w-full max-w-xs xs:max-w-sm sm:max-w-md shadow-lg">
+          <div className="w-full max-w-xs xs:max-w-sm sm:max-w-md space-y-4">
+            {/* Уведомление о тестовом режиме */}
+            {import.meta.env.VITE_YOOKASSA_TEST_MODE === 'true' && (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-yellow-600">🧪</span>
+                  <div className="text-sm">
+                    <div className="font-semibold text-yellow-800">Тестовый режим</div>
+                    <div className="text-yellow-700">Платежи эмулируются, деньги не списываются</div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <Card className="w-full shadow-lg">
           <CardHeader className="text-center px-4 xs:px-6 py-4 xs:py-6">
             <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold leading-tight">
               Оплата
@@ -107,7 +121,8 @@ const CustomPayment = () => {
               </p>
             </div>
           </CardContent>
-        </Card>
+            </Card>
+          </div>
         </div>
         
         {/* Реквизиты в самом низу сайта */}
