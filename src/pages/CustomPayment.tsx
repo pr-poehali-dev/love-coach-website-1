@@ -4,45 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useYookassaPayment } from "@/hooks/useYookassa";
-import { YookassaService } from "@/lib/yookassa";
-import { toast } from "sonner";
 
 const CustomPayment = () => {
   const [amount, setAmount] = useState<number>(0);
-  const { createPayment, loading, error } = useYookassaPayment();
 
-  const handlePayment = async () => {
+  const handlePayment = () => {
     if (amount < 100) {
-      toast.error("Минимальная сумма: 100 ₽");
+      alert("Минимальная сумма: 100 ₽");
       return;
     }
-
-    try {
-      const paymentData = {
-        amount: YookassaService.formatAmount(amount),
-        description: `Оплата услуг на сумму ${amount} ₽`,
-        confirmation: {
-          type: 'redirect' as const,
-          return_url: window.location.origin + '/payment-success'
-        },
-        capture: true,
-        metadata: {
-          order_id: Date.now().toString()
-        }
-      };
-
-      const payment = await createPayment(paymentData);
-      
-      if (payment.confirmation?.confirmation_url) {
-        window.location.href = payment.confirmation.confirmation_url;
-      } else {
-        toast.error("Ошибка получения ссылки на оплату");
-      }
-    } catch (err) {
-      console.error('Ошибка создания платежа:', err);
-      toast.error("Ошибка создания платежа. Попробуйте позже.");
-    }
+    alert("Платёж пока недоступен. Мы свяжемся с вами после консультации.");
   };
 
   return (
@@ -55,21 +26,7 @@ const CustomPayment = () => {
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
         <div className="flex-grow flex items-center justify-center p-3 xs:p-4 sm:p-6">
-          <div className="w-full max-w-xs xs:max-w-sm sm:max-w-md space-y-4">
-            {/* Уведомление о тестовом режиме */}
-            {import.meta.env.VITE_YOOKASSA_TEST_MODE === 'true' && (
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-yellow-600">🧪</span>
-                  <div className="text-sm">
-                    <div className="font-semibold text-yellow-800">Тестовый режим</div>
-                    <div className="text-yellow-700">Платежи эмулируются, деньги не списываются</div>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            <Card className="w-full shadow-lg">
+        <Card className="w-full max-w-xs xs:max-w-sm sm:max-w-md shadow-lg">
           <CardHeader className="text-center px-4 xs:px-6 py-4 xs:py-6">
             <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold leading-tight">
               Оплата
@@ -95,18 +52,11 @@ const CustomPayment = () => {
             
             <Button 
               onClick={handlePayment}
-              disabled={loading || amount < 100}
-              className="w-full text-sm xs:text-base sm:text-lg py-3 xs:py-4 sm:py-6 font-semibold disabled:bg-gray-300"
+              className="w-full text-sm xs:text-base sm:text-lg py-3 xs:py-4 sm:py-6 font-semibold"
               size="lg"
             >
-              {loading ? 'Создание платежа...' : `Оплатить ${amount > 0 ? `${amount} ₽` : ''}`}
+              Оплатить {amount > 0 && `${amount} ₽`}
             </Button>
-            
-            {error && (
-              <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-600 text-sm">{error}</p>
-              </div>
-            )}
             
             <div className="text-[10px] xs:text-[11px] text-gray-400 opacity-50 border-t pt-3 xs:pt-4 text-center leading-tight">
               <p>
@@ -121,8 +71,7 @@ const CustomPayment = () => {
               </p>
             </div>
           </CardContent>
-            </Card>
-          </div>
+        </Card>
         </div>
         
         {/* Реквизиты в самом низу сайта */}
