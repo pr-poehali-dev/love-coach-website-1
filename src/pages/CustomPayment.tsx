@@ -78,7 +78,7 @@ const CustomPayment = () => {
       </div>
       
       {/* Реквизиты в самом низу сайта */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-4 px-3">
+      <div className="py-4 px-3">
         <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-gray-400 opacity-60 leading-tight text-center">
           Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
         </p>
