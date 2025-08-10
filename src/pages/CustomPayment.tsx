@@ -7,10 +7,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const CustomPayment = () => {
   const [amount, setAmount] = useState<number>(0);
+  const [email, setEmail] = useState<string>("");
 
   const handlePayment = () => {
     if (amount < 100) {
       alert("Минимальная сумма: 100 ₽");
+      return;
+    }
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      alert("Введите корректный email");
       return;
     }
     alert("Платёж пока недоступен. Мы свяжемся с вами после консультации.");
@@ -37,7 +42,16 @@ const CustomPayment = () => {
           </CardHeader>
           
           <CardContent className="space-y-4 xs:space-y-6 px-4 xs:px-6 pb-4 xs:pb-6">
-            <div className="space-y-2">
+            <div className="space-y-4">
+              <Input
+                id="email"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="text-base xs:text-lg py-2 xs:py-3 px-3 xs:px-4"
+              />
+              
               <Input
                 id="amount"
                 type="number"
@@ -47,7 +61,6 @@ const CustomPayment = () => {
                 onChange={(e) => setAmount(Number(e.target.value))}
                 className="text-base xs:text-lg py-2 xs:py-3 px-3 xs:px-4"
               />
-
             </div>
             
             <Button 
