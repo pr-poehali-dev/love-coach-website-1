@@ -4,10 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import Icon from '@/components/ui/icon';
 
-type CreatePaymentResponse = {
-  confirmation_url: string;
+// Объявляем глобальный объект YooMoneyCheckoutWidget
+declare global {
+  interface Window {
+    YooMoneyCheckoutWidget: any;
+  }
+}
+
+type CreatePaymentEmbeddedResponse = {
   payment_id: string;
+  confirmation_token: string;
 };
 
 type StatusResponse = {
@@ -17,9 +25,12 @@ type StatusResponse = {
   description: string;
 };
 
+type PaymentMethod = 'auto' | 'sbp' | 'bank_card' | 'sberbank' | 'tinkoff_bank';
+
 const CustomPayment = () => {
   const [email, setEmail] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
+  const [payMethod, setPayMethod] = useState<PaymentMethod>('auto');
   const [loading, setLoading] = useState<boolean>(false);
   const [phase, setPhase] = useState<'idle' | 'checking' | 'ok' | 'fail'>('idle');
   const [info, setInfo] = useState<{amount?: string}>({});
@@ -40,26 +51,147 @@ const CustomPayment = () => {
   // Проверка валидности формы
   const isFormValid = isValidEmail(email) && isValidAmount(amount);
   
-  // Создание платежа
-  const startPayment = async (email: string, amount: number) => {
+  // Конфигурация способов оплаты
+  const paymentMethods = [
+    {
+      id: 'auto' as PaymentMethod,
+      label: 'Автовыбор в виджете',
+      hint: 'Показать все доступные',
+      icon: 'Settings'
+    },
+    {
+      id: 'sbp' as PaymentMethod,
+      label: 'СБП',
+      hint: 'Оплата по QR/в приложении',
+      icon: 'QrCode'
+    },
+    {
+      id: 'bank_card' as PaymentMethod,
+      label: 'Банковская карта',
+      hint: 'Visa/MIR/Mastercard',
+      icon: 'CreditCard'
+    },
+    {
+      id: 'sberbank' as PaymentMethod,
+      label: 'SberPay',
+      hint: 'Приложение СберБанк Онлайн',
+      icon: 'Smartphone'
+    },
+    {
+      id: 'tinkoff_bank' as PaymentMethod,
+      label: 'T-Pay',
+      hint: 'Приложение Tinkoff',
+      icon: 'Wallet'
+    }
+  ];
+  
+  // Создание embedded платежа
+  const startPaymentEmbedded = async (email: string, amount: number) => {
     try {
-      const response = await fetch('/api/create_payment.php', {
+      const response = await fetch('/api/create_payment_embedded.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), amount })
       });
       
-      const data = await response.json() as CreatePaymentResponse;
+      const data = await response.json() as CreatePaymentEmbeddedResponse;
       
-      if (!response.ok || !data.confirmation_url || !data.payment_id) {
+      if (!response.ok || !data.confirmation_token || !data.payment_id) {
         throw new Error((data as any).error || 'Не удалось создать платёж');
       }
       
+      // Сохраняем payment_id для последующей проверки статуса
       sessionStorage.setItem('yk_pid', data.payment_id);
-      window.location.href = data.confirmation_url;
+      
+      // Инициализируем виджет ЮKassa
+      initYooKassaWidget(data.confirmation_token, data.payment_id);
       
     } catch (error) {
       throw error;
+    }
+  };
+  
+  // Инициализация виджета ЮKassa
+  const initYooKassaWidget = (confirmationToken: string, paymentId: string) => {
+    if (!window.YooMoneyCheckoutWidget) {
+      toast.error('Виджет ЮKassa не загружен');
+      return;
+    }
+    
+    const Widget = window.YooMoneyCheckoutWidget;
+    const methods = payMethod === 'auto' ? undefined : [payMethod];
+    
+    const checkout = new Widget({
+      confirmation_token: confirmationToken,
+      customization: {
+        modal: true,
+        ...(methods ? { payment_methods: methods } : {}),
+      },
+      error_callback(error: any) {
+        console.error('YooWidget error:', error);
+        if (error?.code === 'no_payment_methods_to_display') {
+          toast.error('Этот способ оплаты недоступен для вашего магазина в ЮKassa');
+        } else if (error?.code === 'invalid_combination_of_payment_methods') {
+          toast.error('Нельзя отображать выбранную комбинацию способов');
+        } else {
+          toast.error('Ошибка виджета ЮKassa');
+        }
+        setLoading(false);
+      },
+    });
+    
+    // Подписки на события виджета
+    checkout
+      .on('success', () => {
+        console.log('Payment success');
+        checkPaymentStatus(paymentId, 2); // 2 попытки проверки
+      })
+      .on('fail', () => {
+        console.log('Payment failed');
+        setPhase('fail');
+        setLoading(false);
+      })
+      .on('modal_close', () => {
+        console.log('Modal closed');
+        setPhase('fail');
+        setLoading(false);
+      })
+      .on('complete', () => {
+        console.log('Payment completed');
+        checkPaymentStatus(paymentId, 2); // На всякий случай проверяем
+      });
+    
+    // Открываем виджет
+    checkout.render('embedded');
+  };
+  
+  // Короткий опрос статуса платежа (для embedded виджета)
+  const checkPaymentStatus = async (paymentId: string, attempts: number) => {
+    if (attempts <= 0) {
+      setPhase('fail');
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      const response = await fetch('/api/status.php?payment_id=' + encodeURIComponent(paymentId));
+      const status = await response.json() as StatusResponse;
+      
+      if (status.paid || status.status === 'succeeded') {
+        setPhase('ok');
+        setInfo({ amount: status.amount });
+        setLoading(false);
+        setTimeout(() => sessionStorage.removeItem('yk_pid'), 5000);
+      } else if (status.status === 'canceled') {
+        setPhase('fail');
+        setLoading(false);
+      } else {
+        // Повторяем через 1 секунду
+        setTimeout(() => checkPaymentStatus(paymentId, attempts - 1), 1000);
+      }
+    } catch (error) {
+      console.error('Ошибка проверки статуса:', error);
+      setTimeout(() => checkPaymentStatus(paymentId, attempts - 1), 1000);
     }
   };
   
@@ -69,16 +201,15 @@ const CustomPayment = () => {
     
     setLoading(true);
     try {
-      await startPayment(email, parseFloat(amount));
+      await startPaymentEmbedded(email, parseFloat(amount));
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Ошибка при создании платежа';
       toast.error(message);
-    } finally {
       setLoading(false);
     }
   };
   
-  // Проверка статуса платежа при загрузке страницы
+  // Проверка статуса платежа при загрузке страницы (для обычных платежей)
   useEffect(() => {
     const pid = sessionStorage.getItem('yk_pid');
     if (!pid) return;
@@ -93,13 +224,11 @@ const CustomPayment = () => {
         if (status.paid || status.status === 'succeeded') {
           setPhase('ok');
           setInfo({ amount: status.amount });
-          // Очистка после успешного показа (опционально через несколько секунд)
           setTimeout(() => sessionStorage.removeItem('yk_pid'), 5000);
         } else if (status.status === 'canceled') {
           setPhase('fail');
           setTimeout(() => sessionStorage.removeItem('yk_pid'), 5000);
         } else {
-          // pending / waiting_for_capture - проверяем снова через 2 секунды
           setTimeout(checkStatus, 2000);
         }
       } catch (error) {
@@ -110,6 +239,20 @@ const CustomPayment = () => {
     };
     
     checkStatus();
+  }, []);
+  
+  // Загрузка скрипта ЮKassa
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://yookassa.ru/checkout-widget/v1/checkout-widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+    
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
   }, []);
   
   return (
@@ -156,7 +299,7 @@ const CustomPayment = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-red-600 text-xl">❌</span>
                   <div>
-                    <div className="font-semibold text-red-800">Оплата не прошла</div>
+                    <div className="font-semibold text-red-800">Оплата не завершена</div>
                     <div className="text-sm text-red-700">Попробуйте ещё раз</div>
                   </div>
                 </div>
@@ -209,7 +352,6 @@ const CustomPayment = () => {
                       value={amount}
                       onChange={(e) => {
                         const value = e.target.value;
-                        // Ограничение до 2 знаков после запятой
                         if (value === '' || /^\d+(\.\d{0,2})?$/.test(value)) {
                           setAmount(value);
                         }
@@ -225,6 +367,57 @@ const CustomPayment = () => {
                       </p>
                     )}
                   </div>
+                  
+                  {/* Способы оплаты */}
+                  <div className="space-y-3">
+                    <h3 className="font-semibold text-sm text-gray-700">Способ оплаты</h3>
+                    <div 
+                      role="radiogroup" 
+                      aria-label="Способ оплаты" 
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                    >
+                      {paymentMethods.map((method) => (
+                        <button
+                          key={method.id}
+                          type="button"
+                          role="radio"
+                          aria-checked={payMethod === method.id}
+                          onClick={() => setPayMethod(method.id)}
+                          disabled={loading}
+                          className={`rounded-xl border-2 p-3 text-left transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+                            payMethod === method.id
+                              ? 'border-primary bg-primary/5 shadow-sm'
+                              : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <Icon 
+                              name={method.icon} 
+                              size={20} 
+                              className={`mt-0.5 ${
+                                payMethod === method.id ? 'text-primary' : 'text-gray-400'
+                              }`} 
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className={`font-semibold text-sm ${
+                                payMethod === method.id ? 'text-primary' : 'text-gray-900'
+                              }`}>
+                                {method.label}
+                              </div>
+                              <div className="text-xs text-gray-600 mt-0.5 leading-relaxed">
+                                {method.hint}
+                              </div>
+                            </div>
+                            {payMethod === method.id && (
+                              <div className="text-primary mt-0.5">
+                                <Icon name="Check" size={16} />
+                              </div>
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
                 
                 {/* Кнопка оплаты */}
@@ -237,7 +430,7 @@ const CustomPayment = () => {
                   {loading ? (
                     <div className="flex items-center gap-2">
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                      Создание платежа...
+                      Открываем виджет оплаты...
                     </div>
                   ) : (
                     `Оплатить${amount && isValidAmount(amount) ? ` ${Number(amount).toFixed(2)} ₽` : ''}`
@@ -268,6 +461,9 @@ const CustomPayment = () => {
             Услуги оказывает ИП Симонов Сергей Сергеевич, ОГРНИП 325650000019110, ИНН 650703217742
           </p>
         </div>
+        
+        {/* Контейнер для embedded виджета */}
+        <div id="embedded" className="hidden"></div>
       </div>
     </>
   );
