@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PaymentStatusBanner from "@/components/payment/PaymentStatusBanner";
 import PaymentFormFields from "@/components/payment/PaymentFormFields";
-import PaymentMethodSelector from "@/components/payment/PaymentMethodSelector";
 import PaymentButton from "@/components/payment/PaymentButton";
 import { useMultiPaymentLogic } from "@/hooks/useMultiPaymentLogic";
 
@@ -13,8 +12,6 @@ const CustomPayment = () => {
     setEmail,
     amount,
     setAmount,
-    payMethod,
-    setPayMethod,
     loading,
     phase,
     info,
@@ -84,14 +81,7 @@ const CustomPayment = () => {
                     isValidAmount={isValidAmount}
                   />
                   
-                  {/* Способы оплаты - только для YooKassa */}
-                  {activeProvider?.provider === 'yookassa' && (
-                    <PaymentMethodSelector
-                      payMethod={payMethod}
-                      setPayMethod={setPayMethod}
-                      loading={loading}
-                    />
-                  )}
+
                 </div>
                 
                 {/* Кнопка и соглашение */}

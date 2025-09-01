@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { publicApi } from '@/utils/api';
 import type { PublicActivePaymentResponse } from '@/types/admin';
-import { PaymentMethod } from '@/components/payment/PaymentMethodSelector';
+
 
 declare global {
   interface Window {
@@ -25,7 +25,6 @@ export type StatusResponse = {
 export const useMultiPaymentLogic = () => {
   const [email, setEmail] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
-  const [payMethod, setPayMethod] = useState<PaymentMethod>('auto');
   const [loading, setLoading] = useState<boolean>(false);
   const [phase, setPhase] = useState<'idle' | 'checking' | 'ok' | 'fail'>('idle');
   const [info, setInfo] = useState<{amount?: string}>({});
@@ -313,8 +312,6 @@ export const useMultiPaymentLogic = () => {
     setEmail,
     amount,
     setAmount,
-    payMethod,
-    setPayMethod,
     loading,
     phase,
     info,
