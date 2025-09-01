@@ -90,7 +90,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     <AdminAuthContext.Provider value={value}>
       {children}
     </AdminAuthContext.Provider>
-  ) as JSX.Element;
+  );
 }
 
 export function useAdminAuth() {
