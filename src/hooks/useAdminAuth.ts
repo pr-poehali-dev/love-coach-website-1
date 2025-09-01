@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext, ReactNode } from 'react';
+import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
 import { adminApi, ApiError } from '@/utils/api';
 import type { MeResponse } from '@/types/admin';
 
@@ -90,7 +90,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     <AdminAuthContext.Provider value={value}>
       {children}
     </AdminAuthContext.Provider>
-  );
+  ) as JSX.Element;
 }
 
 export function useAdminAuth() {
