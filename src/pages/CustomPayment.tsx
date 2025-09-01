@@ -5,7 +5,7 @@ import PaymentStatusBanner from "@/components/payment/PaymentStatusBanner";
 import PaymentFormFields from "@/components/payment/PaymentFormFields";
 import PaymentMethodSelector from "@/components/payment/PaymentMethodSelector";
 import PaymentButton from "@/components/payment/PaymentButton";
-import { usePaymentLogic } from "@/hooks/usePaymentLogic";
+import { useMultiPaymentLogic } from "@/hooks/useMultiPaymentLogic";
 
 const CustomPayment = () => {
   const {
@@ -18,11 +18,33 @@ const CustomPayment = () => {
     loading,
     phase,
     info,
+    activeProvider,
+    providerLoading,
     isValidEmail,
     isValidAmount,
     isFormValid,
     handlePayment
-  } = usePaymentLogic();
+  } = useMultiPaymentLogic();
+
+  // Показываем лоадер пока загружается провайдер
+  if (providerLoading) {
+    return (
+      <>
+        <Helmet>
+          <title>Оплата консультации</title>
+          <meta name="robots" content="noindex, nofollow" />
+          <meta name="referrer" content="no-referrer" />
+        </Helmet>
+        
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Загружаем настройки оплаты...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -62,12 +84,14 @@ const CustomPayment = () => {
                     isValidAmount={isValidAmount}
                   />
                   
-                  {/* Способы оплаты */}
-                  <PaymentMethodSelector
-                    payMethod={payMethod}
-                    setPayMethod={setPayMethod}
-                    loading={loading}
-                  />
+                  {/* Способы оплаты - только для YooKassa */}
+                  {activeProvider?.provider === 'yookassa' && (
+                    <PaymentMethodSelector
+                      payMethod={payMethod}
+                      setPayMethod={setPayMethod}
+                      loading={loading}
+                    />
+                  )}
                 </div>
                 
                 {/* Кнопка и соглашение */}

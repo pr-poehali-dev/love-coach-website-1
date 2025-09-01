@@ -5,6 +5,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AdminAuthProvider } from "@/hooks/useAdminAuth";
+import ProtectedRoute from "@/components/admin/ProtectedRoute";
 import Preloader from "./components/Preloader";
 
 // Lazy load pages for better performance
@@ -14,6 +16,12 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const CustomPayment = lazy(() => import("./pages/CustomPayment"));
 const Blog = lazy(() => import("./pages/Blog"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Admin pages
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminPayments = lazy(() => import("./pages/admin/AdminPayments"));
+const AdminTelegram = lazy(() => import("./pages/admin/AdminTelegram"));
 
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -72,6 +80,25 @@ const AppContent = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/custom-payment" element={<CustomPayment />} />
+          
+          {/* Admin routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/payments" element={
+            <ProtectedRoute>
+              <AdminPayments />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/integrations/telegram" element={
+            <ProtectedRoute>
+              <AdminTelegram />
+            </ProtectedRoute>
+          } />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -89,7 +116,9 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AppContent />
+          <AdminAuthProvider>
+            <AppContent />
+          </AdminAuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
