@@ -41,10 +41,10 @@ export const adminApi = {
         body: JSON.stringify({ username, password }),
       }),
 
-    verifyTotp: (mfa_token: string, code: string): Promise<TotpVerifyResponse> =>
+    verifyTotp: (code: string): Promise<TotpVerifyResponse> =>
       fetchJSON('/api/admin/auth/verify-totp.php', {
         method: 'POST',
-        body: JSON.stringify({ mfa_token, code }),
+        body: JSON.stringify({ code }),
       }),
 
     me: (): Promise<MeResponse> =>

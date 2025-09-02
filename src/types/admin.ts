@@ -1,10 +1,10 @@
 export type LoginResponse =
-  | { token: string }
-  | { mfa_required: true; mfa_token: string };
+  | { needs_totp: false; session_id: string; user: { id: number; username: string } }
+  | { needs_totp: true; message: string };
 
-export type TotpVerifyResponse = { token: string };
+export type TotpVerifyResponse = { session_id: string; user: { id: number; username: string } };
 
-export type MeResponse = { username: string; roles: string[] };
+export type MeResponse = { user: { id: number; username: string } };
 
 export type PaymentsSettings = {
   active_provider: 'yookassa' | 'robokassa' | 'cloudpayments' | 'alfabank';
