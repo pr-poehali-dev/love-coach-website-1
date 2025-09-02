@@ -48,7 +48,7 @@ export class ValidationError extends APIError {
 // Base API Configuration
 // ======================================
 
-const API_BASE_URL = '/api/v2';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v2';
 
 const DEFAULT_HEADERS = {
   'Content-Type': 'application/json',
