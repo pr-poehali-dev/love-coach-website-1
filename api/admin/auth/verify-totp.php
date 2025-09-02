@@ -24,8 +24,19 @@ if ($_SESSION['mfa_token'] !== $input['mfa_token']) {
 
 // Check if temp session is still valid (5 minutes)
 if (time() - $_SESSION['temp_login_time'] > 300) {
-    unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time']);
+    unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time'], $_SESSION['mfa_token']);
     sendError(401, 'Login session expired');
+}
+
+// Rate limiting - max 5 attempts
+if (!isset($_SESSION['totp_attempts'])) {
+    $_SESSION['totp_attempts'] = 0;
+}
+$_SESSION['totp_attempts']++;
+
+if ($_SESSION['totp_attempts'] > 5) {
+    unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time'], $_SESSION['mfa_token'], $_SESSION['totp_attempts']);
+    sendError(429, 'Too many attempts. Please login again.');
 }
 
 // Get user data
@@ -60,7 +71,7 @@ setcookie('session_id', $sessionId, [
 ]);
 
 // Clear temporary data
-unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time'], $_SESSION['mfa_token']);
+unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time'], $_SESSION['mfa_token'], $_SESSION['totp_attempts']);
 
 sendSuccess([
     'token' => $sessionId,

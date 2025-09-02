@@ -27,12 +27,16 @@ if ($method === 'GET') {
             $settings = $stmt->fetch();
         }
         
-        // Don't expose bot token in response for security
-        if ($settings['bot_token']) {
-            $settings['bot_token'] = '***hidden***';
-        }
+        // Transform to expected structure
+        $transformed = [
+            'enabled' => (bool)($settings['enabled'] ?? false),
+            'bot_token' => $settings['bot_token'] ? '***hidden***' : '',
+            'chat_id' => $settings['chat_id'] ?? '',
+            'notify_on_payment' => (bool)($settings['notify_on_payment'] ?? false),
+            'notify_on_contact' => (bool)($settings['notify_on_contact'] ?? false)
+        ];
         
-        sendSuccess($settings);
+        sendSuccess($transformed);
         
     } catch (Exception $e) {
         error_log("Telegram settings fetch error: " . $e->getMessage());
@@ -51,8 +55,7 @@ if ($method === 'POST' || $method === 'PUT') {
     try {
         $allowedFields = [
             'bot_token', 'chat_id', 'enabled', 
-            'notifications_new_payments', 'notifications_failed_payments', 
-            'notifications_system_alerts'
+            'notify_on_payment', 'notify_on_contact'
         ];
         
         $updateFields = [];
@@ -78,12 +81,16 @@ if ($method === 'POST' || $method === 'PUT') {
         $stmt->execute();
         $settings = $stmt->fetch();
         
-        // Hide bot token in response
-        if ($settings['bot_token']) {
-            $settings['bot_token'] = '***hidden***';
-        }
+        // Transform to expected structure
+        $transformed = [
+            'enabled' => (bool)($settings['enabled'] ?? false),
+            'bot_token' => $settings['bot_token'] ? '***hidden***' : '',
+            'chat_id' => $settings['chat_id'] ?? '',
+            'notify_on_payment' => (bool)($settings['notify_on_payment'] ?? false),
+            'notify_on_contact' => (bool)($settings['notify_on_contact'] ?? false)
+        ];
         
-        sendSuccess($settings, 'Telegram settings updated successfully');
+        sendSuccess($transformed, 'Telegram settings updated successfully');
         
     } catch (Exception $e) {
         error_log("Telegram settings update error: " . $e->getMessage());
