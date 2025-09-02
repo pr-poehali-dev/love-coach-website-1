@@ -48,7 +48,23 @@ export class ValidationError extends APIError {
 // Base API Configuration
 // ======================================
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v2';
+// Определяем базовый URL API в зависимости от окружения
+const getApiBaseUrl = () => {
+  // Если есть переменная окружения, используем её
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  
+  // Если мы в production и на workstab.com, используем относительный путь
+  if (window.location.hostname === 'workstab.com') {
+    return './api/v2';
+  }
+  
+  // По умолчанию для локальной разработки
+  return '/api/v2';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const DEFAULT_HEADERS = {
   'Content-Type': 'application/json',
