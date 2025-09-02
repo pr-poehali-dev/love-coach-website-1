@@ -42,11 +42,6 @@ if (!$sessionId) {
 }
 
 sendSuccess([
-    'needs_totp' => false,
-    'session_id' => $sessionId,
-    'user' => [
-        'id' => $result['user']['id'],
-        'username' => $result['user']['username']
-    ]
+    'token' => $sessionId
 ]);
 ?>
