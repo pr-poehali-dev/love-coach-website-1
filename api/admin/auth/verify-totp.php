@@ -49,6 +49,16 @@ if (!$sessionId) {
     sendError(500, 'Failed to create session');
 }
 
+// Set cookie for session
+setcookie('session_id', $sessionId, [
+    'expires' => time() + 7200, // 2 hours
+    'path' => '/',
+    'domain' => '',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
 // Clear temporary data
 unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time'], $_SESSION['mfa_token']);
 
