@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { adminApi, ApiError } from '@/utils/api';
+import { adminApi, APIError } from '@/utils/api';
 import type { TelegramSettings } from '@/types/admin';
 import Icon from '@/components/ui/icon';
 
@@ -29,7 +29,7 @@ const AdminTelegram: React.FC = () => {
       const data = await adminApi.settings.getTelegram();
       setSettings(data);
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Ошибка загрузки настроек');
       }
     } finally {
@@ -48,7 +48,7 @@ const AdminTelegram: React.FC = () => {
       await adminApi.settings.updateTelegram(settings);
       setSuccess('Настройки Telegram сохранены');
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Ошибка сохранения настроек');
       }
     } finally {
@@ -65,7 +65,7 @@ const AdminTelegram: React.FC = () => {
       await adminApi.testTelegram();
       setSuccess('Тестовое сообщение отправлено в Telegram');
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Ошибка отправки сообщения в Telegram');
       }
     } finally {

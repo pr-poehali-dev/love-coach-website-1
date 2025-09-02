@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { ApiError } from '@/utils/api';
+import { APIError } from '@/utils/api';
 import Icon from '@/components/ui/icon';
 
 const AdminLogin: React.FC = () => {
@@ -37,7 +37,7 @@ const AdminLogin: React.FC = () => {
         setStep('totp');
       }
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Неверный логин или пароль');
       } else {
         setError('Ошибка соединения');
@@ -55,7 +55,7 @@ const AdminLogin: React.FC = () => {
     try {
       await verifyTotp(mfaToken, code);
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Неверный код');
       } else {
         setError('Ошибка соединения');

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { adminApi, ApiError } from '@/utils/api';
+import { adminApi, APIError } from '@/utils/api';
 import type { PaymentsSettings } from '@/types/admin';
 import Icon from '@/components/ui/icon';
 import AdminPaymentsHeader from '@/components/admin/payments/AdminPaymentsHeader';
@@ -30,7 +30,7 @@ const AdminPayments: React.FC = () => {
       const data = await adminApi.settings.getPayments();
       setSettings(data);
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Ошибка загрузки настроек');
       }
     } finally {
@@ -49,7 +49,7 @@ const AdminPayments: React.FC = () => {
       await adminApi.settings.updatePayments(settings);
       setSuccess('Настройки сохранены');
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError('Ошибка сохранения');
       }
     } finally {
@@ -70,7 +70,7 @@ const AdminPayments: React.FC = () => {
         setSuccess(`Тестовый платеж для ${provider} создан`);
       }
     } catch (error) {
-      if (error instanceof ApiError) {
+      if (error instanceof APIError) {
         setError(`Ошибка тестирования ${provider}`);
       }
     } finally {
