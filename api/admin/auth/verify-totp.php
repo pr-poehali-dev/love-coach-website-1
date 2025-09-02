@@ -8,13 +8,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-if (empty($input['code'])) {
-    sendError(400, 'TOTP code is required');
+if (empty($input['code']) || empty($input['mfa_token'])) {
+    sendError(400, 'TOTP code and MFA token are required');
 }
 
 // Check if we have temporary user data from login
-if (empty($_SESSION['temp_user_id']) || empty($_SESSION['temp_login_time'])) {
+if (empty($_SESSION['temp_user_id']) || empty($_SESSION['temp_login_time']) || empty($_SESSION['mfa_token'])) {
     sendError(401, 'No pending login found');
+}
+
+// Verify MFA token
+if ($_SESSION['mfa_token'] !== $input['mfa_token']) {
+    sendError(401, 'Invalid MFA token');
 }
 
 // Check if temp session is still valid (5 minutes)
@@ -45,10 +50,10 @@ if (!$sessionId) {
 }
 
 // Clear temporary data
-unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time']);
+unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time'], $_SESSION['mfa_token']);
 
 sendSuccess([
-    'session_id' => $sessionId,
+    'token' => $sessionId,
     'user' => [
         'id' => $user['id'],
         'username' => $user['username']

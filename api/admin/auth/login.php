@@ -23,8 +23,13 @@ if ($result['needs_totp']) {
     $_SESSION['temp_user_id'] = $result['user']['id'];
     $_SESSION['temp_login_time'] = time();
     
+    // Generate temporary MFA token
+    $mfaToken = bin2hex(random_bytes(16));
+    $_SESSION['mfa_token'] = $mfaToken;
+    
     sendSuccess([
-        'needs_totp' => true,
+        'mfa_required' => true,
+        'mfa_token' => $mfaToken,
         'message' => 'Please enter your TOTP code'
     ]);
 }

@@ -1,8 +1,8 @@
 export type LoginResponse =
-  | { needs_totp: false; session_id: string; user: { id: number; username: string } }
-  | { needs_totp: true; message: string };
+  | { token: string }
+  | { mfa_required: true; mfa_token: string };
 
-export type TotpVerifyResponse = { session_id: string; user: { id: number; username: string } };
+export type TotpVerifyResponse = { token: string };
 
 export type MeResponse = { user: { id: number; username: string } };
 
