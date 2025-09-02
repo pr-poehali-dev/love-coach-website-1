@@ -110,7 +110,7 @@ const AdminPayments: React.FC = () => {
     );
   }
 
-  if (!settings) {
+  if (!settings || !settings.providers) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">

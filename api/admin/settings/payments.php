@@ -27,7 +27,48 @@ if ($method === 'GET') {
             $settings = $stmt->fetch();
         }
         
-        sendSuccess($settings);
+        // Transform flat structure to nested structure expected by frontend
+        $transformed = [
+            'active_provider' => $settings['active_provider'] ?? 'yookassa',
+            'providers' => [
+                'yookassa' => [
+                    'enabled' => (bool)($settings['yookassa_enabled'] ?? false),
+                    'shop_id' => $settings['yookassa_shop_id'] ?? '',
+                    'secret_key' => $settings['yookassa_secret_key'] ?? '',
+                    'base_return_url' => $settings['yookassa_base_return_url'] ?? '',
+                    'capture' => (bool)($settings['yookassa_capture'] ?? true)
+                ],
+                'robokassa' => [
+                    'enabled' => (bool)($settings['robokassa_enabled'] ?? false),
+                    'merchant_login' => $settings['robokassa_merchant_login'] ?? '',
+                    'password1' => $settings['robokassa_password1'] ?? '',
+                    'password2' => $settings['robokassa_password2'] ?? '',
+                    'test_mode' => (bool)($settings['robokassa_test_mode'] ?? true),
+                    'culture' => $settings['robokassa_culture'] ?? 'ru',
+                    'success_url' => $settings['robokassa_success_url'] ?? '',
+                    'fail_url' => $settings['robokassa_fail_url'] ?? ''
+                ],
+                'cloudpayments' => [
+                    'enabled' => (bool)($settings['cloudpayments_enabled'] ?? false),
+                    'public_id' => $settings['cloudpayments_public_id'] ?? '',
+                    'api_secret' => $settings['cloudpayments_api_secret'] ?? '',
+                    'success_url' => $settings['cloudpayments_success_url'] ?? '',
+                    'fail_url' => $settings['cloudpayments_fail_url'] ?? ''
+                ],
+                'alfabank' => [
+                    'enabled' => (bool)($settings['alfabank_enabled'] ?? false),
+                    'token' => $settings['alfabank_token'] ?? '',
+                    'gateway' => $settings['alfabank_gateway'] ?? 'test',
+                    'stages' => (int)($settings['alfabank_stages'] ?? 1),
+                    'language' => $settings['alfabank_language'] ?? 'ru',
+                    'return_url' => $settings['alfabank_return_url'] ?? '',
+                    'fail_url' => $settings['alfabank_fail_url'] ?? '',
+                    'amount_format' => $settings['alfabank_amount_format'] ?? 'kopeyki'
+                ]
+            ]
+        ];
+        
+        sendSuccess($transformed);
         
     } catch (Exception $e) {
         error_log("Payment settings fetch error: " . $e->getMessage());
@@ -74,12 +115,52 @@ if ($method === 'POST') {
         $stmt = $pdo->prepare($sql);
         $stmt->execute($updateValues);
         
-        // Fetch updated settings
+        // Fetch updated settings and transform
         $stmt = $pdo->prepare("SELECT * FROM payment_settings WHERE id = 1");
         $stmt->execute();
         $settings = $stmt->fetch();
         
-        sendSuccess($settings, 'Payment settings updated successfully');
+        $transformed = [
+            'active_provider' => $settings['active_provider'] ?? 'yookassa',
+            'providers' => [
+                'yookassa' => [
+                    'enabled' => (bool)($settings['yookassa_enabled'] ?? false),
+                    'shop_id' => $settings['yookassa_shop_id'] ?? '',
+                    'secret_key' => $settings['yookassa_secret_key'] ?? '',
+                    'base_return_url' => $settings['yookassa_base_return_url'] ?? '',
+                    'capture' => (bool)($settings['yookassa_capture'] ?? true)
+                ],
+                'robokassa' => [
+                    'enabled' => (bool)($settings['robokassa_enabled'] ?? false),
+                    'merchant_login' => $settings['robokassa_merchant_login'] ?? '',
+                    'password1' => $settings['robokassa_password1'] ?? '',
+                    'password2' => $settings['robokassa_password2'] ?? '',
+                    'test_mode' => (bool)($settings['robokassa_test_mode'] ?? true),
+                    'culture' => $settings['robokassa_culture'] ?? 'ru',
+                    'success_url' => $settings['robokassa_success_url'] ?? '',
+                    'fail_url' => $settings['robokassa_fail_url'] ?? ''
+                ],
+                'cloudpayments' => [
+                    'enabled' => (bool)($settings['cloudpayments_enabled'] ?? false),
+                    'public_id' => $settings['cloudpayments_public_id'] ?? '',
+                    'api_secret' => $settings['cloudpayments_api_secret'] ?? '',
+                    'success_url' => $settings['cloudpayments_success_url'] ?? '',
+                    'fail_url' => $settings['cloudpayments_fail_url'] ?? ''
+                ],
+                'alfabank' => [
+                    'enabled' => (bool)($settings['alfabank_enabled'] ?? false),
+                    'token' => $settings['alfabank_token'] ?? '',
+                    'gateway' => $settings['alfabank_gateway'] ?? 'test',
+                    'stages' => (int)($settings['alfabank_stages'] ?? 1),
+                    'language' => $settings['alfabank_language'] ?? 'ru',
+                    'return_url' => $settings['alfabank_return_url'] ?? '',
+                    'fail_url' => $settings['alfabank_fail_url'] ?? '',
+                    'amount_format' => $settings['alfabank_amount_format'] ?? 'kopeyki'
+                ]
+            ]
+        ];
+        
+        sendSuccess($transformed, 'Payment settings updated successfully');
         
     } catch (Exception $e) {
         error_log("Payment settings update error: " . $e->getMessage());

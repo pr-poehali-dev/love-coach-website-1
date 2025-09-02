@@ -66,6 +66,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       // Игнорируем ошибки логаута
     } finally {
+      // Очистить cookies вручную для надежности
+      document.cookie = 'session_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       setState({
         user: null,
         loading: false,
