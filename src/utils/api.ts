@@ -229,6 +229,19 @@ export const adminApi = {
 };
 
 // ======================================
+// Public API (for payment widgets)
+// ======================================
+
+const publicHttpClient = new HTTPClient('/api');
+
+export const publicApi = {
+  async getActivePayment(): Promise<any> {
+    const response = await publicHttpClient.get<any>('/payments/active.php');
+    return response.data;
+  },
+};
+
+// ======================================
 // Utility Functions
 // ======================================
 

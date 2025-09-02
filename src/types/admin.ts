@@ -190,6 +190,26 @@ export interface ValidationErrors {
   [field: string]: string;
 }
 
+export interface PublicActivePaymentResponse {
+  provider: Provider;
+  yookassa?: {};
+  alfabank?: {
+    token: string;
+    gateway: 'test' | 'payment';
+    stages: 1 | 2;
+    language: string;
+    return_url: string;
+    fail_url: string;
+    amount_format: 'rubli' | 'kopeyki';
+  };
+  robokassa?: {};
+  cloudpayments?: { 
+    public_id: string; 
+    success_url: string; 
+    fail_url: string; 
+  };
+}
+
 export interface ActivityLog {
   id: number;
   user_id?: number;
