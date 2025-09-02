@@ -3,60 +3,51 @@ require_once '../../includes/auth.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
-    exit();
+    sendError(405, 'Method not allowed');
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
 
 if (empty($input['code'])) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'TOTP code is required']);
-    exit();
+    sendError(400, 'TOTP code is required');
 }
 
 // Check if we have temporary user data from login
 if (empty($_SESSION['temp_user_id']) || empty($_SESSION['temp_login_time'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'No pending login found']);
-    exit();
+    sendError(401, 'No pending login found');
 }
 
 // Check if temp session is still valid (5 minutes)
 if (time() - $_SESSION['temp_login_time'] > 300) {
     unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time']);
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Login session expired']);
-    exit();
+    sendError(401, 'Login session expired');
 }
 
 // Get user data
 $stmt = $pdo->prepare("SELECT id, username, totp_secret FROM admin_users WHERE id = ? AND is_active = 1");
 $stmt->execute([$_SESSION['temp_user_id']]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$user = $stmt->fetch();
 
 if (!$user || empty($user['totp_secret'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Invalid user or TOTP not configured']);
-    exit();
+    sendError(401, 'Invalid user or TOTP not configured');
 }
 
 // Verify TOTP code
 if (!$auth->verifyTotp($user['totp_secret'], $input['code'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Invalid TOTP code']);
-    exit();
+    sendError(401, 'Invalid TOTP code');
 }
 
 // TOTP verified, create session
 $sessionId = $auth->createSession($user['id']);
 
+if (!$sessionId) {
+    sendError(500, 'Failed to create session');
+}
+
 // Clear temporary data
 unset($_SESSION['temp_user_id'], $_SESSION['temp_login_time']);
 
-echo json_encode([
-    'success' => true,
+sendSuccess([
     'session_id' => $sessionId,
     'user' => [
         'id' => $user['id'],
