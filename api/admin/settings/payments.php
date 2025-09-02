@@ -76,7 +76,7 @@ if ($method === 'GET') {
     }
 }
 
-if ($method === 'POST') {
+if ($method === 'POST' || $method === 'PUT') {
     // Update payment settings
     $input = json_decode(file_get_contents('php://input'), true);
     
