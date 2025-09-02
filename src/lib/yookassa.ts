@@ -79,7 +79,7 @@ export class YookassaService {
   private useDirectApi: boolean;
   
   constructor() {
-    this.apiUrl = '/api/yookassa'; // Наш бэкенд прокси
+    this.apiUrl = '/api/yookassa.php'; // Наш бэкенд прокси
     this.useDirectApi = import.meta.env.VITE_YOOKASSA_TEST_MODE === 'true'; // Для тестирования
   }
   
@@ -93,7 +93,7 @@ export class YookassaService {
     }
     
     try {
-      const response = await fetch(`${this.apiUrl}/payments`, {
+      const response = await fetch(`${this.apiUrl}/payments.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ export class YookassaService {
     }
     
     try {
-      const response = await fetch(`${this.apiUrl}/payments/${paymentId}`, {
+      const response = await fetch(`${this.apiUrl}/payments/${paymentId}.php`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -184,7 +184,7 @@ export class YookassaService {
    */
   async capturePayment(paymentId: string, amount?: YookassaAmount): Promise<YookassaPayment> {
     try {
-      const response = await fetch(`${this.apiUrl}/payments/${paymentId}/capture`, {
+      const response = await fetch(`${this.apiUrl}/payments/${paymentId}/capture.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -209,7 +209,7 @@ export class YookassaService {
    */
   async cancelPayment(paymentId: string): Promise<YookassaPayment> {
     try {
-      const response = await fetch(`${this.apiUrl}/payments/${paymentId}/cancel`, {
+      const response = await fetch(`${this.apiUrl}/payments/${paymentId}/cancel.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
