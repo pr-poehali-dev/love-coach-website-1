@@ -73,7 +73,7 @@ export const useMultiPaymentLogic = () => {
     }
 
     try {
-      const response = await fetch('/api/status.php?payment_id=' + encodeURIComponent(paymentId));
+      const response = await fetch('/api/payments/status.php?payment_id=' + encodeURIComponent(paymentId));
       const status = await response.json() as StatusResponse;
 
       if (status.paid || status.status === 'succeeded') {
@@ -101,7 +101,8 @@ export const useMultiPaymentLogic = () => {
     }
 
     const Widget = window.YooMoneyCheckoutWidget;
-    const methods = payMethod === 'auto' ? undefined : [payMethod];
+    // Use auto payment methods for multi-payment
+    const methods = undefined;
 
     const checkout = new Widget({
       confirmation_token: confirmationToken,
@@ -199,7 +200,7 @@ export const useMultiPaymentLogic = () => {
   // YooKassa платеж
   const startYooKassaPayment = async () => {
     try {
-      const response = await fetch('/api/create_payment_embedded.php', {
+      const response = await fetch('/api/payments/create-embedded.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), amount: parseFloat(amount) })
@@ -268,7 +269,7 @@ export const useMultiPaymentLogic = () => {
 
     const checkStatus = async () => {
       try {
-        const response = await fetch('/api/status.php?payment_id=' + encodeURIComponent(pid));
+        const response = await fetch('/api/payments/status.php?payment_id=' + encodeURIComponent(pid));
         const status = await response.json() as StatusResponse;
 
         if (status.paid || status.status === 'succeeded') {

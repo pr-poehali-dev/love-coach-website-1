@@ -53,7 +53,7 @@ export const usePaymentLogic = () => {
     }
 
     try {
-      const response = await fetch('/api/status.php?payment_id=' + encodeURIComponent(paymentId));
+      const response = await fetch('/api/payments/status.php?payment_id=' + encodeURIComponent(paymentId));
       const status = await response.json() as StatusResponse;
 
       if (status.paid || status.status === 'succeeded') {
@@ -131,7 +131,7 @@ export const usePaymentLogic = () => {
   // Создание embedded платежа
   const startPaymentEmbedded = async (email: string, amount: number) => {
     try {
-      const response = await fetch('/api/create_payment_embedded.php', {
+      const response = await fetch('/api/payments/create-embedded.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), amount })
@@ -177,7 +177,7 @@ export const usePaymentLogic = () => {
 
     const checkStatus = async () => {
       try {
-        const response = await fetch('/api/status.php?payment_id=' + encodeURIComponent(pid));
+        const response = await fetch('/api/payments/status.php?payment_id=' + encodeURIComponent(pid));
         const status = await response.json() as StatusResponse;
 
         if (status.paid || status.status === 'succeeded') {

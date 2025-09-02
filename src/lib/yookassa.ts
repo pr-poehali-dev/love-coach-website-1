@@ -79,7 +79,7 @@ export class YookassaService {
   private useDirectApi: boolean;
   
   constructor() {
-    this.apiUrl = '/api/yookassa.php'; // Наш бэкенд прокси
+    this.apiUrl = '/api/payments'; // Наш бэкенд прокси
     this.useDirectApi = import.meta.env.VITE_YOOKASSA_TEST_MODE === 'true'; // Для тестирования
   }
   
@@ -93,7 +93,7 @@ export class YookassaService {
     }
     
     try {
-      const response = await fetch(`${this.apiUrl}/payments.php`, {
+      const response = await fetch(`${this.apiUrl}/create.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ export class YookassaService {
     }
     
     try {
-      const response = await fetch(`${this.apiUrl}/payments/${paymentId}.php`, {
+      const response = await fetch(`${this.apiUrl}/status.php?payment_id=${paymentId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -184,12 +184,12 @@ export class YookassaService {
    */
   async capturePayment(paymentId: string, amount?: YookassaAmount): Promise<YookassaPayment> {
     try {
-      const response = await fetch(`${this.apiUrl}/payments/${paymentId}/capture.php`, {
+      const response = await fetch(`${this.apiUrl}/capture.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount }),
+        body: JSON.stringify({ payment_id: paymentId, amount }),
       });
       
       if (!response.ok) {
@@ -209,11 +209,12 @@ export class YookassaService {
    */
   async cancelPayment(paymentId: string): Promise<YookassaPayment> {
     try {
-      const response = await fetch(`${this.apiUrl}/payments/${paymentId}/cancel.php`, {
+      const response = await fetch(`${this.apiUrl}/cancel.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ payment_id: paymentId }),
       });
       
       if (!response.ok) {

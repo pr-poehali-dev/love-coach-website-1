@@ -42,13 +42,13 @@ export const adminApi = {
       }),
 
     verifyTotp: (mfa_token: string, code: string): Promise<TotpVerifyResponse> =>
-      fetchJSON('/api/admin/auth/totp/verify.php', {
+      fetchJSON('/api/admin/auth/verify-totp.php', {
         method: 'POST',
         body: JSON.stringify({ mfa_token, code }),
       }),
 
     me: (): Promise<MeResponse> =>
-      fetchJSON('/api/admin/me.php'),
+      fetchJSON('/api/admin/auth/me.php'),
 
     logout: (): Promise<{ ok: boolean }> =>
       fetchJSON('/api/admin/auth/logout.php', { method: 'POST' }),
